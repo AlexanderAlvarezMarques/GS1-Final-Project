@@ -1,7 +1,6 @@
 .DS_STORE
 node_modules
 .eslintcache
-<<<<<<< HEAD
 scripts/flow/*/.flowconfig
 .flowconfig
 *~
@@ -38,6 +37,3 @@ packages/react-devtools-extensions/.tempUserDataDir
 packages/react-devtools-inline/dist
 packages/react-devtools-shell/dist
 packages/react-devtools-scheduling-profiler/dist
-=======
-src/firebaseConfig.js
->>>>>>> 96b2b706712cf88a7585657ed6a326b880769b86
