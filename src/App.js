@@ -23,7 +23,7 @@ function App() {
      * que es una funciona asincrona. Y cuando se cumple satisfactoriamente actualizas el estado. De esta
      * forma se actualiza la vista.
      */
-    auth.signInWithEmailAndPassword("magi61012@gmail.com", "123456")
+    auth.signInWithEmailAndPassword("pepe@gmail.com", "elpepe")
     .then(operation => {
       setSignIn(true);
       setUser(operation.user);
@@ -47,7 +47,7 @@ function App() {
       { isSignIn ? 
       <React.Fragment>
         <button onClick={logout}>Cerrar sesión</button> 
-        <h2>Bienvenido a casa: {user.email}</h2>
+        <h2>Bienvenido a la aplicacion: {user.email}</h2>
       </React.Fragment>
       : 
         <button onClick={login}>Iniciar sesión</button>
