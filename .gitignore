@@ -1,4 +1,8 @@
 .DS_STORE
 node_modules
 src/firebaseConfig.js
+<<<<<<< HEAD
 
+=======
+benito
+>>>>>>> ada147c0a4d23b6abb73340b3921d0b42adc1e69
