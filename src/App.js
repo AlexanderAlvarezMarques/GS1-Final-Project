@@ -2,7 +2,7 @@
 import { useState, Fragment } from 'react';
 import React from 'react'
 import {auth} from './firebaseConfig';
-import SignIn from './componentes/SignIn';
+import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 
@@ -49,7 +49,8 @@ function App() {
       <Router>
         <Switch>
           <Route exact path="/" component={PagePrincipal}/>
-          <Route exact path="/signIn" component={SignIn}/>
+          <Route exact path="/signUp" component={SignUp}/>
+          <Route exact path="/login" component={Login}/>
         </Switch>
       </Router>
       // {/* <SignIn/> */}

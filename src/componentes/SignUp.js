@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
 
-const SignIn = () => {
+const SignUp = () => {
 
-    const [userSignIn, signIn] = useState({
+    const [userSignUp, signUp] = useState({
         name:'',
         surname:'',
         dni:'',
@@ -15,8 +15,8 @@ const SignIn = () => {
     const [error, actualizarError] = useState(false);
 
     const actualizarState = e => {
-            signIn({
-                ...userSignIn,
+            signUp({
+                ...userSignUp,
                 [e.target.name] : e.target.value
             })
     }
@@ -30,7 +30,7 @@ const SignIn = () => {
         }
     }
 
-    const {name,surname,dni,email,password,license,model} = userSignIn;
+    const {name,surname,dni,email,password,license,model} = userSignUp;
 return( 
     <Fragment>
         <h2>Sign In Form</h2>
@@ -87,4 +87,4 @@ return(
     </Fragment>
 );
 }
-export default SignIn ;
+export default SignUp ;
