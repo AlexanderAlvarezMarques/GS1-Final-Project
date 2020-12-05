@@ -1,7 +1,10 @@
 
-import { useState } from 'react';
+import { useState, Fragment } from 'react';
 import React from 'react'
 import {auth} from './firebaseConfig';
+import SignIn from './componentes/SignIn';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PagePrincipal from './componentes/PagePrincipal';
 
 function App() {
 
@@ -43,16 +46,26 @@ function App() {
    * El onClick y que para hacer un if tiene que ser con el ternario.
    */
   return (
-    <div className="App">
-      { isSignIn ? 
-      <React.Fragment>
-        <button onClick={logout}>Cerrar sesión</button> 
-        <h2>Bienvenido a la aplicacion: {user.email}</h2>
-      </React.Fragment>
-      : 
-        <button onClick={login}>Iniciar sesión</button>
-      }      
-    </div>
+      <Router>
+        <Switch>
+          <Route exact path="/" component={PagePrincipal}/>
+          <Route exact path="/signIn" component={SignIn}/>
+        </Switch>
+      </Router>
+      // {/* <SignIn/> */}
+      // {/* { isSignIn ? 
+      // <React.Fragment>
+      //   <button onClick={logout}>Cerrar sesión</button> 
+      //   <h2>Bienvenido a la aplicacion: {user.email}</h2>
+      // </React.Fragment>
+      // : 
+      // <Fragment>
+      //     <button onClick={login}>Iniciar sesión</button>
+      //     <Link to={'/signIn'}>Crear cuenta</Link>
+      // </Fragment>
+        
+      // }       */}
+
   );
 }
 
