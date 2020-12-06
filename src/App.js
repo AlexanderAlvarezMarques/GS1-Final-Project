@@ -50,7 +50,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
-          <Route exact path="/login" component={Login}/>
+          {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
       // {/* <SignIn/> */}
