@@ -1,9 +1,12 @@
 import React, { Fragment, useState } from 'react';
-import { Router} from 'react-router-dom';
+import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
 
 const SignUp = () => {
+    //para rediccionar
+    let history = useHistory();
 
+    // estado que tiene el usuario 
     const [userSignUp, signUp] = useState({
         nombre : 'juanma',
         apellido : 'perez',
@@ -15,18 +18,12 @@ const SignUp = () => {
         marca : 'toyota',
         modelo : 'yaris',
         matricula : '1234FTG'
-        // nombreIncidencia : '',
-        // descripcionIncidencia : '',
-        // tipoIncidencia : '',
-        // nombreReclamacion : '',
-        // descripcionReclamacion : '',
-        // tipoReclamacion : ''
-
     })
     
-
+    // estado para validaciones
     const [error, actualizarError] = useState(false);
 
+    // actualizar campos del formulario
     const actualizarState = e => {
         signUp({
             ...userSignUp,
@@ -34,7 +31,21 @@ const SignUp = () => {
         })
     }
 
+    //objeto que contiene todas las variables que necesitamos
     const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,marca,modelo,matricula} = userSignUp;
+
+    
+    const vehiculo = {
+        marca,
+        modelo,
+        matricula
+    }
+
+    // const car = {
+    //     marca:[],
+    //     modelo:[],
+    //     matricula:[]
+    // }
 
     const datosPerfil = {
         nombre,
@@ -43,51 +54,39 @@ const SignUp = () => {
         correo,
         fechaCarnet,
         nacimiento,
-        contraseña
+        contraseña,
+        vehiculos : [vehiculo.marca,vehiculo.modelo,vehiculo.matricula]
     }
 
-    const vehiculo = {
-        marca,
-        modelo,
-        matricula
-    }
-
-    // const incidencias = [{
-    //     nombreIncidencia,
-    //     descripcionIncidencia,
-    //     tipoIncidencia
-    // }]
-
-    // const reclamaciones = [{
-    //     nombreReclamacion,
-    //     descripcionReclamacion,
-    //     tipoReclamacion
-    // }]
 
     const registrar = e => {
 
         e.preventDefault()
-        console.log("pulse el botón")
+
         //validar que los campos no esten vacios
-        if ( nombre.trim() === '' || apellido.trim() === '' || dni.trim() === '' || correo.trim() === '' || contraseña.trim() === '' || fechaCarnet.trim() === '' || modelo.trim() === '' || nacimiento.trim() === '' ){
+        if ( nombre.trim() === '' || apellido.trim() === '' || dni.trim() === '' || correo.trim() === '' || contraseña.trim() === '' || fechaCarnet.trim() === '' || modelo.trim() === '' || nacimiento.trim() === '' || marca.trim() === '' || modelo.trim() === '' || matricula.trim() === ''){
             actualizarError(true);
             return;
         }
         actualizarError(false);
         
-
+        //crear usuario nuevo y añadir a la base de datos
         auth.createUserWithEmailAndPassword(correo, contraseña)
         .then((user) => {
             
             var db = firestore;
             var userUID = auth.currentUser.uid;
             db.collection('bd').doc(userUID).set(datosPerfil)
+            
+            //db.collection('bd').doc(userUID).set(vehiculo);
                 .then(() => {
                     console.log("Todo correcto")
+                    
+                    history.push("/");
                 }).catch((e) => {
                 console.log("hubo un error: ", e)
             })
-            //db.collection('bd').add(vehiculo);
+            
         })
         .catch((error) => {
             var errorCode = error.code;
@@ -96,10 +95,10 @@ const SignUp = () => {
             console.log(errorMessage);
         });
     
-       
+
     }
     
-    
+    //HTML 
 return( 
     <Fragment>
         <h2>Sign In Form</h2>
