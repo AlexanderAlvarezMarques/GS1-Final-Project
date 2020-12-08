@@ -5,6 +5,7 @@ import {auth} from './firebaseConfig';
 import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
+import PriceEstimate from './componentes/PriceEstimate';
 
 function App() {
 
@@ -50,6 +51,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
+          <Route exact path="/priceEstimate" component={PriceEstimate}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>

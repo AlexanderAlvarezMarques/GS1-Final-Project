@@ -5,6 +5,7 @@ const PagePrincipal = () => (
     <Fragment>
         <h1>Página Principal</h1>  
         <Link to={'/signUp'} >Crear cuenta</Link>
+        <Link to={'/priceEstimate'}>Buscar estimacion de precio</Link>
     </Fragment>
     
 );

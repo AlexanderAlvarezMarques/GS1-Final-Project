@@ -3,7 +3,8 @@ import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
 
 const SignUp = () => {
-    //para rediccionar
+
+    // para rediccionar
     let history = useHistory();
 
     // estado que tiene el usuario 
@@ -31,7 +32,17 @@ const SignUp = () => {
         })
     }
 
-    //objeto que contiene todas las variables que necesitamos
+    //select
+    const [select, setSelect] = useState([
+        {
+            value : 'marca',
+            
+        },
+        {}
+    ]);
+    
+
+    // objeto que contiene todas las variables que necesitamos
     const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,marca,modelo,matricula} = userSignUp;
 
     
@@ -40,12 +51,6 @@ const SignUp = () => {
         modelo,
         matricula
     }
-
-    // const car = {
-    //     marca:[],
-    //     modelo:[],
-    //     matricula:[]
-    // }
 
     const datosPerfil = {
         nombre,
@@ -57,7 +62,6 @@ const SignUp = () => {
         contraseña,
         vehiculos : [vehiculo.marca,vehiculo.modelo,vehiculo.matricula]
     }
-
 
     const registrar = e => {
 
@@ -100,7 +104,7 @@ const SignUp = () => {
     
     //HTML 
 return( 
-    <Fragment>
+    <>
         <h2>Sign In Form</h2>
         { error ? <p>Todos los campos deben estar rellenos</p> : null }
         <form
@@ -149,18 +153,25 @@ return(
                 onChange={actualizarState}
             />
             <label>Marca: </label>
-            <input
-                type="text"
-                name="marca"
-                onChange={actualizarState}
-            />
+            <select value={this.state.value} onChange={this.handleChange}>
+                <option value="">-- Seleccione --</option>
+                <option value="">Toyota </option>
+                <option value="">Ford </option>
+                <option value="">Mercedes </option>
+                <option value="">Seat </option>
+                <option value="">Hyundai </option>
+                <option value="">Jarguar </option>
+                <option value="">Honda </option>
+            </select>
 
             <label>Submodel: </label>
-            <input
-                type="text"
-                name="modelo"
-                onChange={actualizarState}
-            />
+            <select value={this.state.value2} onChange={this.handleChange2}>
+                <option value="">-- Seleccione --</option>
+                {
+                this.state.options.map((item, index) => <option value={item} key={index}>{item}</option>)
+                }
+               
+            </select>
             <label>Matricula: </label>
             <input
                 type="text"
@@ -171,7 +182,7 @@ return(
                 type="submit"
             >Registrarse</button>
         </form>
-    </Fragment>
+    </>
 );
 }
 export default SignUp ;
