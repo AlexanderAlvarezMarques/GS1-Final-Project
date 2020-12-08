@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
 
 const contenedor = styled.div`
   display: flex;
@@ -27,19 +28,27 @@ const Boton = styled.button`
     background-color: #26c6da;
     cursor: pointer;
   }
+  margin-top: 1rem;
 `;
+
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+  width: 47.5%;
+  text-align: center;
+  margin-top: 1rem;
+`;
+
 
 const LogIn = () => {
   //para redireccionar
-  let history = useHistory();
 
   const [datos, guardarDatos] = useState({
     userName: "",
     passwd: "",
   });
   const [error, guardarError] = useState(false);
-
-  
 
   // extrarer valores
   const { userName, passwd } = datos;
@@ -55,6 +64,7 @@ const LogIn = () => {
   const iniciarSesion = (e) => {
     e.preventDefault();
 
+    // eslint-disable-next-line eqeqeq
     if (userName.trim() == "" || passwd.trim() == "") {
       guardarError(true);
       return;
@@ -66,8 +76,7 @@ const LogIn = () => {
   return (
     <Fragment>
       <form onSubmit={iniciarSesion}>
-      <h2> Log In</h2>
-      
+        <h2> Log In</h2>
         <contenedor>
           <Label>Nombre de usuario:&nbsp;</Label>
           <input
@@ -91,7 +100,10 @@ const LogIn = () => {
           />
         </contenedor>
         <br></br>
+        {error ? <Error>Debes rellenar todos los campos</Error> : null}
         <Boton type="submit">Iniciar sesión</Boton>
+        <br></br>
+        <Link to={"/"}>Volver</Link>
       </form>
     </Fragment>
   );
