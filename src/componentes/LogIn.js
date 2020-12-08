@@ -42,7 +42,7 @@ const Error = styled.div`
 
 
 const LogIn = () => {
-  //para redireccionar
+  
 
   const [datos, guardarDatos] = useState({
     userName: "",
