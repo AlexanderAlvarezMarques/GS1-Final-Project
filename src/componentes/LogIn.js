@@ -1,6 +1,4 @@
 import React, { Fragment, useState } from "react";
-import { Router, useHistory } from "react-router-dom";
-import { auth, firestore } from "../firebaseConfig";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 
