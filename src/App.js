@@ -6,6 +6,7 @@ import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 import LogIn from './componentes/LogIn';
+import Incidence from './componentes/Incidence';
 
 function App() {
 
@@ -52,6 +53,7 @@ function App() {
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
           <Route exact path="/logIn" component={LogIn}/>
+          <Route exact path="/Incidence" component={Incidence}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>

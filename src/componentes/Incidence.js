@@ -18,7 +18,7 @@ const Incidence = () => {
               <label>Fecha: </label>
               <input type="text" name="issue"/>
               <br></br>
-              <label>Tema de incidencia</label>
+              <label>Tema de incidencia: </label>
               <input type="text" name="incidence"/>
           </form>
       </Fragment>
