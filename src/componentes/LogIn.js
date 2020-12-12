@@ -88,7 +88,7 @@ const LogIn = () => {
         <contenedor>
           <Label>
             Contraseña:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;
           </Label>
           <input
             type="password"
