@@ -1,13 +1,19 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
 
-const PagePrincipal = () => ( 
+const Claims = () => {
+  const misReclamaciones = (e) => {
+    window.location.href = "/newClaim";
+  };
+  return (
     <Fragment>
-        <h1>Reclamaciones</h1> 
-        <Link to={'/logIn'}>Iniciar sesión</Link> 
-        <br></br>
-        <Link to={'/signUp'} >Crear cuenta</Link>
+      <h1>Mis reclamaciones</h1>
+      <label> AQUI IRIAN LAS RECLAMACIONES</label>
+      <br></br>
+      <button onClick={misReclamaciones}> Nueva reclamación</button>
+      <br></br>
+      <Link to={"/logIn"}>Volver</Link>
     </Fragment>
-    
-);
-export default PagePrincipal;
+  );
+};
+export default Claims;

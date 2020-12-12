@@ -6,6 +6,9 @@ import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 import LogIn from './componentes/LogIn';
+import SesionPage from "./componentes/SesionPage";
+import Claims from './componentes/Claims';
+import NewClaim from './componentes/NewClaim';
 
 function App() {
 
@@ -52,6 +55,9 @@ function App() {
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
           <Route exact path="/logIn" component={LogIn}/>
+          <Route exact path="/sesion" component={SesionPage}/>
+          <Route exact path="/claims" component={Claims}/>
+          <Route exact path="/newClaim" component={NewClaim}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
