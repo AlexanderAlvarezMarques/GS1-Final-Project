@@ -1,7 +1,7 @@
 
 import { useState, Fragment } from 'react';
 import React from 'react'
-import {auth} from './firebaseConfig';
+import { auth } from './firebaseConfig';
 import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
@@ -28,11 +28,11 @@ function App() {
      * forma se actualiza la vista.
      */
     auth.signInWithEmailAndPassword("pepe@gmail.com", "elpepe")
-    .then(operation => {
-      setSignIn(true);
-      setUser(operation.user);
-      console.log(operation.user);
-    })
+      .then(operation => {
+        setSignIn(true);
+        setUser(operation.user);
+        console.log(operation.user);
+      })
   }
 
   function logout() {
@@ -47,27 +47,27 @@ function App() {
    * El onClick y que para hacer un if tiene que ser con el ternario.
    */
   return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={PagePrincipal}/>
-          <Route exact path="/signUp" component={SignUp}/>
-          <Route exact path="/logIn" component={LogIn}/>
-          {/* <Route exact path="/login" component={Login}/> */}
-        </Switch>
-      </Router>
-      // {/* <SignIn/> */}
-      // {/* { isSignIn ? 
-      // <React.Fragment>
-      //   <button onClick={logout}>Cerrar sesión</button> 
-      //   <h2>Bienvenido a la aplicacion: {user.email}</h2>
-      // </React.Fragment>
-      // : 
-      // <Fragment>
-      //     <button onClick={login}>Iniciar sesión</button>
-      //     <Link to={'/signIn'}>Crear cuenta</Link>
-      // </Fragment>
-        
-      // }       */}
+    <Router>
+      <Switch>
+        <Route exact path="/" component={PagePrincipal} />
+        <Route exact path="/signUp" component={SignUp} />
+        <Route exact path="/logIn" component={LogIn} />
+        {/* <Route exact path="/login" component={Login}/> */}
+      </Switch>
+    </Router>
+    // {/* <SignIn/> */}
+    // {/* { isSignIn ? 
+    // <React.Fragment>
+    //   <button onClick={logout}>Cerrar sesión</button> 
+    //   <h2>Bienvenido a la aplicacion: {user.email}</h2>
+    // </React.Fragment>
+    // : 
+    // <Fragment>
+    //     <button onClick={login}>Iniciar sesión</button>
+    //     <Link to={'/signIn'}>Crear cuenta</Link>
+    // </Fragment>
+
+    // }       */}
 
   );
 }
