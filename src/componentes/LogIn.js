@@ -38,10 +38,7 @@ const Error = styled.div`
   margin-top: 1rem;
 `;
 
-
 const LogIn = () => {
-  
-
   const [datos, guardarDatos] = useState({
     userName: "",
     passwd: "",
@@ -68,6 +65,7 @@ const LogIn = () => {
       return;
     }
     guardarError(false);
+    window.location.href = "/sesion";
   };
 
   //    HTML

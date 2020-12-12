@@ -5,6 +5,7 @@ import SignUp from "./componentes/SignUp";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import PagePrincipal from "./componentes/PagePrincipal";
 import LogIn from "./componentes/LogIn";
+import SesionPage from "./componentes/SesionPage";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
@@ -56,6 +57,7 @@ function App() {
         <Route exact path="/" component={PagePrincipal} />
         <Route exact path="/signUp" component={SignUp} />
         <Route exact path="/logIn" component={LogIn} />
+        <Route exact path="/sesion" component={SesionPage}/>
         </Contenedor>
         {/* <Route exact path="/login" component={Login}/> */}
       </Switch>
