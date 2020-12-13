@@ -5,6 +5,9 @@ import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 import LogIn from './componentes/LogIn';
+import Incidences from './componentes/Incidences';
+import newIncidence from './componentes/newIncidence';
+import SesionPage from './componentes/SesionPage';
 
 function App() {
 
@@ -51,6 +54,9 @@ function App() {
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
           <Route exact path="/logIn" component={LogIn}/>
+          <Route exact path="/Incidences" component={Incidences}/>
+          <Route exact path="/newIncidence" component={newIncidence}/>
+          <Route exact path="/sesion" component={SesionPage}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
