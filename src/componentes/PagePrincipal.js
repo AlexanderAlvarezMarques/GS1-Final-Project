@@ -7,8 +7,6 @@ const PagePrincipal = () => (
         <Link to={'/logIn'}>Iniciar sesión</Link> 
         <br></br>
         <Link to={'/signUp'} >Crear cuenta</Link>
-        <br></br>
-        <Link to={'/Incidences'} >Incidencia</Link>
     </Fragment>
     
 );
