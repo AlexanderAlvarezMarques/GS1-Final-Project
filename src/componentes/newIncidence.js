@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
 //import { auth, firestore } from "../firebaseConfig";
 
-const Incidence = () => {
+const newIncidence = () => {
     //para rediccionar
     let history = useHistory();
 
@@ -73,4 +73,4 @@ const Incidence = () => {
         </Fragment>
     )
 };
-export default Incidence;
+export default newIncidence;

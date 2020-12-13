@@ -1,4 +1,3 @@
-
 import { useState, Fragment } from 'react';
 import React from 'react'
 import {auth} from './firebaseConfig';
@@ -6,7 +5,7 @@ import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 import LogIn from './componentes/LogIn';
-import Incidence from './componentes/Incidence';
+import Incidences from './componentes/Incidences';
 
 function App() {
 
@@ -53,7 +52,7 @@ function App() {
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
           <Route exact path="/logIn" component={LogIn}/>
-          <Route exact path="/Incidence" component={Incidence}/>
+          <Route exact path="/Incidences" component={Incidences}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
