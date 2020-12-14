@@ -77,15 +77,14 @@ const SignUp = () => {
         
         //crear usuario nuevo y añadir a la base de datos
         auth.createUserWithEmailAndPassword(correo, contraseña)
-        .then((user) => {
+        .then((u) => {
             
             var db = firestore;
 
-            user.vehiculos = [car];
-            console.table(user);
-            
 
-            db.collection('usuariosCreados').doc(user.uid).set(user)
+            user.vehiculos = [car];
+            
+            db.collection('usuariosRgistrados').doc(auth.currentUser.uid).set(user)
                 .then(() => {
                     console.log("Todo correcto")
                     
