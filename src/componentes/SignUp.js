@@ -6,6 +6,7 @@ import AsyncSelect from 'react-select/async';
 const db = firestore;
 
 const SignUp = () => {
+
     //para rediccionar
     let history = useHistory();
 
@@ -32,28 +33,11 @@ const SignUp = () => {
     })
 
 
-    ///////////////////
-
-    /*const QUERY_CLASS = gql`
-    query{
-        Gear_ClassAll{
-            clase_nombre
-            sub_clase
-        }
-        }
-    `;
-    const { loading, errorr, data } = useQuery(QUERY_CLASS)
-    if (loading) return <p>Loading...</p>
-    if (errorr) return <p>Error :(</p>
-    let arrClases = data.Gear_ClassAll*/
-
-////////////////////////////
-
-
-
-
-
+    //array de marcas
     const brands = ["Audi", "Ford", "Kia", "Toyota"]
+
+
+    //mapa de marca con su modelo
     const models = [
         {marca: "Audi", modelo: "A3"},
         {marca: "Audi", modelo: "A4"},
@@ -63,17 +47,9 @@ const SignUp = () => {
         {marca: "Toyota", modelo: "Yaris"}
     ]
 
-    var modelsFiltered = []
-
-    var adminitrativos = [
-        {display: "A3", value: "A3" },
-        {display: "A4", value: "A4" },
-        {display: "A5", value: "A5" }];
-
-    const changeMarca = () => {
-
-    }
     
+    var modelsFiltered = []
+    const [state,updateState] = useState(modelsFiltered)
     
     // estado para validaciones
     const [error, actualizarError] = useState(false);
@@ -148,32 +124,26 @@ const SignUp = () => {
         });
     }
 
-    
+    //const [state, setState]
 
     const updateModels = (m) => {
 
         //obtengo el valor seleccionado
         var valueSelected = document.getElementById("brands").value;
 
+        //filtro por el valor seleccionado
         modelsFiltered = models.filter(model => (
             model.marca === valueSelected
         ))
-
-        //console.log(modelsFiltered.filter(e => (e.modelo)))
-
-        // document.getElementById('brands').appendChild(
-        //     modelsFiltered.map(model => 
-        //         <option value={model}>{model}</option>
-        //     )
-        // )
-
-        // var z = document.createElement('brands'); // is a node
-        // z.innerHTML = modelsFiltered.map(model => 
-        //     <option value={model.marca}>{model.marca}</option>
-        // );
-        // document.body.appendChild(z);
-        
+        updateState({
+            //actualizar estado
+            
+        })
     }
+
+
+    console.log(modelsFiltered.setState());
+    
 
     let mostrarModelos = modelsFiltered.map(v => (
         <option value={v.modelo}>{v.modelo}</option>
