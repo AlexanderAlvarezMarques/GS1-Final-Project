@@ -1,6 +1,9 @@
 import React, { Fragment, useState } from 'react';
 import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
+import AsyncSelect from 'react-select/async';
+
+const db = firestore;
 
 const SignUp = () => {
     //para rediccionar
@@ -18,6 +21,7 @@ const SignUp = () => {
         vehiculos: []
     })
 
+    //estado para el vehiculo
     const [car, setCar] = useState({
         marca: 'Toyota',
         modelo: 'Yaris',
@@ -26,6 +30,50 @@ const SignUp = () => {
         combustible: 'Gasolina',
         matricula: '3844LLL'
     })
+
+
+    ///////////////////
+
+    /*const QUERY_CLASS = gql`
+    query{
+        Gear_ClassAll{
+            clase_nombre
+            sub_clase
+        }
+        }
+    `;
+    const { loading, errorr, data } = useQuery(QUERY_CLASS)
+    if (loading) return <p>Loading...</p>
+    if (errorr) return <p>Error :(</p>
+    let arrClases = data.Gear_ClassAll*/
+
+////////////////////////////
+
+
+
+
+
+    const brands = ["Audi", "Ford", "Kia", "Toyota"]
+    const models = [
+        {marca: "Audi", modelo: "A3"},
+        {marca: "Audi", modelo: "A4"},
+        {marca: "Ford", modelo: "Focus"},
+        {marca: "Ford", modelo: "Puma"},
+        {marca: "Kia", modelo: "Rio"},
+        {marca: "Toyota", modelo: "Yaris"}
+    ]
+
+    var modelsFiltered = []
+
+    var adminitrativos = [
+        {display: "A3", value: "A3" },
+        {display: "A4", value: "A4" },
+        {display: "A5", value: "A5" }];
+
+    const changeMarca = () => {
+
+    }
+    
     
     // estado para validaciones
     const [error, actualizarError] = useState(false);
@@ -78,9 +126,6 @@ const SignUp = () => {
         //crear usuario nuevo y añadir a la base de datos
         auth.createUserWithEmailAndPassword(correo, contraseña)
         .then((user) => {
-            
-            var db = firestore;
-
             user.vehiculos = [car];
             console.table(user);
             
@@ -101,9 +146,39 @@ const SignUp = () => {
             var errorMessage = error.message;
             console.log(errorMessage);
         });
+    }
+
     
 
+    const updateModels = (m) => {
+
+        //obtengo el valor seleccionado
+        var valueSelected = document.getElementById("brands").value;
+
+        modelsFiltered = models.filter(model => (
+            model.marca === valueSelected
+        ))
+
+        //console.log(modelsFiltered.filter(e => (e.modelo)))
+
+        // document.getElementById('brands').appendChild(
+        //     modelsFiltered.map(model => 
+        //         <option value={model}>{model}</option>
+        //     )
+        // )
+
+        // var z = document.createElement('brands'); // is a node
+        // z.innerHTML = modelsFiltered.map(model => 
+        //     <option value={model.marca}>{model.marca}</option>
+        // );
+        // document.body.appendChild(z);
+        
     }
+
+    let mostrarModelos = modelsFiltered.map(v => (
+        <option value={v.modelo}>{v.modelo}</option>
+    ));
+
     
     //HTML 
 return( 
@@ -155,19 +230,30 @@ return(
                 name="fechaCarnet"
                 onChange={actualizarState}
             />
-            <label>Marca: </label>
-            <input
-                type="text"
-                name="marca"
-                onChange={actualizarState}
-            />
 
-            <label>Submodel: </label>
-            <input
-                type="text"
-                name="modelo"
-                onChange={actualizarState}
-            />
+
+
+
+            <label>Marca: </label>
+            {/* <AsyncSelect 
+                defaultOptions
+                loadOptions={getBrands} /> */}
+
+
+
+            <select id='brands' onChange={updateModels}>
+            {brands.map(e => (
+                <option value={e}>{e}</option>
+                )
+            )}
+            </select>
+
+
+            <select id='modelos'>
+                {mostrarModelos}
+            </select>
+
+
             <label>Matricula: </label>
             <input
                 type="text"
