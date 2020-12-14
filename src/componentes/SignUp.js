@@ -1,8 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
+import AsyncSelect from 'react-select/async';
+
+const db = firestore;
 
 const SignUp = () => {
+
     //para rediccionar
     let history = useHistory();
 
@@ -18,6 +22,7 @@ const SignUp = () => {
         vehiculos: []
     })
 
+    //estado para el vehiculo
     const [car, setCar] = useState({
         marca: 'Toyota',
         modelo: 'Yaris',
@@ -26,6 +31,25 @@ const SignUp = () => {
         combustible: 'Gasolina',
         matricula: '3844LLL'
     })
+
+
+    //array de marcas
+    const brands = ["Audi", "Ford", "Kia", "Toyota"]
+
+
+    //mapa de marca con su modelo
+    const models = [
+        {marca: "Audi", modelo: "A3"},
+        {marca: "Audi", modelo: "A4"},
+        {marca: "Ford", modelo: "Focus"},
+        {marca: "Ford", modelo: "Puma"},
+        {marca: "Kia", modelo: "Rio"},
+        {marca: "Toyota", modelo: "Yaris"}
+    ]
+
+    
+    var modelsFiltered = []
+    const [state,updateState] = useState(modelsFiltered)
     
     // estado para validaciones
     const [error, actualizarError] = useState(false);
@@ -100,9 +124,33 @@ const SignUp = () => {
             var errorMessage = error.message;
             console.log(errorMessage);
         });
+    }
+
+    //const [state, setState]
+
+    const updateModels = (m) => {
+
+        //obtengo el valor seleccionado
+        var valueSelected = document.getElementById("brands").value;
+
+        //filtro por el valor seleccionado
+        modelsFiltered = models.filter(model => (
+            model.marca === valueSelected
+        ))
+        updateState({
+            //actualizar estado
+            
+        })
+    }
+
+
+    console.log(modelsFiltered.setState());
     
 
-    }
+    let mostrarModelos = modelsFiltered.map(v => (
+        <option value={v.modelo}>{v.modelo}</option>
+    ));
+
     
     //HTML 
 return( 
@@ -154,19 +202,30 @@ return(
                 name="fechaCarnet"
                 onChange={actualizarState}
             />
-            <label>Marca: </label>
-            <input
-                type="text"
-                name="marca"
-                onChange={actualizarState}
-            />
 
-            <label>Submodel: </label>
-            <input
-                type="text"
-                name="modelo"
-                onChange={actualizarState}
-            />
+
+
+
+            <label>Marca: </label>
+            {/* <AsyncSelect 
+                defaultOptions
+                loadOptions={getBrands} /> */}
+
+
+
+            <select id='brands' onChange={updateModels}>
+            {brands.map(e => (
+                <option value={e}>{e}</option>
+                )
+            )}
+            </select>
+
+
+            <select id='modelos'>
+                {mostrarModelos}
+            </select>
+
+
             <label>Matricula: </label>
             <input
                 type="text"
