@@ -1,11 +1,13 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { Router, useHistory} from 'react-router-dom';
 
 const Incidences = () => {
-  
+
+  let history = useHistory();
+
   const misIncidences = (e) => {
-    //window.location.href = "/newIncidence";
-    <Link to={"/NewIncidence"}>Volver</Link>
+    history.push("/NewIncidence"); 
   };
   
   return (
@@ -15,7 +17,7 @@ const Incidences = () => {
       <br></br>
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
-      <Link to={"/"}>Volver</Link>
+      <Link to={"/sesion"}>Volver</Link>
     </Fragment>
   );
 };
