@@ -6,6 +6,7 @@ import {porAntiguedad} from '../Helper'
 import Spinner from './Spinner'
 import Resultado from './Resultado'
 import Resumen from './Resumen'
+import { Link } from 'react-router-dom';
 //import { Router, useHistory} from 'react-router-dom';
 //import {auth, firestore} from '../firebaseConfig';
 
@@ -171,7 +172,8 @@ const PriceEstimate = () => {
           <Resultado cotizacion={cotizacion}/>
          : null }
         </div>
-        
+        <Link to={'/contratarSeguro'}>Contratar este Seguro</Link>
+       
         </>
     );
 }
