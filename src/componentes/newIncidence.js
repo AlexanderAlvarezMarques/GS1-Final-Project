@@ -1,6 +1,5 @@
 import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
-import { auth } from "../firebaseConfig";
 import { auth, firestore } from "../firebaseConfig";
 
 const NewIncidence = () => {
@@ -26,18 +25,21 @@ const NewIncidence = () => {
       const enviarIncidencia = (e) => {
         e.preventDefault();
     
-        if (issue.trim() == "" || dateIssue.trim() == "" || incidenceContext.trim() == "") {
+        if (issue.trim() === "" || dateIssue.trim() === "" || incidenceContext.trim() === "") {
           guardarError(true);
+          return;
+        }
           //Codigo BD
-          if (auth.currentUser.uid != null){
-            var user = db.collection('usuariosRgistrados').doc(auth.currentUser.uid)
+          if (auth.currentUser != null){
+            var user = firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid)
             var incidenciasToUpdate = user.incidencias;
             return user.update({
-              incidencias: [...incidenciasToUpdate, incidencias]
+              incidencias: [...incidenciasToUpdate, datos]
             })
-            return;
+          }else{
+            console.log("No hay nadie" + auth.currentUser.uid)
           }
-        }
+        
         guardarError(false);
       };
 

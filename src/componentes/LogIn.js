@@ -1,5 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { useHistory, Link } from "react-router-dom";
+import { auth } from "../firebaseConfig";
 
 //import { auth, firestore } from "../firebaseConfig";
 
@@ -28,10 +29,22 @@ const LogIn = () => {
       e.preventDefault();
   
       // eslint-disable-next-line eqeqeq
-      if (userName.trim() == "" || passwd.trim() == "") {
+      /*if (userName.trim() == "" || passwd.trim() == "") {
         guardarError(true);
         return;
-      }
+      }*/
+      auth.signInWithEmailAndPassword("magi61012@gmail.com", "123456")
+      .then((user) => {
+        // Signed in
+        // ...
+        console.log("Ha entrado juanma")
+        console.log(user)
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+
       guardarError(false);
       window.location.href = "/sesion";
     };
