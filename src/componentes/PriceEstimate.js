@@ -12,9 +12,6 @@ import { Link } from 'react-router-dom';
 
 const PriceEstimate = () => {
 
-    //para rediccionar
-    //let history = useHistory();
-
     const [resumen, guardarResumen] = useState({
         cotizacion: 0,
         datos: {
