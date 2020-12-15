@@ -1,27 +1,32 @@
 
+import { firestore } from 'firebase-admin';
 import React from 'react';
 import {auth} from '../firebaseConfig'
-import {firestore} from '../firebaseConfig'
-import useAutentication from './useAutentication';
 
 const DeleteAccount = () => {
     
     console.log(auth.currentUser.uid)
     
-    const borrar = e => {
-        var uidUser = auth.currentUser.uid
+    const borrar = () => {
+
+        var user = auth.currentUser
+
+        console.log('user: ', user);
         
-        //para poder borrar una cuenta debe estar en esa cuenta 
-        if( uidUser != null){
-            auth.deleteUser(uidUser).then(() => {
-                console.log('Successfully deleted user');
+
+        user.delete()
+            .then(() => {
+                console.log('User deleted!');
+                firestore().collection("usuariosRgistrados").doc(user.uid).delete().then(function() {
+                    console.log("Document successfully deleted!");
+                }).catch(function(error) {
+                    console.error("Error removing document: ", error);
+                });
             })
-            .catch((error) => {
-                console.log('Error deleting user:', error);
-            });
-        }else{
-            console.log("no hay usuario registrado");
-        }
+            .catch((e) => {
+                console.error('Failed to delete user: ', e);
+                
+            })
     }
 
 
