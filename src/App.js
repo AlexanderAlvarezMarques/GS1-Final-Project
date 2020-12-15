@@ -8,10 +8,22 @@ import LogIn from "./componentes/LogIn";
 import SesionPage from "./componentes/SesionPage";
 import styled from "@emotion/styled";
 
+<<<<<<< HEAD
 const Contenedor = styled.div`
   max-width: 600px;
   margin: 0 auto;
 `;
+=======
+import { useState, Fragment } from 'react';
+import React from 'react'
+import {auth} from './firebaseConfig';
+import SignUp from './componentes/SignUp';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import PagePrincipal from './componentes/PagePrincipal';
+import PriceEstimate from './componentes/PriceEstimate';
+import ContratarSeguro from './componentes/ContratarSeguro';
+import DeleteAccount from './componentes/DeleteAccount';
+>>>>>>> HU7
 
 function App() {
   /**
@@ -51,6 +63,7 @@ function App() {
    * El onClick y que para hacer un if tiene que ser con el ternario.
    */
   return (
+<<<<<<< HEAD
     <Router>
       <Switch>
         <Contenedor>
@@ -75,6 +88,32 @@ function App() {
     // </Fragment>
 
     // }       */}
+=======
+      <Router>
+        <Switch>
+          <Route exact path="/" component={PagePrincipal}/>
+          <Route exact path="/signUp" component={SignUp}/>
+          <Route exact path="/priceEstimate" component={PriceEstimate}/>
+          <Route exact path="/contratarSeguro" component={ContratarSeguro}/>
+          <Route exact path="/deleteAccount" component={DeleteAccount}/>
+          {/* <Route exact path="/login" component={Login}/> */}
+        </Switch>
+      </Router>
+      // {/* <SignIn/> */}
+      // {/* { isSignIn ? 
+      // <React.Fragment>
+      //   <button onClick={logout}>Cerrar sesión</button> 
+      //   <h2>Bienvenido a la aplicacion: {user.email}</h2>
+      // </React.Fragment>
+      // : 
+      // <Fragment>
+      //     <button onClick={login}>Iniciar sesión</button>
+      //     <Link to={'/signIn'}>Crear cuenta</Link>
+      // </Fragment>
+        
+      // }       */}
+
+>>>>>>> HU7
   );
 }
 
