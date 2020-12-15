@@ -9,16 +9,12 @@ import { auth } from './firebaseConfig';
 import SignUp from './componentes/SignUp';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
-<<<<<<< HEAD
-import LogIn from './componentes/LogIn';
-=======
 import PriceEstimate from './componentes/PriceEstimate';
 import ContratarSeguro from './componentes/ContratarSeguro';
 import DeleteAccount from './componentes/DeleteAccount';
 import LogIn from "./componentes/LogIn";
 import SesionPage from "./componentes/SesionPage";
 //import styled from "@emotion/styled";
->>>>>>> HU8
 
 function App() {
   /**
@@ -38,14 +34,6 @@ function App() {
      * que es una funciona asincrona. Y cuando se cumple satisfactoriamente actualizas el estado. De esta
      * forma se actualiza la vista.
      */
-<<<<<<< HEAD
-    auth.signInWithEmailAndPassword("pepe@gmail.com", "elpepe")
-      .then(operation => {
-        setSignIn(true);
-        setUser(operation.user);
-        console.log(operation.user);
-      })
-=======
     auth
       .signInWithEmailAndPassword("pepe@gmail.com", "elpepe")
       .then((operation) => {
@@ -53,7 +41,6 @@ function App() {
         setUser(operation.user);
         console.log(operation.user);
       });
->>>>>>> HU8
   }
 
   function logout() {
@@ -67,29 +54,6 @@ function App() {
    * El onClick y que para hacer un if tiene que ser con el ternario.
    */
   return (
-<<<<<<< HEAD
-    <Router>
-      <Switch>
-        <Route exact path="/" component={PagePrincipal} />
-        <Route exact path="/signUp" component={SignUp} />
-        <Route exact path="/logIn" component={LogIn} />
-        {/* <Route exact path="/login" component={Login}/> */}
-      </Switch>
-    </Router>
-    // {/* <SignIn/> */}
-    // {/* { isSignIn ? 
-    // <React.Fragment>
-    //   <button onClick={logout}>Cerrar sesión</button> 
-    //   <h2>Bienvenido a la aplicacion: {user.email}</h2>
-    // </React.Fragment>
-    // : 
-    // <Fragment>
-    //     <button onClick={login}>Iniciar sesión</button>
-    //     <Link to={'/signIn'}>Crear cuenta</Link>
-    // </Fragment>
-
-    // }       */}
-=======
       <Router>
         <Switch>
           <Route exact path="/" component={PagePrincipal}/>
@@ -115,7 +79,6 @@ function App() {
       // </Fragment>
         
       // }       */}
->>>>>>> HU8
 
   );
 }

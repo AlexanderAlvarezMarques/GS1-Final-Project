@@ -1,7 +1,5 @@
-
-import { firestore } from 'firebase-admin';
 import React from 'react';
-import {auth} from '../firebaseConfig'
+import {auth,firestore} from '../firebaseConfig'
 
 const DeleteAccount = () => {
     
@@ -17,7 +15,7 @@ const DeleteAccount = () => {
         user.delete()
             .then(() => {
                 console.log('User deleted!');
-                firestore().collection("usuariosRgistrados").doc(user.uid).delete().then(function() {
+                firestore.collection("usuariosRgistrados").doc(user.uid).delete().then(function() {
                     console.log("Document successfully deleted!");
                 }).catch(function(error) {
                     console.error("Error removing document: ", error);
