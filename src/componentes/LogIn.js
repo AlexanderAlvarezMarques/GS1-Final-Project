@@ -64,6 +64,27 @@ const LogIn = () => {
       guardarError(true);
       return;
     }
+
+    const iniciarSesion = (e) => {
+      e.preventDefault();
+  
+      // eslint-disable-next-line eqeqeq
+      /*if (userName.trim() == "" || passwd.trim() == "") {
+        guardarError(true);
+        return;
+      }*/
+      auth.signInWithEmailAndPassword("magi61012@gmail.com", "123456")
+      .then((user) => {
+        // Signed in
+        // ...
+        console.log("Ha entrado juanma")
+        console.log(user)
+      })
+      .catch((error) => {
+        var errorCode = error.code;
+        var errorMessage = error.message;
+      });
+
     guardarError(false);
     window.location.href = "/sesion";
   };
@@ -104,4 +125,6 @@ const LogIn = () => {
     </Fragment>
   );
 };
+
+}
 export default LogIn;

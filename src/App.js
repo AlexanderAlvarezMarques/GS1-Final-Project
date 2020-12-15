@@ -12,9 +12,11 @@ import PagePrincipal from './componentes/PagePrincipal';
 import PriceEstimate from './componentes/PriceEstimate';
 import ContratarSeguro from './componentes/ContratarSeguro';
 import DeleteAccount from './componentes/DeleteAccount';
-import LogIn from "./componentes/LogIn";
-import SesionPage from "./componentes/SesionPage";
 //import styled from "@emotion/styled";
+import LogIn from './componentes/LogIn';
+import Incidences from './componentes/Incidences';
+import NewIncidence from './componentes/NewIncidence';
+import SesionPage from './componentes/SesionPage';
 
 function App() {
   /**
@@ -63,6 +65,10 @@ function App() {
           <Route exact path="/deleteAccount" component={DeleteAccount}/>
           <Route exact path="/logIn" component={LogIn} />
         <Route exact path="/sesion" component={SesionPage}/>
+  
+          <Route exact path="/Incidences" component={Incidences}/>
+          <Route exact path="/NewIncidence" component={NewIncidence}/>
+        
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
