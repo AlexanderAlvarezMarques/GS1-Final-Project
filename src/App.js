@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import PagePrincipal from './componentes/PagePrincipal';
 import PriceEstimate from './componentes/PriceEstimate';
 import ContratarSeguro from './componentes/ContratarSeguro';
+import DeleteAccount from './componentes/DeleteAccount';
 
 function App() {
 
@@ -54,6 +55,7 @@ function App() {
           <Route exact path="/signUp" component={SignUp}/>
           <Route exact path="/priceEstimate" component={PriceEstimate}/>
           <Route exact path="/contratarSeguro" component={ContratarSeguro}/>
+          <Route exact path="/deleteAccount" component={DeleteAccount}/>
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
       </Router>
