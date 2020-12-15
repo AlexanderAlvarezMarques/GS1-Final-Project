@@ -1,8 +1,9 @@
 import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
-//import { auth, firestore } from "../firebaseConfig";
+import { auth } from "../firebaseConfig";
+import { auth, firestore } from "../firebaseConfig";
 
-const newIncidence = () => {
+const NewIncidence = () => {
     //para rediccionar
     let history = useHistory();
 
@@ -27,7 +28,15 @@ const newIncidence = () => {
     
         if (issue.trim() == "" || dateIssue.trim() == "" || incidenceContext.trim() == "") {
           guardarError(true);
-          return;
+          //Codigo BD
+          if (auth.currentUser.uid != null){
+            var user = db.collection('usuariosRgistrados').doc(auth.currentUser.uid)
+            var incidenciasToUpdate = user.incidencias;
+            return user.update({
+              incidencias: [...incidenciasToUpdate, incidencias]
+            })
+            return;
+          }
         }
         guardarError(false);
       };
@@ -73,4 +82,4 @@ const newIncidence = () => {
         </Fragment>
     )
 };
-export default newIncidence;
+export default NewIncidence;
