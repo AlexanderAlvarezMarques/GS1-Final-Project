@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {obtenerDiferenciaYear} from '../Helper'
 import {calcularMarca} from '../Helper'
 import {obtenerPlan} from '../Helper'
+import {porAntiguedad} from '../Helper'
 import Spinner from './Spinner'
 import Resultado from './Resultado'
 import Resumen from './Resumen'
@@ -62,10 +63,12 @@ const PriceEstimate = () => {
         
             let resultado = 2000;
             const diferencia = obtenerDiferenciaYear(year);
-            resultado-= ((diferencia*3)*resultado)/ 100;
+            const antiguedad = porAntiguedad(antiguedadCarnet);
+            resultado-= ((diferencia*3)*resultado+antiguedad)/ 100;
     
             resultado = calcularMarca(marca) * resultado; 
-    
+
+
             const incrementoPlan = obtenerPlan(plan);
             resultado = parseFloat(incrementoPlan * resultado).toFixed(2);
             console.log(resultado)
