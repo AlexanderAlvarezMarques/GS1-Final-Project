@@ -2,8 +2,9 @@ import React, { Fragment, useState } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import {auth} from '../firebaseConfig'
+import { Router, useHistory} from 'react-router-dom';
 
-const contenedor = styled.div`
+const Contenedor = styled.div`
   display: flex;
   margin-bottom: 1rem;
   align-items: center;
@@ -39,7 +40,11 @@ const Error = styled.div`
   margin-top: 1rem;
 `;
 
+
+
 const LogIn = () => {
+
+  let history = useHistory();
   const [datos, guardarDatos] = useState({
     userName: "",
     passwd: "",
@@ -49,26 +54,18 @@ const LogIn = () => {
   // extrarer valores
   const { userName, passwd } = datos;
 
-  const obtenerDatos = (e) => {
+  const obtenerDatos = e => {
     guardarDatos({
       ...datos,
       [e.target.name]: e.target.value,
     });
   };
 
-  //  cuando el usuario pulsa submit
-  const iniciarSesion = (e) => {
-    e.preventDefault();
 
-    // eslint-disable-next-line eqeqeq
-    if (userName.trim() == "" || passwd.trim() == "") {
-      guardarError(true);
-      return;
-    }
 
-    const iniciarSesion = (e) => {
+    const iniciarSesion = e => {
       e.preventDefault();
-  
+      console.log("he pulsado el boton");
       // eslint-disable-next-line eqeqeq
       /*if (userName.trim() == "" || passwd.trim() == "") {
         guardarError(true);
@@ -87,39 +84,39 @@ const LogIn = () => {
       });
 
     guardarError(false);
-    window.location.href = "/sesion";
-  };
-  }
+    history.push("/sesion");
+    };
+  
   //    HTML
   return (
     <Fragment>
       <form onSubmit={iniciarSesion}>
         <h2> Log In</h2>
-        <contenedor>
-          <label>Nombre de usuario:&nbsp;</label>
+        <Contenedor>
+          <Label>Nombre de usuario:&nbsp;</Label>
           <input
             type="text"
             name="userName"
             value={userName}
             onChange={obtenerDatos}
           />
-        </contenedor>
+        </Contenedor>
         <br></br>
-        <contenedor>
-          <label>
+        <Contenedor>
+          <Label>
             Contraseña:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
             &nbsp;&nbsp;&nbsp;
-          </label>
+          </Label>
           <input
             type="password"
             name="passwd"
             value={passwd}
             onChange={obtenerDatos}
           />
-        </contenedor>
+        </Contenedor>
         <br></br>
-        {error ? <h4>Debes rellenar todos los campos</h4> : null}
-        <button type="submit">Iniciar sesión</button>
+        {error ? <Error>Debes rellenar todos los campos</Error> : null}
+        <Boton type="submit">Iniciar sesión</Boton>
         <br></br>
         <Link to={"/"}>Volver</Link>
       </form>

@@ -1,6 +1,45 @@
 import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
+import styled from "@emotion/styled";
+
+const Contenedor = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  background-color: #ff5733;
+  width: 100%;
+`;
+const Label = styled.label`
+  flex: 0 0 100px;
+  width: 100%;
+`;
+const Boton = styled.button`
+  background-color: #00838f;
+  font-size: 10px;
+  width: 50%;
+  padding: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  &:hover {
+    background-color: #26c6da;
+    cursor: pointer;
+  }
+  margin-top: 1rem;
+`;
+
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+  width: 47.5%;
+  text-align: center;
+  margin-top: 1rem;
+`;
+
+
 
 const NewIncidence = () => {
     //para rediccionar
@@ -48,7 +87,7 @@ const NewIncidence = () => {
         <Fragment>
         <form onSubmit={enviarIncidencia}>
         <h2> Incidencia</h2>
-        <contenedor>
+        <Contenedor>
           <h3>Asunto:&nbsp;</h3>
           <input
             type="text"
@@ -56,9 +95,9 @@ const NewIncidence = () => {
             value={issue}
             onChange={obtenerDatos}
           />
-        </contenedor>
+        </Contenedor>
         <br></br>
-        <contenedor>
+        <Contenedor>
           <h3>Fecha de incidencia:&nbsp;</h3>
           <input
             type="text"
@@ -66,9 +105,9 @@ const NewIncidence = () => {
             value={dateIssue}
             onChange={obtenerDatos}
           />
-        </contenedor>
+        </Contenedor>
         <br></br>
-        <contenedor>
+        <Contenedor>
           <h3>Mensaje:&nbsp;</h3>
           <input
             type="text"
@@ -76,10 +115,10 @@ const NewIncidence = () => {
             value={incidenceContext}
             onChange={obtenerDatos}
           />
-        </contenedor>
+        </Contenedor>
         <br></br>
-        {error ? <a>Debes rellenar todos los campos</a> : null}
-        <button type="submit">Enviar</button>
+        {error ? <Error>Debes rellenar todos los campos</Error> : null}
+        <Boton type="submit">Enviar</Boton>
         </form>
         </Fragment>
     )

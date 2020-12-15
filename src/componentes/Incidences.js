@@ -4,7 +4,8 @@ import { Link } from "react-router-dom";
 const Incidences = () => {
   
   const misIncidences = (e) => {
-    window.location.href = "/newIncidence";
+    //window.location.href = "/newIncidence";
+    <Link to={"/NewIncidence"}>Volver</Link>
   };
   
   return (
