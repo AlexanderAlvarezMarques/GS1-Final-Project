@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 
 const PagePrincipal = () => ( 
     <Fragment>
-        <h1>Página Principal</h1> 
-        <Link to={'/logIn'}>Iniciar sesión</Link> 
-        <br></br>
-        <Link to={'/signUp'} >Crear cuenta</Link>
+        <h1>Página Principal</h1>  
+        <Link to={'/signUp'} > Crear cuenta  </Link>
+        <Link to={'/priceEstimate'}> Buscar estimacion de precio  </Link>
+        <Link to={'/deleteAccount'}  >darse de baja  </Link>
+        <Link to={'/LogIn'} >Iniciar sesión</Link>
     </Fragment>
     
 );
