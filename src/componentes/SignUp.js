@@ -1,13 +1,12 @@
 import React, { Fragment, useState } from 'react';
 import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
-import AsyncSelect from 'react-select/async';
 
 const db = firestore;
 
 const SignUp = () => {
 
-    //para rediccionar
+    // para rediccionar
     let history = useHistory();
 
     // estado que tiene el usuario 
@@ -126,35 +125,10 @@ const SignUp = () => {
         });
     }
 
-    //const [state, setState]
-
-    const updateModels = (m) => {
-
-        //obtengo el valor seleccionado
-        var valueSelected = document.getElementById("brands").value;
-
-        //filtro por el valor seleccionado
-        modelsFiltered = models.filter(model => (
-            model.marca === valueSelected
-        ))
-        updateState({
-            //actualizar estado
-            
-        })
-    }
-
-
-    console.log(modelsFiltered.setState());
-    
-
-    let mostrarModelos = modelsFiltered.map(v => (
-        <option value={v.modelo}>{v.modelo}</option>
-    ));
-
     
     //HTML 
 return( 
-    <Fragment>
+    <>
         <h2>Sign Up Form</h2>
         { error ? <p>Todos los campos deben estar rellenos</p> : null }
         <form
@@ -207,25 +181,9 @@ return(
 
 
             <label>Marca: </label>
-            {/* <AsyncSelect 
-                defaultOptions
-                loadOptions={getBrands} /> */}
 
 
-
-            <select id='brands' onChange={updateModels}>
-            {brands.map(e => (
-                <option value={e}>{e}</option>
-                )
-            )}
-            </select>
-
-
-            <select id='modelos'>
-                {mostrarModelos}
-            </select>
-
-
+            <label>Submodel: </label>
             <label>Matricula: </label>
             <input
                 type="text"
@@ -236,7 +194,7 @@ return(
                 type="submit"
             >Registrarse</button>
         </form>
-    </Fragment>
+    </>
 );
 }
 export default SignUp ;

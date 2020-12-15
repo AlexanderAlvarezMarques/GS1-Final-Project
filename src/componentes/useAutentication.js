@@ -1,4 +1,4 @@
-const { useState, useEffect } = require("react");
+//const { useState, useEffect } = require("react");
 
 import React ,{useState, useEffect} from 'react';
 import firebase, { auth } from '../firebaseConfig';
