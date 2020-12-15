@@ -1,6 +1,7 @@
 import React, { Fragment, useState } from "react";
 import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
+import {auth} from '../firebaseConfig'
 
 const contenedor = styled.div`
   display: flex;
@@ -88,7 +89,7 @@ const LogIn = () => {
     guardarError(false);
     window.location.href = "/sesion";
   };
-
+  }
   //    HTML
   return (
     <Fragment>
@@ -126,5 +127,5 @@ const LogIn = () => {
   );
 };
 
-}
+
 export default LogIn;
