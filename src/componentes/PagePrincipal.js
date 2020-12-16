@@ -12,6 +12,7 @@ const PagePrincipal = () => (
         <Link to={'/NewIncidence'} >nueva incidencia    </Link>
         <Link to={'/Incidences'} >incidencias    </Link>
         <Link to={'/actualizarPerfil'} >actualizar perfil    </Link>
+        <Link to={'/extras'} >añadir extras </Link>
         
     </Fragment>
     

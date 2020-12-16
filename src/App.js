@@ -18,6 +18,7 @@ import Incidences from './componentes/Incidences';
 import NewIncidence from './componentes/NewIncidence';
 import SesionPage from './componentes/SesionPage';
 import UpdateProfile from './componentes/UpdateProfile';
+import Extras from './componentes/Extras';
 
 function App() {
   /**
@@ -70,6 +71,7 @@ function App() {
   
           <Route exact path="/Incidences" component={Incidences}/>
           <Route exact path="/NewIncidence" component={NewIncidence}/>
+          <Route exact path="/extras" component={Extras}/>
         
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>
