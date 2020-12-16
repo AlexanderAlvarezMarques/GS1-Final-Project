@@ -1,7 +1,9 @@
 import React, { Fragment, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const NewClaim = () => {
+
+  let history = useHistory();
   const [datos, guardarDatos] = useState({
     asunto: "",
     descripcion: "",
@@ -27,7 +29,7 @@ const NewClaim = () => {
       return;
     }
     guardarError(false);
-    window.location.href = "/claims";
+    history.push("/claims");
   };
 
   return (

@@ -30,7 +30,6 @@ const Boton = styled.button`
   }
   margin-top: 1rem;
 `;
-
 const Error = styled.div`
   background-color: red;
   color: white;
@@ -39,7 +38,6 @@ const Error = styled.div`
   text-align: center;
   margin-top: 1rem;
 `;
-
 */
 
 const LogIn = () => {
@@ -62,14 +60,6 @@ const LogIn = () => {
     });
   };
 
-    // eslint-disable-next-line eqeqeq
-    if (userName.trim() == "" || passwd.trim() == "") {
-      guardarError(true);
-      return;
-    }
-    guardarError(false);
-    window.location.href = "/sesion";
-  
 
 
     const iniciarSesion = e => {

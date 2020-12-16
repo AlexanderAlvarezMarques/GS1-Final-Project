@@ -1,9 +1,10 @@
 import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory} from "react-router-dom";
 
 const Claims = () => {
+  let history = useHistory();
   const misReclamaciones = (e) => {
-    window.location.href = "/newClaim";
+    history.push("/newClaim");
   };
   return (
     <Fragment>
