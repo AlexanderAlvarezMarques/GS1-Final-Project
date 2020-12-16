@@ -23,19 +23,35 @@ const Incidences = () => {
     if (user) {
       //var uid = user.uid;
       var userUID = auth.currentUser.uid;
-      firestore
-        .collection("usuariosRgistrados").where("dni", "==", "12345678E")
-        .get()
-        .then(function (querySnapshot) {
-          querySnapshot.forEach(function (doc) {
-            // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data().incidencias[0].issue);
-          });
-        })
-        .catch(function (error) {
-          console.log("Error getting documents: ", error);
-        });
+
+      var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
+
+      docRef.get().then(function(doc) {
+          if (doc.exists) {
+              console.log("Document data:", doc.data().incidencias);
+          } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+          }
+      }).catch(function(error) {
+          console.log("Error getting document:", error);
+      });
     }
+
+
+    //   firestore
+    //     .collection("usuariosRgistrados").doc(userUID)
+    //     .get()
+    //     .then(function (querySnapshot) {
+    //       querySnapshot.forEach(function (doc) {
+    //         // doc.data() is never undefined for query doc snapshots
+    //         console.log(doc.id, " => ", doc.data().incidencias[0].issue);
+    //       });
+    //     })
+    //     .catch(function (error) {
+    //       console.log("Error getting documents: ", error);
+    //     });
+    // }
   });
 
   return (
