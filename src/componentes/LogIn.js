@@ -1,9 +1,9 @@
 import React, { Fragment, useState } from "react";
-import styled from "@emotion/styled";
+//import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import {auth} from '../firebaseConfig'
 import { Router, useHistory} from 'react-router-dom';
-
+/*
 const Contenedor = styled.div`
   display: flex;
   margin-bottom: 1rem;
@@ -40,7 +40,7 @@ const Error = styled.div`
   margin-top: 1rem;
 `;
 
-
+*/
 
 const LogIn = () => {
 
@@ -93,30 +93,30 @@ const LogIn = () => {
     <Fragment>
       <form onSubmit={iniciarSesion}>
         <h2> Log In</h2>
-        <Contenedor>
-          <Label>Nombre de usuario:&nbsp;</Label>
+        <div>
+          <label>Nombre de usuario:&nbsp;</label>
           <input
             type="text"
             name="userName"
             value={userName}
             onChange={obtenerDatos}
           />
-        </Contenedor>
+        </div>
         <br></br>
-        <Contenedor>
-          <Label>
+        <div>
+          <label>
             Contraseña:
-          </Label>
+          </label>
           <input
             type="password"
             name="passwd"
             value={passwd}
             onChange={obtenerDatos}
           />
-        </Contenedor>
+        </div>
         <br></br>
-        {error ? <Error>Debes rellenar todos los campos</Error> : null}
-        <Boton type="submit">Iniciar sesión</Boton>
+        {error ? <a>Debes rellenar todos los campos</a> : null}
+        <button type="submit">Iniciar sesión</button>
         <br></br>
         <Link to={"/"}>Volver</Link>
       </form>
