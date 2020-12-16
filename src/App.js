@@ -17,6 +17,7 @@ import LogIn from './componentes/LogIn';
 import Incidences from './componentes/Incidences';
 import NewIncidence from './componentes/NewIncidence';
 import SesionPage from './componentes/SesionPage';
+import UpdateProfile from './componentes/UpdateProfile';
 
 function App() {
   /**
@@ -64,7 +65,8 @@ function App() {
           <Route exact path="/contratarSeguro" component={ContratarSeguro}/>
           <Route exact path="/deleteAccount" component={DeleteAccount}/>
           <Route exact path="/logIn" component={LogIn} />
-        <Route exact path="/sesion" component={SesionPage}/>
+          <Route exact path="/sesion" component={SesionPage}/>
+          <Route exact path="/actualizarPerfil" component={UpdateProfile}/>
   
           <Route exact path="/Incidences" component={Incidences}/>
           <Route exact path="/NewIncidence" component={NewIncidence}/>

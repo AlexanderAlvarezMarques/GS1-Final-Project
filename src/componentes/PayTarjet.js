@@ -1,6 +1,7 @@
 import React, { useState }  from 'react';
+import { auth, firestore } from '../firebaseConfig';
 
-const PayTarjet = () => {
+const PayTarjet = ({cotizacion}) => {
     
      //state para los campos del formulario
      const [data, setData] = useState({
@@ -9,6 +10,11 @@ const PayTarjet = () => {
         fechaCaducidad : '',
         
     });
+
+    const pagoSeguro = {
+        precio: cotizacion,
+        fecha: new Date().getTime().toString(),
+    }
 
     const {numeroSecreto,numeroTarjeta,fechaCaducidad} = data;
     // estado para validaciones
@@ -33,6 +39,22 @@ const PayTarjet = () => {
             actualizarError(false);
 
         //realizar pago en la base de datos
+
+        if(auth.currentUser.uid != null ){
+            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).update({
+                "pagos": [pagoSeguro]
+            }).then(() => {
+                console.info('se ha actualizado el pago');
+                
+              }).catch((e) => {
+                console.error('Mal', e);
+                
+              })
+        }else{
+            console.log('no hay usuario ');
+        }
+
+
 
     }
     
@@ -65,7 +87,7 @@ const PayTarjet = () => {
             value={fechaCaducidad}
             onChange={actualizarState}
         ></input>
-
+        <button type="submit">Pagar</button>
     </form>
     </>
 )};

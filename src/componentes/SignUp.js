@@ -16,11 +16,13 @@ const SignUp = () => {
         dni : '12345678E',
         correo : 'juanma@gmail.com',
         contraseña : '123456',
+        telefono: '678678678',
         fechaCarnet : '10/02/2019',
         nacimiento : '5/02/1997',
         vehiculos: [],
         incidencias : [],
-        reclamaciones: []
+        reclamaciones: [],
+        
     })
 
     //estado para el vehiculo
@@ -30,24 +32,10 @@ const SignUp = () => {
         kilometros: 28000,
         tipo: 'Turismo',
         combustible: 'Gasolina',
-        matricula: '3844LLL'
+        matricula: '3844LLL',
+        pagos: []
     })
 
-
-    //array de marcas
-    const brands = ["Audi", "Ford", "Kia", "Toyota"]
-
-
-    //mapa de marca con su modelo
-    const models = [
-        {marca: "Audi", modelo: "A3"},
-        {marca: "Audi", modelo: "A4"},
-        {marca: "Ford", modelo: "Focus"},
-        {marca: "Ford", modelo: "Puma"},
-        {marca: "Kia", modelo: "Rio"},
-        {marca: "Toyota", modelo: "Yaris"}
-    ]
-    
     // estado para validaciones
     const [error, actualizarError] = useState(false);
 
@@ -64,7 +52,7 @@ const SignUp = () => {
     }
 
     //objeto que contiene todas las variables que necesitamos
-    const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento} = user;
+    const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,telefono} = user;
     const {marca,modelo,kilometros,tipo,combustible,matricula} = car;
 
 
@@ -82,7 +70,9 @@ const SignUp = () => {
                 matricula.trim() === '' ||
                 tipo.trim() === '' ||
                 kilometros === 0 ||
-                combustible.trim() === ''
+                combustible.trim() === '' ||
+                telefono.trim() === ''
+
     }
 
     const registrar = e => {
@@ -166,6 +156,13 @@ return(
             <input
                 type="date"
                 name="nacimiento"
+                onChange={actualizarState}
+            />
+
+            <label>Telefono: </label>
+            <input
+                type="date"
+                name="telefono"
                 onChange={actualizarState}
             />
             <label>Fecha Carnet: </label>
