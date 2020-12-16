@@ -14,9 +14,11 @@ import ContratarSeguro from './componentes/ContratarSeguro';
 import DeleteAccount from './componentes/DeleteAccount';
 //import styled from "@emotion/styled";
 import LogIn from './componentes/LogIn';
+import SesionPage from "./componentes/SesionPage";
+import Claims from './componentes/Claims';
+import NewClaim from './componentes/NewClaim';
 import Incidences from './componentes/Incidences';
 import NewIncidence from './componentes/NewIncidence';
-import SesionPage from './componentes/SesionPage';
 import UpdateProfile from './componentes/UpdateProfile';
 import Extras from './componentes/Extras';
 
@@ -62,13 +64,15 @@ function App() {
         <Switch>
           <Route exact path="/" component={PagePrincipal}/>
           <Route exact path="/signUp" component={SignUp}/>
+          <Route exact path="/logIn" component={LogIn}/>
+          <Route exact path="/sesion" component={SesionPage}/>
+          <Route exact path="/claims" component={Claims}/>
+          <Route exact path="/newClaim" component={NewClaim}/>
           <Route exact path="/priceEstimate" component={PriceEstimate}/>
           <Route exact path="/contratarSeguro" component={ContratarSeguro}/>
           <Route exact path="/deleteAccount" component={DeleteAccount}/>
           <Route exact path="/logIn" component={LogIn} />
-          <Route exact path="/sesion" component={SesionPage}/>
           <Route exact path="/actualizarPerfil" component={UpdateProfile}/>
-  
           <Route exact path="/Incidences" component={Incidences}/>
           <Route exact path="/NewIncidence" component={NewIncidence}/>
           <Route exact path="/extras" component={Extras}/>

@@ -2,7 +2,7 @@ import React, { Fragment, useState } from "react";
 //import styled from "@emotion/styled";
 import { Link } from "react-router-dom";
 import {auth} from '../firebaseConfig'
-import { Router, useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 /*
 const Contenedor = styled.div`
   display: flex;
@@ -30,7 +30,6 @@ const Boton = styled.button`
   }
   margin-top: 1rem;
 `;
-
 const Error = styled.div`
   background-color: red;
   color: white;
@@ -39,7 +38,6 @@ const Error = styled.div`
   text-align: center;
   margin-top: 1rem;
 `;
-
 */
 
 const LogIn = () => {

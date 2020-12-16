@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 const SesionPage = () => ( 
     <Fragment>
         <h1>Sesion iniciada por tu "xxxx"</h1> 
+        <Link to={"/claims"}>Mis reclamaciones</Link>
+        <br></br>
         <Link to={"/Incidences"}>Mis Incidencias</Link>
-    </Fragment>
-    
+    </Fragment>    
 );
 export default SesionPage;
