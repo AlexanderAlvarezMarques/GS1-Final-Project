@@ -24,12 +24,12 @@ const Incidences = () => {
       //var uid = user.uid;
       var userUID = auth.currentUser.uid;
       firestore
-        .collection("usuariosRgistrados").where("UID", "==", userUID)
+        .collection("usuariosRgistrados").where("dni", "==", "12345678E")
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.incidencias);
+            console.log(doc.id, " => ", doc.data().incidencias[0].issue);
           });
         })
         .catch(function (error) {
