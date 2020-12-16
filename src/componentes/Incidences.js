@@ -6,17 +6,6 @@ import { auth, firestore } from "../firebaseConfig";
 const Incidences = () => {
   let history = useHistory();
 
-  // const [datos,setDatos] = useState({
-  //   incidencia:[]
-  // })
-
-  // const {incidencia}=datos
-
-
-
-
-
-
   const misIncidences = (e) => {
     history.push("/NewIncidence");
   };
@@ -54,6 +43,7 @@ const Incidences = () => {
       });
     }
   });
+  
 
 
   
