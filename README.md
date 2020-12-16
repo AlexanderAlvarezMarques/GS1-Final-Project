@@ -74,3 +74,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 `npm install sqlite3`
 `npm install routes`
 `npm i @emotion/styled @emotion/core`
+`npm install react-select-checked`
