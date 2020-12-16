@@ -2,69 +2,85 @@ import React, { Fragment, useState } from 'react';
 import { Router, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
 
+const db = firestore;
+
 const SignUp = () => {
-    //para rediccionar
+
+    // para rediccionar
     let history = useHistory();
 
     // estado que tiene el usuario 
-    const [userSignUp, signUp] = useState({
+    const [user, setUser] = useState({
         nombre : 'juanma',
         apellido : 'perez',
         dni : '12345678E',
         correo : 'juanma@gmail.com',
         contraseña : '123456',
+        telefono: '678678678',
         fechaCarnet : '10/02/2019',
         nacimiento : '5/02/1997',
-        marca : 'toyota',
-        modelo : 'yaris',
-        matricula : '1234FTG'
+        vehiculos: [],
+        incidencias : [],
+        reclamaciones: [],
+        
     })
-    
+
+    //estado para el vehiculo
+    const [car, setCar] = useState({
+        marca: 'Toyota',
+        modelo: 'Yaris',
+        kilometros: 28000,
+        tipo: 'Turismo',
+        combustible: 'Gasolina',
+        matricula: '3844LLL',
+        pagos: []
+    })
+
     // estado para validaciones
     const [error, actualizarError] = useState(false);
 
     // actualizar campos del formulario
     const actualizarState = e => {
-        signUp({
-            ...userSignUp,
+        setUser({
+            ...user,
+            [e.target.name] : e.target.value
+        })
+        setCar({
+            ...car,
             [e.target.name] : e.target.value
         })
     }
 
     //objeto que contiene todas las variables que necesitamos
-    const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,marca,modelo,matricula} = userSignUp;
+    const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,telefono} = user;
+    const {marca,modelo,kilometros,tipo,combustible,matricula} = car;
 
-    
-    const vehiculo = {
-        marca,
-        modelo,
-        matricula
+
+    const checkEmptyValues = () => {
+        return nombre.trim() === '' || 
+                apellido.trim() === '' || 
+                dni.trim() === '' || 
+                correo.trim() === '' || 
+                contraseña.trim() === '' || 
+                fechaCarnet.trim() === '' || 
+                modelo.trim() === '' || 
+                nacimiento.trim() === '' || 
+                marca.trim() === '' || 
+                modelo.trim() === '' || 
+                matricula.trim() === '' ||
+                tipo.trim() === '' ||
+                kilometros === 0 ||
+                combustible.trim() === '' ||
+                telefono.trim() === ''
+
     }
-
-    // const car = {
-    //     marca:[],
-    //     modelo:[],
-    //     matricula:[]
-    // }
-
-    const datosPerfil = {
-        nombre,
-        apellido,
-        dni,
-        correo,
-        fechaCarnet,
-        nacimiento,
-        contraseña,
-        vehiculos : [vehiculo.marca,vehiculo.modelo,vehiculo.matricula]
-    }
-
 
     const registrar = e => {
 
         e.preventDefault()
 
         //validar que los campos no esten vacios
-        if ( nombre.trim() === '' || apellido.trim() === '' || dni.trim() === '' || correo.trim() === '' || contraseña.trim() === '' || fechaCarnet.trim() === '' || modelo.trim() === '' || nacimiento.trim() === '' || marca.trim() === '' || modelo.trim() === '' || matricula.trim() === ''){
+        if (checkEmptyValues()){
             actualizarError(true);
             return;
         }
@@ -72,13 +88,14 @@ const SignUp = () => {
         
         //crear usuario nuevo y añadir a la base de datos
         auth.createUserWithEmailAndPassword(correo, contraseña)
-        .then((user) => {
+        .then((u) => {
             
             var db = firestore;
-            var userUID = auth.currentUser.uid;
-            db.collection('bd').doc(userUID).set(datosPerfil)
+
+
+            user.vehiculos = [car];
             
-            //db.collection('bd').doc(userUID).set(vehiculo);
+            db.collection('usuariosRgistrados').doc(auth.currentUser.uid).set(user)
                 .then(() => {
                     console.log("Todo correcto")
                     
@@ -94,14 +111,13 @@ const SignUp = () => {
             var errorMessage = error.message;
             console.log(errorMessage);
         });
-    
-
     }
+
     
     //HTML 
 return( 
-    <Fragment>
-        <h2>Sign In Form</h2>
+    <>
+        <h2>Sign Up Form</h2>
         { error ? <p>Todos los campos deben estar rellenos</p> : null }
         <form
             onSubmit={registrar}
@@ -142,6 +158,13 @@ return(
                 name="nacimiento"
                 onChange={actualizarState}
             />
+
+            <label>Telefono: </label>
+            <input
+                type="date"
+                name="telefono"
+                onChange={actualizarState}
+            />
             <label>Fecha Carnet: </label>
             <input
                 type="date"
@@ -171,7 +194,7 @@ return(
                 type="submit"
             >Registrarse</button>
         </form>
-    </Fragment>
+    </>
 );
 }
 export default SignUp ;

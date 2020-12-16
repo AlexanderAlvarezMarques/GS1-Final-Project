@@ -5,8 +5,8 @@ const SesionPage = () => (
     <Fragment>
         <h1>Sesion iniciada por tu "xxxx"</h1> 
         <Link to={"/claims"}>Mis reclamaciones</Link>
-    </Fragment>
-    
-    
+        <br></br>
+        <Link to={"/Incidences"}>Mis Incidencias</Link>
+    </Fragment>    
 );
 export default SesionPage;
