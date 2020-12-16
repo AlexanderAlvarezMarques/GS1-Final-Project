@@ -2,6 +2,8 @@ import React, { Fragment, useState } from "react";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import styled from "@emotion/styled";
+import firebase from 'firebase/firebase'
+import useAutetication from './useAutentication'
 
 const Contenedor = styled.div`
   display: flex;
@@ -44,12 +46,14 @@ const Error = styled.div`
 const NewIncidence = () => {
     //para rediccionar
     let history = useHistory();
-
+ 
     const [datos, guardarDatos] = useState({
-        issue: "",
-        dateIssue: "",
-        incidenceContext: "",
+        issue: "pinchazo",
+        dateIssue: "1-10-2020",
+        incidenceContext: "la rueda a la caca",
       });
+
+
     const [error, guardarError] = useState(false);
     const { issue, dateIssue, incidenceContext } = datos;
     
@@ -60,20 +64,36 @@ const NewIncidence = () => {
           [e.target.name]: e.target.value,
         });
       };
+     
+      console.log(auth.currentUser.uid);
+      
 
-      const enviarIncidencia = (e) => {
+      const enviarIncidencia = e => {
         e.preventDefault();
     
         if (issue.trim() === "" || dateIssue.trim() === "" || incidenceContext.trim() === "") {
           guardarError(true);
           return;
         }
+
+       
+        
+        
+        
           //Codigo BD
-          if (auth.currentUser != null){
-            var user = firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid)
-            var incidenciasToUpdate = user.incidencias;
-            return user.update({
-              incidencias: [...incidenciasToUpdate, datos]
+          if (auth.currentUser.uid != null){
+            console.log('entra en el if ' + auth.currentUser.uid);
+            var userUID = auth.currentUser.uid
+            firestore.collection('usuariosRgistrados').doc(userUID).update({
+              //apellido: 'pepito'
+              //incidencias: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
+              incidencias : [datos]
+              }).then(() => {
+              console.info('todo actualizado');
+              
+            }).catch((e) => {
+              console.error('Mal', e);
+              
             })
           }else{
             console.log("No hay nadie" + auth.currentUser.uid)

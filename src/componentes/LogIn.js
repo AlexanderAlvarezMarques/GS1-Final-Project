@@ -47,8 +47,8 @@ const LogIn = () => {
   let history = useHistory();
   
   const [datos, guardarDatos] = useState({
-    userName: "",
-    passwd: "",
+    userName: "juanma@gmail.com",
+    passwd: "123456",
   });
   const [error, guardarError] = useState(false);
 
@@ -72,7 +72,7 @@ const LogIn = () => {
         guardarError(true);
         return;
       }*/
-      auth.signInWithEmailAndPassword("magi61012@gmail.com", "123456")
+      auth.signInWithEmailAndPassword(userName, passwd)
       .then((user) => {
         // Signed in
         // ...
@@ -105,8 +105,7 @@ const LogIn = () => {
         <br></br>
         <Contenedor>
           <Label>
-            Contraseña:&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
-            &nbsp;&nbsp;&nbsp;
+            Contraseña:
           </Label>
           <input
             type="password"

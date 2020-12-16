@@ -18,7 +18,9 @@ const SignUp = () => {
         contraseña : '123456',
         fechaCarnet : '10/02/2019',
         nacimiento : '5/02/1997',
-        vehiculos: []
+        vehiculos: [],
+        incidencias : [],
+        reclamaciones: []
     })
 
     //estado para el vehiculo
@@ -45,10 +47,6 @@ const SignUp = () => {
         {marca: "Kia", modelo: "Rio"},
         {marca: "Toyota", modelo: "Yaris"}
     ]
-
-    
-    var modelsFiltered = []
-    const [state,updateState] = useState(modelsFiltered)
     
     // estado para validaciones
     const [error, actualizarError] = useState(false);
