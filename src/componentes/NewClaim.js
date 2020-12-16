@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import { Link, useHistory } from "react-router-dom";
+import { auth, firestore } from "../firebaseConfig";
+
 
 const NewClaim = () => {
 
@@ -27,6 +29,26 @@ const NewClaim = () => {
     if (asunto.trim() == "" || descripcion.trim() == "") {
       guardarError(true);
       return;
+    }
+    if (auth.currentUser.uid != null) {
+      console.log("entra en el if " + auth.currentUser.uid);
+      var userUID = auth.currentUser.uid;
+      firestore
+        .collection("usuariosRgistrados")
+        .doc(userUID)
+        .update({
+          //apellido: 'pepito'
+          //incidencias: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
+          reclamaciones: [datos],
+        })
+        .then(() => {
+          console.info("todo actualizado");
+        })
+        .catch((e) => {
+          console.error("Mal", e);
+        });
+    } else {
+      console.log("No hay nadie" + auth.currentUser.uid);
     }
     guardarError(false);
     history.push("/claims");
