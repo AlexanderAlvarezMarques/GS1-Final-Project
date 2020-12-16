@@ -10,18 +10,9 @@ const Incidences = () => {
     history.push("/NewIncidence");
   };
 
-
   const list = document.querySelector("ul");
 
-  const addIssue = inc => {
-    let html = `
-        <li>
-            <div>${inc}</div>
-        </li>
-    `;
-    console.log(html);
-    list.innerHTML+=html
-  };
+  const [inci,setInci]=useState([])
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -33,9 +24,15 @@ const Incidences = () => {
       docRef.get().then(function(doc) {
           if (doc.exists) {
               console.log("Document data:", doc.data().incidencias);
-              addIssue("pepe")
+              setInci(
+                ...inci,
+                doc.data().incidencias)
+
+                console.log('data: ', inci);
+                
+              return;
+             
           } else {
-              // doc.data() will be undefined in this case
               console.log("No such document!");
           }
       }).catch(function(error) {
@@ -43,8 +40,6 @@ const Incidences = () => {
       });
     }
   });
-  
-
 
   
 
@@ -53,10 +48,14 @@ const Incidences = () => {
       <h1>Mis incidencias</h1>
       <label> AQUI IRIAN LAS INCIDENCIAS</label>
       <br></br>
+
+      {[inci].map(i => (
+        <p>Incidencia: {i.issue}</p>
+
+      ))}
       
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
-      {addIssue}
       <Link to={"/sesion"}>Volver</Link>
     </Fragment>
   );
