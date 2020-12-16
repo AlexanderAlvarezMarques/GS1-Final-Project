@@ -23,13 +23,14 @@ const Incidences = () => {
     if (user) {
       //var uid = user.uid;
       var userUID = auth.currentUser.uid;
+      var dniCU = userUID.dni;
       firestore
-        .collection("usuariosRgistrados").where("dni", "==", "12345678E")
+        .collection("usuariosRgistrados").where("dni", "==", dniCU)
         .get()
         .then(function (querySnapshot) {
           querySnapshot.forEach(function (doc) {
             // doc.data() is never undefined for query doc snapshots
-            console.log(doc.id, " => ", doc.data().incidencias[0].issue);
+            console.log(doc.id, " => ", doc.data().incidencias[0]);
           });
         })
         .catch(function (error) {
