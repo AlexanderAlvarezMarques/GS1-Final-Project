@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
@@ -6,18 +6,33 @@ import { auth, firestore } from "../firebaseConfig";
 const Incidences = () => {
   let history = useHistory();
 
+  // const [datos,setDatos] = useState({
+  //   incidencia:[]
+  // })
+
+  // const {incidencia}=datos
+
+
+
+
+
+
   const misIncidences = (e) => {
     history.push("/NewIncidence");
   };
-  /*const list = document.querySelector("ul");
-  const addIssue = (incidencias) => {
+
+
+  const list = document.querySelector("ul");
+
+  const addIssue = inc => {
     let html = `
         <li>
-            <div>${incidencias}</div>
+            <div>${inc}</div>
         </li>
     `;
     console.log(html);
-  };*/
+    list.innerHTML+=html
+  };
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -29,6 +44,7 @@ const Incidences = () => {
       docRef.get().then(function(doc) {
           if (doc.exists) {
               console.log("Document data:", doc.data().incidencias);
+              addIssue("pepe")
           } else {
               // doc.data() will be undefined in this case
               console.log("No such document!");
@@ -37,30 +53,20 @@ const Incidences = () => {
           console.log("Error getting document:", error);
       });
     }
-
-
-    //   firestore
-    //     .collection("usuariosRgistrados").doc(userUID)
-    //     .get()
-    //     .then(function (querySnapshot) {
-    //       querySnapshot.forEach(function (doc) {
-    //         // doc.data() is never undefined for query doc snapshots
-    //         console.log(doc.id, " => ", doc.data().incidencias[0].issue);
-    //       });
-    //     })
-    //     .catch(function (error) {
-    //       console.log("Error getting documents: ", error);
-    //     });
-    // }
   });
+
+
+  
 
   return (
     <Fragment>
       <h1>Mis incidencias</h1>
       <label> AQUI IRIAN LAS INCIDENCIAS</label>
       <br></br>
+      
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
+      {addIssue}
       <Link to={"/sesion"}>Volver</Link>
     </Fragment>
   );
