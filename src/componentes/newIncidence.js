@@ -45,6 +45,7 @@ const Error = styled.div`
 
 const NewIncidence = () => {
     //para rediccionar
+    //Se ha cambiado
     let history = useHistory();
  
     const [datos, guardarDatos] = useState({
