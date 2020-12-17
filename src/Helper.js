@@ -44,6 +44,8 @@ export function calcularModelo(modelo){
 }
 
 
+
+
 export function calcularMarca(marca){
     
     let incremento;

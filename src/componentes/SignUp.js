@@ -22,7 +22,7 @@ const SignUp = () => {
         vehiculos: [],
         incidencias : [],
         reclamaciones: [],
-        
+        pagos:[]
     })
 
     //estado para el vehiculo
@@ -33,7 +33,6 @@ const SignUp = () => {
         tipo: 'Turismo',
         combustible: 'Gasolina',
         matricula: '3844LLL',
-        pagos: []
     })
 
     // estado para validaciones

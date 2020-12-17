@@ -8,23 +8,29 @@ import Resultado from './Resultado'
 import { Link } from 'react-router-dom';
 import { auth, firestore } from '../firebaseConfig';
 import useForm from 'react-hook-form';
-//import { Router, useHistory} from 'react-router-dom';
-//import {auth, firestore} from '../firebaseConfig';
+import PayTarjet from './PayTarjet';
+import Paypal from './Paypal';
 
 const PriceEstimate = () => {
 
+    var prueba=false;
     const extrasDisponibles = [
         {
           name: "Robo del vehículo",
+          precioExtra: 500
         },
         {
           name: "Rotura de parabrisas y lunas",
+          precioExtra: 150
         },
         {
           name: "Incendio del vehículo",
+          precioExtra: 200
+
         },
         {
           name: "Daños por atropello de animales cinegéticos (Animales de caza mayor)",
+          precioExtra: 75
         }
       ];
 
@@ -44,6 +50,8 @@ const PriceEstimate = () => {
     
     const {cotizacion, datos} = resumen;
 
+
+
     //state para los campos del formulario
     const [data, setData] = useState({
         marca : 'Ford',
@@ -51,16 +59,23 @@ const PriceEstimate = () => {
         year : 1997,
         antiguedadCarnet : 5,
         plan : 'basico',
-        extra: [extrasDisponibles]
+        extra: extrasDisponibles
     });
 
+    
     const {marca,modelo,year,antiguedadCarnet,plan,extra} = data;
+
+
     // estado para validaciones
     const [error, actualizarError] = useState(false);
+
+
+
 
     //añadir state de extra
     const [isChecked, setIsChecked] = useState({});
     const [formData, setFormData] = useState(extrasDisponibles);
+
 
 
     //metodos para los extras de checkbox
@@ -68,14 +83,6 @@ const PriceEstimate = () => {
         setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
       };
     
-      const addExtra = e =>{
-          e.preventDefault();
-          if(auth.currentUser.uid != null){
-              firestore.collection("usuariosRgistrados").doc(auth.currentUser.uid)
-          }
-          
-      }
-
 
     // actualizar campos del formulario
     const actualizarState = e => {
@@ -94,7 +101,6 @@ const PriceEstimate = () => {
             return;
         }
             actualizarError(false);
-
         
             let resultado = 2000;
             const diferencia = obtenerDiferenciaYear(year);
@@ -121,6 +127,14 @@ const PriceEstimate = () => {
             
     }
 
+
+    const elegirFormaDePago = e =>{
+        e.preventDefault();
+        console.log('he entrado en elegirFormaDePago');
+        prueba=true
+        console.log(prueba);
+        
+    }
 
     return( 
         <>
@@ -227,13 +241,23 @@ const PriceEstimate = () => {
           </>
          : null }
 
+        
         { cotizacion != 0 ?
             <>
-                <Link to={'/contratarSeguro'}>Contratar este Seguro</Link>
+                <button onClick={elegirFormaDePago}>Contratar seguro</button>
+                {prueba===true ? 
+                    <div>
+                    <PayTarjet cotizacion={cotizacion}/>
+                    <Paypal/>
+                    </div>
+                : null}
             </> 
             : null }
         </div>
-        
+   
+
+
+       
        
         </>
     );
