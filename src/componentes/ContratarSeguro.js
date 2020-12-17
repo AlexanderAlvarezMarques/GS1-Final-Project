@@ -4,16 +4,6 @@ import Paypal from './Paypal'
 
 const ContratarSeguro = () => {
 
-    //comprobar que hay un usuario, si no lo hay ir a registrarse o loguearse
-
-    //si esta registrado entonces llamar al componente de pago
-
-    //luego guardar seguro en la base de datos del usuario
-
-    //luego redireccionar a la pagina principal 
-
-
-
     // state para los campos del formulario
     const [data, setData] = useState({
       tipo : 'visa',
@@ -39,18 +29,18 @@ const ContratarSeguro = () => {
                 <label>Pagar con tarjeta </label>
                 <input
                     type="radio"
-                    name="tarjeta"
+                    name="tipo"
                     value="visa"
-                    checked={tarjeta === "visa"}
+                    checked={tipo === "visa"}
                     onChange={actualizarState}
                 /> 
                 Visa
 
                 <input
                     type="radio"
-                    name="tarjeta"
+                    name="tipo"
                     value="mastercard"
-                    checked={tarjeta === "mastercard"}
+                    checked={tipo === "mastercard"}
                     onChange={actualizarState}
                 />
                 Mastercard
@@ -62,7 +52,7 @@ const ContratarSeguro = () => {
                     type="radio"
                     name="tipo"
                     value="paypal"
-                    checked={tarjeta === "paypal"}
+                    checked={tipo === "paypal"}
                     onChange={actualizarState}
                 /> 
                 Paypal

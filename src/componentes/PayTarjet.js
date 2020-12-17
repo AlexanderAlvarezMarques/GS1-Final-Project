@@ -54,7 +54,7 @@ const PayTarjet = (cotizacion) => {
         //realizar pago en la base de datos 
         if(auth.currentUser.uid != null ){
             firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
-            alert("se ha realizado el pago");
+            alert("Ha realizado su pago correctamente!")
         }else{
             console.log('no hay usuario ');
         }
@@ -86,7 +86,7 @@ const PayTarjet = (cotizacion) => {
         Mastercard
     </div>
 
-
+    {error === true ? <p>Necesitan rellenar todos los campos </p> : null }
     <form
         onSubmit={Pagar}
     >
