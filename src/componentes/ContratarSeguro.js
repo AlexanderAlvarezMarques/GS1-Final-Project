@@ -39,18 +39,18 @@ const ContratarSeguro = () => {
                 <label>Pagar con tarjeta </label>
                 <input
                     type="radio"
-                    name="tipo"
+                    name="tarjeta"
                     value="visa"
-                    checked={tipo === "visa"}
+                    checked={tarjeta === "visa"}
                     onChange={actualizarState}
                 /> 
                 Visa
 
                 <input
                     type="radio"
-                    name="tipo"
+                    name="tarjeta"
                     value="mastercard"
-                    checked={tipo === "mastercard"}
+                    checked={tarjeta === "mastercard"}
                     onChange={actualizarState}
                 />
                 Mastercard
@@ -62,7 +62,7 @@ const ContratarSeguro = () => {
                     type="radio"
                     name="tipo"
                     value="paypal"
-                    checked={tipo === "paypal"}
+                    checked={tarjeta === "paypal"}
                     onChange={actualizarState}
                 /> 
                 Paypal

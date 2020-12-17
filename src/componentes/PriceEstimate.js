@@ -13,7 +13,6 @@ import Paypal from './Paypal';
 
 const PriceEstimate = () => {
 
-    var prueba=false;
     const extrasDisponibles = [
         {
           name: "Robo del vehículo",
@@ -84,12 +83,15 @@ const PriceEstimate = () => {
       };
     
 
+      const [prueba,setPrueba] = useState(false);
+
     // actualizar campos del formulario
     const actualizarState = e => {
         setData({
             ...data,
             [e.target.name] : e.target.value
         })
+        setPrueba(true)
     }
 
     const getPriceEstimate = e =>{
@@ -125,15 +127,6 @@ const PriceEstimate = () => {
                 });
             },3000);
             
-    }
-
-
-    const elegirFormaDePago = e =>{
-        e.preventDefault();
-        console.log('he entrado en elegirFormaDePago');
-        prueba=true
-        console.log(prueba);
-        
     }
 
     return( 
@@ -244,7 +237,7 @@ const PriceEstimate = () => {
         
         { cotizacion != 0 ?
             <>
-                <button onClick={elegirFormaDePago}>Contratar seguro</button>
+                <button onClick={actualizarState}>Contratar seguro</button>
                 {prueba===true ? 
                     <div>
                     <PayTarjet cotizacion={cotizacion}/>

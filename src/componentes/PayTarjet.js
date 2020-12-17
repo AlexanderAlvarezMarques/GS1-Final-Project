@@ -3,6 +3,18 @@ import { auth, firestore } from '../firebaseConfig';
 
 const PayTarjet = (cotizacion) => {
     
+
+
+
+    // state para los campos del formulario
+    const [tipoTarjeta, setTipoTarjeta] = useState({
+        tarjeta : 'visa',
+      });
+  
+      const {tarjeta} = tipoTarjeta
+  
+
+
      //state para los campos del formulario
      const [data, setData] = useState({
         numeroTarjeta : '',
@@ -26,6 +38,10 @@ const PayTarjet = (cotizacion) => {
     const actualizarState = e => {
         setData({
             ...data,
+            [e.target.name] : e.target.value
+        })
+        setTipoTarjeta({
+            ...tipoTarjeta,
             [e.target.name] : e.target.value
         })
     }
@@ -57,6 +73,29 @@ const PayTarjet = (cotizacion) => {
     return( 
     <>
     <h1>Pagar con tarjeta</h1>
+
+    <div>
+        <label>Elegir tarjeta </label>
+        <input
+            type="radio"
+            name="tarjeta"
+            value="visa"
+            checked={tarjeta === "visa"}
+            onChange={actualizarState}
+        /> 
+        Visa
+
+        <input
+            type="radio"
+            name="tarjeta"
+            value="mastercard"
+            checked={tarjeta === "mastercard"}
+            onChange={actualizarState}
+        />
+        Mastercard
+    </div>
+
+
     <form
         onSubmit={Pagar}
     >
