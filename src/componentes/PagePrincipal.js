@@ -4,31 +4,53 @@ import { Router, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
-  const [seg, getSeguro] = useState([]);
   let history = useHistory();
+  const [datos, getId] = useState({
+    idSeg: "",
+  });
 
+  const [error, guardarError] = useState(false);
+
+  const {idSeg} = datos;
+
+  const obtenerID = e => {
+    getId({
+      ...datos,
+      [e.target.name]: e.target.value,
+    });
+  };
   const contratar = (e) => {
-    history.push("/contratarSeguro");
+    e.preventDefault();
+    if (idSeg.trim() == "") {
+      guardarError(true);
+      return;
+    }
+    guardarError(false);
+    //history.push("/contratarSeguro");
+    history.push({
+      pathname: '/contratarSeguro',
+      state: { detail: idSeg }
+    })
   };
   //const list = document.getElementById("seguros");
   let html = "";
-  const addSeguro = (seguro) => {
+  const addSeguro = (doc) => {
+    let seguro=doc.data()
     html += `
             <li>
               <div>
+                ID: ${doc.id}
+                <br></br>
                 Tipo de seguro: ${seguro.Tipo}
                 <br></br>
                 Descripción: ${seguro.Descripcion}
                 <br></br>
                 Coberturas: ${seguro.Coberturas}
                 <br></br>
-                Precio: ${seguro.Precio}
-                <br></br>
-                <button onClick=contratar>Contratar</button>
+                Precio: ${seguro.Precio} €
               </div>
             </li>
             `;
-    console.log(html);
     //list.innerHTML += html;
     
     ReactDOM.render(
@@ -37,14 +59,14 @@ const PagePrincipal = () => {
     );
   };
 
-  let i = 1;
   firestore
     .collection("seguros")
     .get()
     .then((snapshot) => {
       snapshot.forEach((doc) => {
-        addSeguro(doc.data());
-        console.log(i);
+
+        console.log(doc);
+        addSeguro(doc);
       });
     })
     .catch((error) => console.log(error));
@@ -71,10 +93,16 @@ const PagePrincipal = () => {
           <br></br>
           <Link to={"/extras"}>añadir extras </Link>
           <br></br>
-          <div id="seguros">
-          
-
-          </div>
+          <div id="seguros"></div>
+          <br></br>
+          {error ? <a>Debes rellenar especificar el ID del seguro<br></br></a> : null}
+          <input
+            type="text"
+            name="idSeg"
+            value={idSeg}
+            onChange={obtenerID}
+          />
+          <button onClick={contratar}>Contratar</button>
           
         </body>
       </html>
