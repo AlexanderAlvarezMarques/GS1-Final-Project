@@ -160,7 +160,7 @@ return(
 
             <label>Telefono: </label>
             <input
-                type="date"
+                type="number"
                 name="telefono"
                 onChange={actualizarState}
             />

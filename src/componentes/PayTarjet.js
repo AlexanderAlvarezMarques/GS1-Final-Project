@@ -4,16 +4,10 @@ import { auth, firestore } from '../firebaseConfig';
 const PayTarjet = (cotizacion) => {
     
 
-
-
-    // state para los campos del formulario
+    // state para el tipo de tarjeta
     const [tipoTarjeta, setTipoTarjeta] = useState({
         tarjeta : 'visa',
-      });
-  
-      const {tarjeta} = tipoTarjeta
-  
-
+    });
 
      //state para los campos del formulario
      const [data, setData] = useState({
@@ -29,12 +23,14 @@ const PayTarjet = (cotizacion) => {
         fecha: new Date().getTime().toString(),
     }
 
-    const {numeroSecreto,numeroTarjeta,fechaCaducidad} = data;
-    
     // estado para validaciones
     const [error, actualizarError] = useState(false);
 
-    // actualizar campos del formulario
+    const {numeroSecreto,numeroTarjeta,fechaCaducidad} = data;
+    const {tarjeta} = tipoTarjeta
+  
+
+    // actualizar los states
     const actualizarState = e => {
         setData({
             ...data,
@@ -48,25 +44,20 @@ const PayTarjet = (cotizacion) => {
 
     const Pagar = e => {
         e.preventDefault()
-        console.log("pagar con tarjeta");
 
         if( numeroSecreto === null || numeroTarjeta === null || fechaCaducidad === null ){
             actualizarError(true);
             return;
         }
-            actualizarError(false);
+             actualizarError(false);
 
-        //realizar pago en la base de datos
-        
+        //realizar pago en la base de datos 
         if(auth.currentUser.uid != null ){
-            console.log('usuario '+auth.currentUser.uid);
-            
-            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set([pagoSeguro]);
+            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
+            alert("se ha realizado el pago");
         }else{
             console.log('no hay usuario ');
         }
-
-
 
     }
     
