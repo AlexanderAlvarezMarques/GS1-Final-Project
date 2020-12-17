@@ -14,21 +14,23 @@ const PagePrincipal = () => {
   let html = "";
   const addSeguro = (seguro) => {
     html += `
-     <li>
-      <div>
-      Tipo de seguro: ${seguro.Tipo}
-      <br></br>
-      Descripción: ${seguro.Descripcion}
-      <br></br>
-      Coberturas: ${seguro.Coberturas}
-      <br></br>
-      Precio: ${seguro.Precio}
-      <br></br>
-      </div>
-      </li>
-                `;
+            <li>
+              <div>
+                Tipo de seguro: ${seguro.Tipo}
+                <br></br>
+                Descripción: ${seguro.Descripcion}
+                <br></br>
+                Coberturas: ${seguro.Coberturas}
+                <br></br>
+                Precio: ${seguro.Precio}
+                <br></br>
+                <button onClick=contratar>Contratar</button>
+              </div>
+            </li>
+            `;
     console.log(html);
     //list.innerHTML += html;
+    
     ReactDOM.render(
       <div dangerouslySetInnerHTML={{ __html: html }} />,
       document.getElementById("seguros")
@@ -69,8 +71,11 @@ const PagePrincipal = () => {
           <br></br>
           <Link to={"/extras"}>añadir extras </Link>
           <br></br>
-          <label id="seguros"></label>
-          <button onClick={contratar}> Contratar</button>
+          <div id="seguros">
+          
+
+          </div>
+          
         </body>
       </html>
     </Fragment>
