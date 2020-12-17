@@ -5,37 +5,44 @@ import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
   const [seg, getSeguro] = useState([]);
-  const list = document.querySelector('ul');
-  const addSeguro = (seguro) => {
-    let html = `<li>
-                  <div>
-                    Tipo de seguro: ${seguro.Tipo}
-                    <br></br>
-                    Descripción: ${seguro.Descripcion}
-                    <br></br>
-                    Coberturas: ${seguro.Coberturas}
-                    <br></br>
-                    Precio: ${seguro.Precio}
-                  </div>
-                </li>`;
-    console.log(html);
-    list.innerHTML += html;
-  };
-  
-  let i = 1;
-  firestore
-    .collection("seguros")
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
-        addSeguro(doc.data());
-        console.log(i);
-      });
-    })
-    .catch((error) => console.log(error));
+  const list = document.getElementById("seguros");
 
+  const printseg = () => {
+    
+    const addSeguro = (seguro) => {
+      let html = `<li>
+      <div>
+      Tipo de seguro: ${seguro.Tipo}
+      <br></br>
+      Descripción: ${seguro.Descripcion}
+      <br></br>
+      Coberturas: ${seguro.Coberturas}
+      <br></br>
+      Precio: ${seguro.Precio}
+      </div>
+                </li>`;
+      console.log(html);
+      list.innerHTML += html;
+    };
+
+    let i = 1;
+    firestore
+      .collection("seguros")
+      .get()
+      .then((snapshot) => {
+        snapshot.forEach((doc) => {
+          addSeguro(doc.data());
+          console.log(i);
+        });
+      })
+      .catch((error) => console.log(error));
+  };
   return (
+  
+
     <Fragment>
+      <html lang="en">
+      <body>
       <h1>Página Principal</h1>
       <Link to={"/signUp"}> Crear cuenta </Link>
       <br></br>
@@ -52,8 +59,13 @@ const PagePrincipal = () => {
       <Link to={"/Incidences"}>incidencias </Link>
       <br></br>
       <Link to={"/actualizarPerfil"}>actualizar perfil </Link>
+      <br></br>
       <Link to={"/extras"}>añadir extras </Link>
-      <ul></ul>
+      <br></br>
+      <div id="seguros"></div>
+      {printseg()}
+      </body>
+      </html>
     </Fragment>
   );
 };
