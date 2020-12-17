@@ -5,32 +5,34 @@ import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
   const [seg, getSeguro] = useState([]);
-
+  const list = document.querySelector('ul');
+  const addSeguro = (seguro) => {
+    let html = `<li>
+                  <div>
+                    Tipo de seguro: ${seguro.Tipo}
+                    <br></br>
+                    Descripción: ${seguro.Descripcion}
+                    <br></br>
+                    Coberturas: ${seguro.Coberturas}
+                    <br></br>
+                    Precio: ${seguro.Precio}
+                  </div>
+                </li>`;
+    console.log(html);
+    list.innerHTML += html;
+  };
+  
+  let i = 1;
   firestore
     .collection("seguros")
     .get()
     .then((snapshot) => {
-      const seguro = [];
       snapshot.forEach((doc) => {
-        const data = doc.data();
-        seguro.push(data);
+        addSeguro(doc.data());
+        console.log(i);
       });
-      getSeguro({
-        seg: seguro,
-      });      
     })
     .catch((error) => console.log(error));
-
-  function printSeg() {
-      let html='';
-      /*for (let property in seg) {
-        html+=<p>Seguro:{seg[property]}</p> 
-    };*/
-    Object.values(seg).forEach(item => {html += item});
-
-    console.log(html)
-    return html
-    }
 
   return (
     <Fragment>
@@ -51,8 +53,7 @@ const PagePrincipal = () => {
       <br></br>
       <Link to={"/actualizarPerfil"}>actualizar perfil </Link>
       <Link to={"/extras"}>añadir extras </Link>
-
-      {printSeg()}
+      <ul></ul>
     </Fragment>
   );
 };
