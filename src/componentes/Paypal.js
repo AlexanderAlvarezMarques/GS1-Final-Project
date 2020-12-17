@@ -38,20 +38,14 @@ const Paypal = ({cotizacion}) => {
         }
         
         actualizarError(false);
+        //realizar pago en la base de datos 
         if(auth.currentUser.uid != null ){
-            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).update({
-                "pagos": [pagoSeguro]
-            }).then(() => {
-                console.info('se ha actualizado el pago');
-                
-              }).catch((e) => {
-                console.error('Mal', e);
-                
-              })
+            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
+            alert("Ha realizado su pago correctamente!")
         }else{
             console.log('no hay usuario ');
         }
-        
+
     }
 
     return( 
