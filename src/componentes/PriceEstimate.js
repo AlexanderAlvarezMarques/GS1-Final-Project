@@ -5,12 +5,28 @@ import {obtenerPlan} from '../Helper'
 import {porAntiguedad} from '../Helper'
 import Spinner from './Spinner'
 import Resultado from './Resultado'
-import Resumen from './Resumen'
 import { Link } from 'react-router-dom';
+import { auth, firestore } from '../firebaseConfig';
+import useForm from 'react-hook-form';
 //import { Router, useHistory} from 'react-router-dom';
 //import {auth, firestore} from '../firebaseConfig';
 
 const PriceEstimate = () => {
+
+    const extrasDisponibles = [
+        {
+          name: "Robo del vehículo",
+        },
+        {
+          name: "Rotura de parabrisas y lunas",
+        },
+        {
+          name: "Incendio del vehículo",
+        },
+        {
+          name: "Daños por atropello de animales cinegéticos (Animales de caza mayor)",
+        }
+      ];
 
     const [resumen, guardarResumen] = useState({
         cotizacion: 0,
@@ -19,7 +35,8 @@ const PriceEstimate = () => {
             modelo : 'Focus',
             year : 1997,
             antiguedadCarnet : 5,
-            plan : 'basico'
+            plan : 'basico',
+            extra: []
         }
       });
 
@@ -33,12 +50,32 @@ const PriceEstimate = () => {
         modelo : 'Focus',
         year : 1997,
         antiguedadCarnet : 5,
-        plan : 'basico'
+        plan : 'basico',
+        extra: [extrasDisponibles]
     });
 
-    const {marca,modelo,year,antiguedadCarnet,plan} = data;
+    const {marca,modelo,year,antiguedadCarnet,plan,extra} = data;
     // estado para validaciones
     const [error, actualizarError] = useState(false);
+
+    //añadir state de extra
+    const [isChecked, setIsChecked] = useState({});
+    const [formData, setFormData] = useState(extrasDisponibles);
+
+
+    //metodos para los extras de checkbox
+    const handleSingleCheck = e => {
+        setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
+      };
+    
+      const addExtra = e =>{
+          e.preventDefault();
+          if(auth.currentUser.uid != null){
+              firestore.collection("usuariosRgistrados").doc(auth.currentUser.uid)
+          }
+          
+      }
+
 
     // actualizar campos del formulario
     const actualizarState = e => {
@@ -136,6 +173,8 @@ const PriceEstimate = () => {
                 value={antiguedadCarnet}
                 onChange={actualizarState}
             />
+
+
             <div>
                 <label>Plan</label>
                 <input
@@ -156,20 +195,45 @@ const PriceEstimate = () => {
                 />
                 Completo
             </div>
-            <button 
-                type="submit"
-            >Aceptar</button>
+
+
+            <div>
+                <label>Extras para añadir a tu seguro: </label>
+                {formData.map((test, index) => (
+                    <div key={index}>
+                        <label>{test.name}</label>
+                        <input
+                            type="checkbox"
+                            name={test.name}
+                            checked={isChecked[test.name]}
+                            onChange={handleSingleCheck}
+                        />
+                    </div>
+                ))}
+            </div>
+
+            <button type="submit" >Aceptar</button>
         </form>
+
+
+
+
         <div>
         { cargando ? <Spinner/> : null }
-        
-        <Resumen datos={datos}/>
          
          { !cargando ? 
+         <>
           <Resultado cotizacion={cotizacion}/>
+          </>
          : null }
+
+        { cotizacion != 0 ?
+            <>
+                <Link to={'/contratarSeguro'}>Contratar este Seguro</Link>
+            </> 
+            : null }
         </div>
-        <Link to={'/contratarSeguro'}>Contratar este Seguro</Link>
+        
        
         </>
     );
