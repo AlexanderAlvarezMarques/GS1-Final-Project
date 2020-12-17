@@ -1,15 +1,20 @@
 import React, { Fragment, useState } from "react";
 import ReactDOM from "react-dom";
-import { Link } from "react-router-dom";
-import { Router, useHistory } from "react-router-dom";
+import { Router, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
   const [seg, getSeguro] = useState([]);
+  let history = useHistory();
+
+  const contratar = (e) => {
+    history.push("/contratarSeguro");
+  };
   //const list = document.getElementById("seguros");
-  let html=''
+  let html = "";
   const addSeguro = (seguro) => {
-     html += `<li>
+    html += `
+     <li>
       <div>
       Tipo de seguro: ${seguro.Tipo}
       <br></br>
@@ -18,14 +23,16 @@ const PagePrincipal = () => {
       Coberturas: ${seguro.Coberturas}
       <br></br>
       Precio: ${seguro.Precio}
+      <br></br>
       </div>
-                </li>`;
+      </li>
+                `;
     console.log(html);
     //list.innerHTML += html;
     ReactDOM.render(
-      <div dangerouslySetInnerHTML={{ __html:html}} />,
+      <div dangerouslySetInnerHTML={{ __html: html }} />,
       document.getElementById("seguros")
-    )
+    );
   };
 
   let i = 1;
@@ -63,7 +70,7 @@ const PagePrincipal = () => {
           <Link to={"/extras"}>añadir extras </Link>
           <br></br>
           <label id="seguros"></label>
-          
+          <button onClick={contratar}> Contratar</button>
         </body>
       </html>
     </Fragment>
