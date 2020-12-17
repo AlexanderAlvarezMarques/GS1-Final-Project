@@ -1,16 +1,15 @@
 import React, { Fragment, useState } from "react";
+import ReactDOM from "react-dom";
 import { Link } from "react-router-dom";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
   const [seg, getSeguro] = useState([]);
-  const list = document.getElementById("seguros");
-
-  const printseg = () => {
-    
-    const addSeguro = (seguro) => {
-      let html = `<li>
+  //const list = document.getElementById("seguros");
+  let html=''
+  const addSeguro = (seguro) => {
+     html += `<li>
       <div>
       Tipo de seguro: ${seguro.Tipo}
       <br></br>
@@ -21,50 +20,51 @@ const PagePrincipal = () => {
       Precio: ${seguro.Precio}
       </div>
                 </li>`;
-      console.log(html);
-      list.innerHTML += html;
-    };
-
-    let i = 1;
-    firestore
-      .collection("seguros")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          addSeguro(doc.data());
-          console.log(i);
-        });
-      })
-      .catch((error) => console.log(error));
+    console.log(html);
+    //list.innerHTML += html;
+    ReactDOM.render(
+      <div dangerouslySetInnerHTML={{ __html:html}} />,
+      document.getElementById("seguros")
+    )
   };
-  return (
-  
 
+  let i = 1;
+  firestore
+    .collection("seguros")
+    .get()
+    .then((snapshot) => {
+      snapshot.forEach((doc) => {
+        addSeguro(doc.data());
+        console.log(i);
+      });
+    })
+    .catch((error) => console.log(error));
+  return (
     <Fragment>
       <html lang="en">
-      <body>
-      <h1>Página Principal</h1>
-      <Link to={"/signUp"}> Crear cuenta </Link>
-      <br></br>
-      <Link to={"/priceEstimate"}> Buscar estimacion de precio </Link>
-      <br></br>
-      <Link to={"/deleteAccount"}>darse de baja </Link>
-      <br></br>
-      <Link to={"/LogIn"}>Iniciar sesión </Link>
-      <br></br>
-      <Link to={"/sesion"}>ir a sesion </Link>
-      <br></br>
-      <Link to={"/NewIncidence"}>nueva incidencia </Link>
-      <br></br>
-      <Link to={"/Incidences"}>incidencias </Link>
-      <br></br>
-      <Link to={"/actualizarPerfil"}>actualizar perfil </Link>
-      <br></br>
-      <Link to={"/extras"}>añadir extras </Link>
-      <br></br>
-      <div id="seguros"></div>
-      {printseg()}
-      </body>
+        <body>
+          <h1>Página Principal</h1>
+          <Link to={"/signUp"}> Crear cuenta </Link>
+          <br></br>
+          <Link to={"/priceEstimate"}> Buscar estimacion de precio </Link>
+          <br></br>
+          <Link to={"/deleteAccount"}>darse de baja </Link>
+          <br></br>
+          <Link to={"/LogIn"}>Iniciar sesión </Link>
+          <br></br>
+          <Link to={"/sesion"}>ir a sesion </Link>
+          <br></br>
+          <Link to={"/NewIncidence"}>nueva incidencia </Link>
+          <br></br>
+          <Link to={"/Incidences"}>incidencias </Link>
+          <br></br>
+          <Link to={"/actualizarPerfil"}>actualizar perfil </Link>
+          <br></br>
+          <Link to={"/extras"}>añadir extras </Link>
+          <br></br>
+          <label id="seguros"></label>
+          
+        </body>
       </html>
     </Fragment>
   );
