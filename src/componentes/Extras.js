@@ -1,44 +1,118 @@
 import React,{useState,useEffect} from 'react';
-import CheckedSelect from 'react-select-checked';
+import useForm from 'react-hook-form';
 
 const Extras = () => {
-    
-    const [datos, setDatos] = useState({
-        datos: {
-            extra: ''
+    const data = [
+        {
+          name: "test1",
+          result: "pass"
+        },
+        {
+          name: "test2",
+          result: "pass"
+        },
+        {
+          name: "test3",
+          result: "pass"
+        },
+        {
+          name: "test4",
+          result: "pass"
+        },
+        {
+          name: "test5",
+          result: "pass"
         }
-      });
+      ];
 
-    const [checked, setChecked] = useState(false)
 
-    const{extra}=datos
+    const [allChecked, setAllChecked] = useState(false);
+    const [isChecked, setIsChecked] = useState({});
+    const [formData, setFormData] = useState(data);
+  
+    const handleAllCheck = e => {
+      setAllChecked(e.target.checked);
+    };
+  
+    const handleSingleCheck = e => {
+      setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
+    };
+  
+    const onDelete = () => {
+      console.log(isChecked);
+      const newData = data.filter(
+        item => !Object.keys(isChecked).includes(item.name)
+      );
+      console.log(newData);
+      setFormData(newData);
+    };
+
+
+
+
+    
+   /* const [datos, setDatos] = useState({
+        extra: []
+    });
+    const{extra}=datos 
+
     
     // actualizar campos del formulario
     const actualizarState = e => {
         setDatos({
+            
             ...datos,
-            [e.target.name] : e.target.value
+            [e.target.name] : e.target.value,
         })
-        setChecked(true)
-        
     }
 
 
-    // React.useEffect(() => {
-    //     setCheckedInput(checked);
-    //     if (onChange) {
-    //       onChange(checked);
-    //     }
-    // }, [checked]);
+    useEffect(() => {
+
+    }, [datos]);
     
+*/
+
     return( 
     <>
-    <h3>Añadir extras a tu seguro</h3>
+
+
+<div className="App">
+      <div>
+        <label>All</label>
+        <input
+          name="checkall"
+          type="checkbox"
+          checked={allChecked}
+          onChange={handleAllCheck}
+        />
+        <label />
+      </div>
+      {formData.map((test, index) => (
+        <div key={index}>
+          <label>{test.name}</label>
+          <input
+            type="checkbox"
+            name={test.name}
+            checked={allChecked ? true : isChecked[test.name]}
+            onChange={handleSingleCheck}
+          />
+        </div>
+      ))}
+      <button onClick={() => onDelete()}>DELETE</button>
+    </div>
+
+
+
+
+
+
+
+    {/* <h3>Añadir extras a tu seguro</h3>
     
         <div>
                  <input
                     type="checkbox"
-                    name="extra"
                     value="robo"
                     onChange={actualizarState}
                 />
@@ -46,7 +120,6 @@ const Extras = () => {
 
                 <input
                     type="checkbox"
-                    name="extra"
                     value="rotura"
                     onChange={actualizarState}
                 /> 
@@ -54,7 +127,6 @@ const Extras = () => {
 
                 <input
                     type="checkbox"
-                    name="extra"
                     value="incendio"
                     onChange={actualizarState}
                 />
@@ -62,12 +134,13 @@ const Extras = () => {
 
                 <input
                     type="checkbox"
-                    name="extra"
                     value="dañoAnimales"
                     onChange={actualizarState}
                 />
                 Daños por atropello de animales cinegéticos (Animales de caza mayor)
-        </div>
+        </div> */}
     </>
+
 )};
+
 export default Extras ; 

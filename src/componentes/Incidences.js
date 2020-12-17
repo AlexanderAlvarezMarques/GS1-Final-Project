@@ -27,7 +27,6 @@ const Incidences = () => {
               setInci(
                 ...inci,
                 doc.data().incidencias)
-
                 console.log('data: ', inci);
                 
               return;
