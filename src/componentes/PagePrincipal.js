@@ -21,13 +21,19 @@ const PagePrincipal = () => {
   };
   const contratar = (e) => {
     e.preventDefault();
+    console.log('pulse el boton');
+    
     if (idSeg.trim() == "") {
+      console.log('entro por el if');
+      
       guardarError(true);
       return;
     }
+
     guardarError(false);
     //history.push("/contratarSeguro");
     history.push({
+
       pathname: '/contratarSeguro',
       state: { detail: idSeg }
     })
@@ -49,6 +55,7 @@ const PagePrincipal = () => {
                 <br></br>
                 Precio: ${seguro.Precio} €
               </div>
+              <button click="${contratar}">Contratar</button>
             </li>
             `;
     //list.innerHTML += html;
@@ -102,7 +109,7 @@ const PagePrincipal = () => {
             value={idSeg}
             onChange={obtenerID}
           />
-          <button onClick={contratar}>Contratar</button>
+        
           
         </body>
       </html>
