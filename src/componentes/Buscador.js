@@ -1,18 +1,54 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Router, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 
 
 const Buscador = () => {
-  const [seg, getSeguro] = useState({
-    seleccion : '1' // 1= Basico, 2=TodoRiesgoNet, 3=TodoRiesgoSinNet
-  })
+  var seleccion = "1" // 1= Basico, 2=TodoRiesgoNet, 3=TodoRiesgoSinNet
   let history = useHistory();
+  var tip = "Básico"
+  const [seguros, setSeguros] = useState([]);
+  
+  const changeSearch = () => {
+    if(seleccion === 1){
+      var tip = "Básico"
+    }
+    if (seleccion === 2){  
+      var tip = "Todo riesgo con franquicia"
+    }
+    if(seleccion === 3){
+      var tip = "Todo riesgo sin franquicia"
+    }
+  }
+  
+  //constante que coje los seguros de firestore y añade los datos con el id en el estado de seguros
+  const seguroDB = async() => {
+    firestore.collection("seguros").onSnapshot((querySnapshot) => {
+    const docs = [];    
+      querySnapshot.forEach((doc) => {
+          docs.push({...doc.data(), id:doc.id});
+      })
+      //añado los seguros de firestore a mi estado
+      setSeguros(
+        ...seguros,
+        docs
+      )
+    }
+  )};
 
-  const contratar = (e) => {
-    history.push("/contratarSeguro");
+  //metodo al pulsar el boton para contratar
+  const contratar = (id) => {
+    if(window.confirm("Estas seguro de que quieres contratar este seguro?")){
+      console.log('pulse el boton', id);
+      history.push()
+    }
   };
+  //se queda escuchando cada cambio y se va actualizando
+  useEffect(() => {
+    seguroDB()
+  },[])
+
   //const list = document.getElementById("seguros");
   let html = "";
   const addSeguro = (seguro) => {
@@ -38,7 +74,7 @@ const Buscador = () => {
     );
   };
 
-  switch (seg.seleccion) {
+  /*switch (seg.seleccion) {
     case '1':
       console.log("Entro en caso 1")
       firestore
@@ -80,8 +116,8 @@ const Buscador = () => {
         });
       })
       .catch((error) => console.log(error));
-      break;
-  }
+      break;}*/
+  
   
   return (
     <Fragment>
@@ -90,6 +126,19 @@ const Buscador = () => {
           <h1>BUSCAR</h1>
           <br></br>
           <h3>Por tipo: </h3>
+          {seguros.map(s => {
+            if(s.Tipo == tip){
+              return (<div key={s.id}>
+                <h1>Tipo de seguro: {s.Tipo}</h1>
+                <p>Descripción: {s.Descripcion}</p>
+                <p>Coberturas : {s.Coberturas}</p>
+                <p>Precio: {s.Precio}</p>
+                <Link to={`/contratarSeguro/${s.id}`}>Contratar seguro</Link>
+                {/* <button onClick={ () => contratar(s.id)}>Contratar</button> */}
+                </div>
+              )}
+            })
+          }
 
           <label id="seguros"></label>
           <button onClick={contratar}> Contratar</button>
