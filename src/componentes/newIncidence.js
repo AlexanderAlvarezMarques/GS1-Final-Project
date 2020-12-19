@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from "react";
-import {useHistory } from "react-router-dom";
+import {Link,useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import styled from "@emotion/styled";
 
@@ -136,6 +136,7 @@ const NewIncidence = () => {
         <br></br>
         {error ? <Error>Debes rellenar todos los campos</Error> : null}
         <Boton type="submit">Enviar</Boton>
+        <Link to={"/Incidences"}> Volver</Link>
       </form>
     </Fragment>
   );

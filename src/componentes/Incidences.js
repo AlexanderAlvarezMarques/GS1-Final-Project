@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
 import { Router, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
+import ReactDOM from "react-dom";
 
 const Incidences = () => {
   let history = useHistory();
@@ -12,12 +13,12 @@ const Incidences = () => {
 
   const list = document.querySelector("ul");
 
-  const [inciData,setInci]=useState({
-    inci:[],
+  const [inciData, setInci] = useState({
+    inci: [],
   });
-  const{inci}=inciData;
+  const { inci } = inciData;
 
-  let inc =[];
+  let inc = [];
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -26,55 +27,47 @@ const Incidences = () => {
 
       var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
 
-      docRef.get().then(function(doc) {
+      docRef
+        .get()
+        .then(function (doc) {
           if (doc.exists) {
-              console.log("Document data:", doc.data().incidencias);
-              // doc.data().incidencias.forEach(incidencia => {
-              //   console.log(incidencia.dateIssue);
-              // });
-              inc = doc.data().incidencias;
-              setInci(
-                ...inci,
-                doc.data().incidencias)
-                console.log('data: ', inci);
-                
-            
-             
+            let html = "";
+            console.log("Document data:", doc.data().incidencias);
+            doc.data().incidencias.forEach((incidencia) => {
+              html += `
+                <li>
+                  <div>
+                    <h2>Incidencia: ${incidencia.issue}</h2>
+                    Asunto: ${incidencia.incidenceContext}
+                    <br></br>
+                    Fecha: ${incidencia.dateIssue}
+                  </div>
+                </li>
+            `;
+              //list.innerHTML += html;
+
+              ReactDOM.render(
+                <div dangerouslySetInnerHTML={{ __html: html }} />,
+                document.getElementById("incidencia")
+              );
+            });
           } else {
-              console.log("No such document!");
+            console.log("No such document!");
           }
-      }).catch(function(error) {
+        })
+        .catch(function (error) {
           console.log("Error getting document:", error);
-      });
+        });
     }
   });
-
-  function printInci(){
-    for (const i in inci) {
-      [i].map(a => (
-        <p>Incidencia: {a.issue}</p>
-
-      )) 
-    }
-  }
-
-  
 
   return (
     <Fragment>
       <h1>Mis incidencias</h1>
-      <label> AQUI IRIAN LAS INCIDENCIAS</label>
       <br></br>
-      <div>
-      {inc.forEach(incidencia => {
-        console.log(`oye ${incidencia.dateIssue}`);
-                return(<div>
-                  <h1>Date issue: {incidencia.dateIssue}</h1>
-                </div>)
-              })
-            }
+      <div id="incidencia">
       </div>
-      
+      <br></br>
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
       <Link to={"/sesion"}>Volver</Link>
