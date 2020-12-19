@@ -1,86 +1,55 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { Router, Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
-  let history = useHistory();
-  const [datos, getId] = useState({
-    idSeg: "",
-  });
 
+  //para redireccionar
+  let history = useHistory();
+
+
+  //estados
   const [error, guardarError] = useState(false);
 
-  const {idSeg} = datos;
+  const [seguros, setSeguros] = useState([]);
 
-  const obtenerID = e => {
-    getId({
-      ...datos,
-      [e.target.name]: e.target.value,
-    });
-  };
+
+
+  //metodo al pulsar el boton para contratar
   const contratar = (e) => {
     e.preventDefault();
     console.log('pulse el boton');
-    
-    if (idSeg.trim() == "") {
-      console.log('entro por el if');
-      
-      guardarError(true);
-      return;
-    }
-
     guardarError(false);
-    //history.push("/contratarSeguro");
-    history.push({
-
-      pathname: '/contratarSeguro',
-      state: { detail: idSeg }
-    })
-  };
-  //const list = document.getElementById("seguros");
-  let html = "";
-  const addSeguro = (doc) => {
-    let seguro=doc.data()
-    html += `
-            <li>
-              <div>
-                ID: ${doc.id}
-                <br></br>
-                Tipo de seguro: ${seguro.Tipo}
-                <br></br>
-                Descripción: ${seguro.Descripcion}
-                <br></br>
-                Coberturas: ${seguro.Coberturas}
-                <br></br>
-                Precio: ${seguro.Precio} €
-              </div>
-              <button click="${contratar}">Contratar</button>
-            </li>
-            `;
-    //list.innerHTML += html;
-    
-    ReactDOM.render(
-      <div dangerouslySetInnerHTML={{ __html: html }} />,
-      document.getElementById("seguros")
-    );
   };
 
-  firestore
-    .collection("seguros")
-    .get()
-    .then((snapshot) => {
-      snapshot.forEach((doc) => {
+  
+  //constante que coje los seguros de firestore y añade los datos con el id en el estado de seguros
+  const seguroDB = async() => {
+    firestore.collection("seguros").onSnapshot((querySnapshot) => {
+    const docs = [];    
+      querySnapshot.forEach((doc) => {
+          docs.push({...doc.data(), id:doc.id});
+          //addSeguro(doc.data());
+      })
+      console.log(docs);
+      setSeguros(
+        ...seguros,
+        docs
+      )
+    }
+  )};
 
-        console.log(doc);
-        addSeguro(doc);
-      });
-    })
-    .catch((error) => console.log(error));
+  //se queda escuchando cada cambio y se va actualizando
+    useEffect(() => {
+      seguroDB()
+    },[])
+
+
+
+
   return (
     <Fragment>
-      <html lang="en">
-        <body>
           <h1>Página Principal</h1>
           <Link to={"/signUp"}> Crear cuenta </Link>
           <br></br>
@@ -102,17 +71,20 @@ const PagePrincipal = () => {
           <br></br>
           <div id="seguros"></div>
           <br></br>
-          {error ? <a>Debes rellenar especificar el ID del seguro<br></br></a> : null}
-          <input
-            type="text"
-            name="idSeg"
-            value={idSeg}
-            onChange={obtenerID}
-          />
-        
-          
-        </body>
-      </html>
+          <h1>Mis seguros</h1>
+          <div>
+            {seguros.map(s => {
+              return (<>
+                  <h1>Tipo de seguro: {s.Tipo}</h1>
+                  <p>Descripción: {s.Descripcion}</p>
+                  <p>Coberturas : {s.Coberturas}</p>
+                  <p>Precio: {s.Precio}</p>
+                  <button></button>
+                  </>
+            )})}
+          </div>
+          {/* {error ? <a>Debes rellenar especificar el ID del seguro<br></br></a> : null} */}
+
     </Fragment>
   );
 };
