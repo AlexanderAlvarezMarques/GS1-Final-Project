@@ -22,18 +22,19 @@ const Incidences = () => {
       var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
 
       docRef.get().then(function(doc) {
-          // if (doc.exists) {
-          //     console.log("Document data:", doc.data().incidencias);
-          //     // setInci(
-          //     //   ...inci,
-          //     //   doc.data().incidencias)
-          //       console.log('data: ', inci);
+          if (doc.exists) {
+              console.log("Document data:", doc.data().incidencias);
+              
+              /*setInci(
+                ...inci,
+                doc.data().incidencias)
+                console.log('data: ', inci);*/
                 
             
              
-          // } else {
-          //     console.log("No such document!");
-          // }
+          } else {
+              console.log("No such document!");
+          }
       }).catch(function(error) {
           console.log("Error getting document:", error);
       });
