@@ -40,6 +40,15 @@ const Incidences = () => {
     }
   });
 
+  function printInci(){
+    for (const i in inci) {
+      [i].map(a => (
+        <p>Incidencia: {a.issue}</p>
+
+      )) 
+    }
+  }
+
   
 
   return (
@@ -48,10 +57,10 @@ const Incidences = () => {
       <label> AQUI IRIAN LAS INCIDENCIAS</label>
       <br></br>
 
-      {[inci].map(i => (
-        <p>Incidencia: {i.issue}</p>
-
-      ))}
+      
+      {printInci()}
+      
+      
       
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
