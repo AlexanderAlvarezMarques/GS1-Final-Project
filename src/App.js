@@ -69,7 +69,7 @@ function App() {
           <Route exact path="/claims" component={Claims}/>
           <Route exact path="/newClaim" component={NewClaim}/>
           <Route exact path="/priceEstimate" component={PriceEstimate}/>
-          <Route exact path="/contratarSeguro" component={ContratarSeguro}/>
+          <Route exact path="/contratarSeguro/:id" component={ContratarSeguro}/>
           <Route exact path="/deleteAccount" component={DeleteAccount}/>
           <Route exact path="/logIn" component={LogIn} />
           <Route exact path="/actualizarPerfil" component={UpdateProfile}/>

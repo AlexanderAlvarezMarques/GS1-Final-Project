@@ -1,7 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { Router, Link, useHistory } from "react-router-dom";
+import { Router, Link, useHistory, Route } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
+import ContratarSeguro from "./ContratarSeguro";
+import NewIncidence from "./NewIncidence";
 
 const PagePrincipal = () => {
 
@@ -11,16 +12,17 @@ const PagePrincipal = () => {
 
   //estados
   const [error, guardarError] = useState(false);
-
   const [seguros, setSeguros] = useState([]);
 
 
 
   //metodo al pulsar el boton para contratar
-  const contratar = (e) => {
-    e.preventDefault();
-    console.log('pulse el boton');
-    guardarError(false);
+  const contratar = (id) => {
+    if(window.confirm("Estas seguro de que quieres contratar este seguro?")){
+      console.log('pulse el boton', id);
+      history.push()
+    }
+    
   };
 
   
@@ -30,9 +32,8 @@ const PagePrincipal = () => {
     const docs = [];    
       querySnapshot.forEach((doc) => {
           docs.push({...doc.data(), id:doc.id});
-          //addSeguro(doc.data());
       })
-      console.log(docs);
+      //añado los seguros de firestore a mi estado
       setSeguros(
         ...seguros,
         docs
@@ -40,12 +41,11 @@ const PagePrincipal = () => {
     }
   )};
 
+
   //se queda escuchando cada cambio y se va actualizando
     useEffect(() => {
       seguroDB()
     },[])
-
-
 
 
   return (
@@ -73,14 +73,16 @@ const PagePrincipal = () => {
           <br></br>
           <h1>Mis seguros</h1>
           <div>
+            {/* recorro mi state y devuelve cada seguro */}
             {seguros.map(s => {
-              return (<>
+              return (<div key={s.id}>
                   <h1>Tipo de seguro: {s.Tipo}</h1>
                   <p>Descripción: {s.Descripcion}</p>
                   <p>Coberturas : {s.Coberturas}</p>
                   <p>Precio: {s.Precio}</p>
-                  <button></button>
-                  </>
+                  <Link to={`/contratarSeguro/${s.id}`}>Contratar seguro</Link>
+                  {/* <button onClick={ () => contratar(s.id)}>Contratar</button> */}
+                  </div>
             )})}
           </div>
           {/* {error ? <a>Debes rellenar especificar el ID del seguro<br></br></a> : null} */}
