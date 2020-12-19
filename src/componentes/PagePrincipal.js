@@ -69,9 +69,11 @@ const PagePrincipal = () => {
           <br></br>
           <Link to={"/extras"}>añadir extras </Link>
           <br></br>
+          <Link to={"/buscador"}>Buscar Seguro</Link>
+          <br></br>
           <div id="seguros"></div>
           <br></br>
-          <h1>Mis seguros</h1>
+          <h1>OFERTAS</h1>
           <div>
             {/* recorro mi state y devuelve cada seguro */}
             {seguros.map(s => {

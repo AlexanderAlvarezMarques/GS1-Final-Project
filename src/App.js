@@ -21,6 +21,7 @@ import Incidences from './componentes/Incidences';
 import NewIncidence from './componentes/NewIncidence';
 import UpdateProfile from './componentes/UpdateProfile';
 import Extras from './componentes/Extras';
+import Buscador from './componentes/Buscador';
 
 function App() {
   /**
@@ -75,6 +76,7 @@ function App() {
           <Route exact path="/actualizarPerfil" component={UpdateProfile}/>
           <Route exact path="/Incidences" component={Incidences}/>
           <Route exact path="/NewIncidence" component={NewIncidence}/>
+          <Route exact path="/buscador" component={Buscador}/>
           <Route exact path="/extras" component={Extras}/>
         
           {/* <Route exact path="/login" component={Login}/> */}
