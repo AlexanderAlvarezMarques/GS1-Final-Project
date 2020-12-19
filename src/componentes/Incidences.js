@@ -12,7 +12,12 @@ const Incidences = () => {
 
   const list = document.querySelector("ul");
 
-  const [inci,setInci]=useState([])
+  const [inciData,setInci]=useState({
+    inci:[],
+  });
+  const{inci}=inciData;
+
+  let inc =[];
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -24,11 +29,14 @@ const Incidences = () => {
       docRef.get().then(function(doc) {
           if (doc.exists) {
               console.log("Document data:", doc.data().incidencias);
-              
-              /*setInci(
+              // doc.data().incidencias.forEach(incidencia => {
+              //   console.log(incidencia.dateIssue);
+              // });
+              inc = doc.data().incidencias;
+              setInci(
                 ...inci,
                 doc.data().incidencias)
-                console.log('data: ', inci);*/
+                console.log('data: ', inci);
                 
             
              
@@ -57,11 +65,15 @@ const Incidences = () => {
       <h1>Mis incidencias</h1>
       <label> AQUI IRIAN LAS INCIDENCIAS</label>
       <br></br>
-
-      
-      {printInci()}
-      
-      
+      <div>
+      {inc.forEach(incidencia => {
+        console.log(`oye ${incidencia.dateIssue}`);
+                return(<div>
+                  <h1>Date issue: {incidencia.dateIssue}</h1>
+                </div>)
+              })
+            }
+      </div>
       
       <button onClick={misIncidences}> Nueva incidencia</button>
       <br></br>
