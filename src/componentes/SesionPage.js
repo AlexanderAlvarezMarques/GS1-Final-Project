@@ -36,25 +36,34 @@ const SesionPage = () => {
   }, []);
 
   auth.onAuthStateChanged((user) => {
-    let nombre = "<h1>Sesión iniciada por ";
-    var userUID = auth.currentUser.uid;
-    var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
-    docRef.get().then(function (doc) {
-      if (doc.exists) {
-        nombre += `${doc.data().nombre} </h1>`;
-        ReactDOM.render(
-          <div dangerouslySetInnerHTML={{ __html: nombre }} />,
-          document.getElementById("welcome")
-        );
-      } else {
-        nombre += `null </h1>`;
-        ReactDOM.render(
-          <div dangerouslySetInnerHTML={{ __html: nombre }} />,
-          document.getElementById("welcome")
-        );
-      }
-    });
+    if (user) {
+      var userUID = auth.currentUser.uid;
+      let nombre = "<h1>Sesión iniciada por ";
+      var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
+      docRef.get().then(function (doc) {
+        if (doc.exists) {
+          nombre += `${doc.data().nombre} </h1>`;
+          ReactDOM.render(
+            <div dangerouslySetInnerHTML={{ __html: nombre }} />,
+            document.getElementById("welcome")
+          );
+        } else {
+          nombre += `null </h1>`;
+          ReactDOM.render(
+            <div dangerouslySetInnerHTML={{ __html: nombre }} />,
+            document.getElementById("welcome")
+          );
+        }
+      }).catch(function (error) {
+        console.log("Error getting document:", error);
+      });
+    }
   });
+
+  const cerrarSesion=()=>{
+    auth.signOut();
+    history.push("/");
+  }
 
   return (
     <Fragment>
@@ -65,7 +74,7 @@ const SesionPage = () => {
       <br></br>
       <Link to={"/buscador"}>Buscar Seguro</Link>
       <br></br>
-      <Link to={"/"}>Cerrar sesión</Link>
+      <button onClick={cerrarSesion}>Cerrar sesión</button>
       <br></br>
       <h1>OFERTAS</h1>
       <div>
