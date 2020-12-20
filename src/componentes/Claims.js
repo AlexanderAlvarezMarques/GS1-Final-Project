@@ -30,26 +30,15 @@ const Claims = () => {
         .then(function (doc) {
           if (doc.exists) {
             let html = "";
-<<<<<<< HEAD
-            console.log("Document data:", doc.data().reclamaciones);
-=======
             console.log("Document data:", doc.data().reclamaciones); 
->>>>>>> 03550eff77a7ce31adafbff279d19c55469d5e54
             doc.data().reclamaciones.forEach((claim) => {
               html += `
                 <li>
                   <div>
-<<<<<<< HEAD
-                    <h2>Incidencia: ${claim.issue}</h2>
-                    Asunto: ${claim.incidenceContext}
-                    <br></br>
-                    Fecha: ${claim.dateIssue}
-=======
                     <h2>Reclamación:</h2>
                     Asunto: ${claim.asunto}
                     <br></br>
                     Descripción: ${claim.descripcion}
->>>>>>> 03550eff77a7ce31adafbff279d19c55469d5e54
                   </div>
                 </li>
             `;
@@ -57,11 +46,7 @@ const Claims = () => {
 
               ReactDOM.render(
                 <div dangerouslySetInnerHTML={{ __html: html }} />,
-<<<<<<< HEAD
-                document.getElementById("reclamaciones")
-=======
                 document.getElementById("reclamacion")
->>>>>>> 03550eff77a7ce31adafbff279d19c55469d5e54
               );
             });
           } else {
@@ -87,4 +72,4 @@ const Claims = () => {
     </Fragment>
   );
 };
-export default Claims;
+export default Claims;  
