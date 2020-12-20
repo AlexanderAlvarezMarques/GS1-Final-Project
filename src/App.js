@@ -69,8 +69,8 @@ function App() {
           <Route exact path="/sesion" component={SesionPage}/>
           <Route exact path="/claims" component={Claims}/>
           <Route exact path="/newClaim" component={NewClaim}/>
-          <Route exact path="/priceEstimate" component={PriceEstimate}/>
-          <Route exact path="/contratarSeguro/:id" component={ContratarSeguro}/>
+          {/* <Route exact path="/priceEstimate" component={PriceEstimate}/> */}
+          {/* <Route exact path="/contratarSeguro/:id" component={ContratarSeguro}/> */}
           <Route exact path="/deleteAccount" component={DeleteAccount}/>
           <Route exact path="/logIn" component={LogIn} />
           <Route exact path="/actualizarPerfil" component={UpdateProfile}/>
@@ -78,6 +78,8 @@ function App() {
           <Route exact path="/NewIncidence" component={NewIncidence}/>
           <Route exact path="/buscador" component={Buscador}/>
           <Route exact path="/extras" component={Extras}/>
+          <Route exact path="/:path" component={PriceEstimate}/>
+          <Route exact path="/:path/:id" component={ContratarSeguro}/>
         
           {/* <Route exact path="/login" component={Login}/> */}
         </Switch>

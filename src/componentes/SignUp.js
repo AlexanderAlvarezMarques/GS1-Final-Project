@@ -44,12 +44,14 @@ const SignUp = () => {
             ...user,
             [e.target.name] : e.target.value
         })
+    }
+
+    const actualizarCoche = e => {
         setCar({
             ...car,
             [e.target.name] : e.target.value
         })
     }
-
     //objeto que contiene todas las variables que necesitamos
     const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,telefono} = user;
     const {marca,modelo,kilometros,tipo,combustible,matricula} = car;
@@ -89,10 +91,10 @@ const SignUp = () => {
         auth.createUserWithEmailAndPassword(correo, contraseña)
         .then((u) => {
             
-            var db = firestore;
-
-
             user.vehiculos = [car];
+
+            console.log('user: ', user);
+            
             
             db.collection('usuariosRgistrados').doc(auth.currentUser.uid).set(user)
                 .then(() => {
@@ -147,7 +149,7 @@ return(
             />
             <label>contraseña: </label>
             <input
-                type="text"
+                type="password"
                 name="contraseña"
                 onChange={actualizarState}
             />
@@ -168,26 +170,26 @@ return(
             <input
                 type="date"
                 name="fechaCarnet"
-                onChange={actualizarState}
+                onChange={actualizarCoche}
             />
             <label>Marca: </label>
             <input
                 type="text"
                 name="marca"
-                onChange={actualizarState}
+                onChange={actualizarCoche}
             />
 
             <label>Submodel: </label>
             <input
                 type="text"
                 name="modelo"
-                onChange={actualizarState}
+                onChange={actualizarCoche}
             />
             <label>Matricula: </label>
             <input
                 type="text"
                 name="matricula"
-                onChange={actualizarState}
+                onChange={actualizarCoche}
             />
             <button
                 type="submit"

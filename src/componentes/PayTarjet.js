@@ -1,8 +1,28 @@
-import React, { useState }  from 'react';
+import React, { useEffect, useState }  from 'react';
 import { auth, firestore } from '../firebaseConfig';
 
-const PayTarjet = (cotizacion) => {
+const PayTarjet = ({cotizacion, idSeguro}) => {
     
+    console.log('id seguro desde PayTarjet: '+idSeguro);
+
+    const [precio, setPrecioSeguro] = useState(0);
+    
+
+    useEffect(()=>{
+        const docRef = firestore.collection("seguros").doc(idSeguro)
+        docRef.get().then(function(doc) {
+            if (doc.exists) {
+                console.log("Precio:", doc.data().Precio);
+                setPrecioSeguro(doc.data().Precio)
+            } else {
+                // doc.data() will be undefined in this case
+                console.log("No such document!");
+            }
+        }).catch(function(error) {
+            console.log("Error getting document:", error);
+        });
+    }, [])
+
 
     // state para el tipo de tarjeta
     const [tipoTarjeta, setTipoTarjeta] = useState({
@@ -14,12 +34,15 @@ const PayTarjet = (cotizacion) => {
         numeroTarjeta : '',
         numeroSecreto : '',
         fechaCaducidad : '',
-        
     });
 
+
+    const price = (cotizacion != null ? cotizacion : precio)
+    console.log('valor de precio es: ',price);
+    
     //state para el pago
     const pagoSeguro = {
-        precio: cotizacion,
+        precio: price,
         fecha: new Date().getTime().toString(),
     }
 
@@ -49,10 +72,11 @@ const PayTarjet = (cotizacion) => {
             actualizarError(true);
             return;
         }
-             actualizarError(false);
+            actualizarError(false);
 
         //realizar pago en la base de datos 
         if(auth.currentUser.uid != null ){
+           
             firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
             alert("Ha realizado su pago correctamente!")
         }else{

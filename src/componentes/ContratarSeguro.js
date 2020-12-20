@@ -1,13 +1,25 @@
-import React , { useState } from 'react';
+import React , { useEffect, useState } from 'react';
 import PayTarjet from './PayTarjet'
 import Paypal from './Paypal'
+import { useParams } from 'react-router-dom';
+import { auth, firestore } from "../firebaseConfig";
 
 const ContratarSeguro = () => {
 
     // state para los campos del formulario
     const [data, setData] = useState({
-      tipo : 'visa',
+      tipo : 'tarjeta',
     });
+    
+
+    //obtengo el id de la url
+    const { id } = useParams()
+
+    const {path} = useParams()
+    console.log('path es ', path);
+    
+    //guardar precio en state
+    const [precioSeguro,setPrecioSeguro] = useState()
 
     const {tipo} = data
     const [error, actualizarError] = useState(false);
@@ -21,33 +33,37 @@ const ContratarSeguro = () => {
     }
 
 
+    // useEffect(()=>{
+    //     const docRef = firestore.collection("seguros").doc(id)
+    //     docRef.get().then(function(doc) {
+    //         if (doc.exists) {
+    //             console.log("Precio:", doc.data().Precio);
+    //             setPrecioSeguro(doc.data().Precio)
+    //         } else {
+    //             // doc.data() will be undefined in this case
+    //             console.log("No such document!");
+    //         }
+    //     }).catch(function(error) {
+    //         console.log("Error getting document:", error);
+    //     });
+    // })
+
     return( 
         <>
-            <h1>Contratar seguro: Forma de pago</h1>
+            <h1>Contratar seguro</h1>
+            <h2>Forma de pago:</h2>
 
             <div>
-                <label>Pagar con tarjeta </label>
-                <input
-                    type="radio"
-                    name="tipo"
-                    value="visa"
-                    checked={tipo === "visa"}
-                    onChange={actualizarState}
-                /> 
-                Visa
 
                 <input
                     type="radio"
                     name="tipo"
-                    value="mastercard"
-                    checked={tipo === "mastercard"}
+                    value="tarjeta"
+                    checked={tipo === "tarjeta"}
                     onChange={actualizarState}
                 />
-                Mastercard
-            </div>
-
-            <div>
-                <label>Pagar con paypal</label>
+                Tarjeta
+        
                 <input
                     type="radio"
                     name="tipo"
@@ -57,9 +73,7 @@ const ContratarSeguro = () => {
                 /> 
                 Paypal
             </div>
-
-            {tipo === 'visa' || tipo === 'mastercard' ? <PayTarjet /> : <Paypal />}
-
+            {tipo === 'tarjeta'  ? <PayTarjet idSeguro={id}/> : <Paypal />}
         </>
     )
 };

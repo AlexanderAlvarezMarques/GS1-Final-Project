@@ -76,14 +76,17 @@ const LogIn = () => {
         // ...
         console.log("Ha entrado juanma")
         console.log(user)
+
+        history.push("/sesion");
       })
       .catch((error) => {
         var errorCode = error.code;
         var errorMessage = error.message;
+        
       });
 
     guardarError(false);
-    history.push("/sesion");
+    
     };
   
   //    HTML

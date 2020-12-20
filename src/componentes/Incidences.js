@@ -11,11 +11,11 @@ const Incidences = () => {
     history.push("/NewIncidence");
   };
 
-  const list = document.querySelector("ul");
 
   const [inciData, setInci] = useState({
     inci: [],
   });
+  
   const { inci } = inciData;
 
   let inc = [];

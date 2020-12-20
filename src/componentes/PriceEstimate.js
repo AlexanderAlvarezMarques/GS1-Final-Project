@@ -5,7 +5,7 @@ import {obtenerPlan} from '../Helper'
 import {porAntiguedad} from '../Helper'
 import Spinner from './Spinner'
 import Resultado from './Resultado'
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { auth, firestore } from '../firebaseConfig';
 import useForm from 'react-hook-form';
 import PayTarjet from './PayTarjet';
@@ -33,6 +33,9 @@ const PriceEstimate = () => {
         }
       ];
 
+    const {path} = useParams();
+    console.log('path es',path);
+    
     const [resumen, guardarResumen] = useState({
         cotizacion: 0,
         datos: {

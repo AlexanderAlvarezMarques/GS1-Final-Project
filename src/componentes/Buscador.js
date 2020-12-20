@@ -20,7 +20,6 @@ const Buscador = () => {
       ...seleccionData,
       [e.target.name]: e.target.value,
     });
-    //changeSearch();
   };
 
   //constante que coje los seguros de firestore y añade los datos con el id en el estado de seguros
@@ -34,87 +33,11 @@ const Buscador = () => {
       setSeguros(...seguros, docs);
     });
   };
-
-  //metodo al pulsar el boton para contratar
-  const contratar = (id) => {
-    if (window.confirm("Estas seguro de que quieres contratar este seguro?")) {
-      console.log("pulse el boton", id);
-      history.push();
-    }
-  };
+  
   //se queda escuchando cada cambio y se va actualizando
   useEffect(() => {
     seguroDB();
   }, []);
-
-  //const list = document.getElementById("seguros");
-  let html = "";
-  const addSeguro = (seguro) => {
-    html += `
-     <li>
-      <div>
-      Tipo de seguro: ${seguro.Tipo}
-      <br></br>
-      Descripción: ${seguro.Descripcion}
-      <br></br>
-      Coberturas: ${seguro.Coberturas}
-      <br></br>
-      Precio: ${seguro.Precio}
-      <br></br>
-      </div>
-      </li>
-                `;
-    console.log(html);
-    //list.innerHTML += html;
-    ReactDOM.render(
-      <div dangerouslySetInnerHTML={{ __html: html }} />,
-      document.getElementById("seguros")
-    );
-  };
-
-  /*switch (seg.seleccion) {
-    case '1':
-      console.log("Entro en caso 1")
-      firestore
-      .collection("seguros")
-      .where("Tipo", "==", "Seguro básico")
-      .get()
-      .then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            console.log("Que es esto: " + doc.data())
-            addSeguro(doc.data())
-            //console.log(doc.id, " => ", doc.data());
-        });
-    })
-      .catch((error) => console.log(error));
-      break;
-    case '2':
-      console.log("Entro en caso 2")
-      firestore
-      .collection("seguros")
-      .where("Tipo", "==", "Todo a todo riesgo con franquicia")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          addSeguro(doc.data());
-        });
-      })
-      .catch((error) => console.log(error));
-      break;
-    case '3':
-      console.log("Entro en caso 3")
-      firestore
-      .collection("seguros")
-      .where("Tipo", "==", "Todo a todo riesgo sin franquicia")
-      .get()
-      .then((snapshot) => {
-        snapshot.forEach((doc) => {
-          addSeguro(doc.data());
-          
-        });
-      })
-      .catch((error) => console.log(error));
-      break;}*/
 
   return (
     <Fragment>
@@ -188,7 +111,6 @@ const Buscador = () => {
                     <Link to={`/contratarSeguro/${s.id}`}>
                       Contratar seguro
                     </Link>
-                    {/* <button onClick={ () => contratar(s.id)}>Contratar</button> */}
                   </div>
                 );
               }
@@ -201,7 +123,6 @@ const Buscador = () => {
                     <p>Coberturas : {s.Coberturas}</p>
                     <p>Precio: {s.Precio}</p>
                     <Link to={`/contratarSeguro/${s.id}`}>Contratar seguro</Link>
-                    {/* <button onClick={ () => contratar(s.id)}>Contratar</button> */}
                   </div>
                   )};
             }
