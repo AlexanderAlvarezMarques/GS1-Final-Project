@@ -74,6 +74,8 @@ const SesionPage = () => {
       <br></br>
       <Link to={"/buscador"}>Buscar Seguro</Link>
       <br></br>
+      <Link to={"/DeleteAccount"}>Eliminar cuenta</Link>
+      <br></br>
       <button onClick={cerrarSesion}>Cerrar sesión</button>
       <br></br>
       <h1>OFERTAS</h1>

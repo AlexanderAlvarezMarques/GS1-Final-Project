@@ -1,5 +1,7 @@
 import React from 'react';
 import {auth,firestore} from '../firebaseConfig'
+import { Link,} from "react-router-dom";
+
 
 const DeleteAccount = () => {
     
@@ -33,6 +35,8 @@ const DeleteAccount = () => {
             <h1>Darse de baja en la cuenta</h1>
             <h4>¿Desea darse de baja? Al darse de baja sus datos se perderían de la base de datos y su vehículo ya no estaría asegurado a partir del comienzo del mes próximo</h4>
             <button onClick={borrar}>darse de baja</button>
+            <br></br>
+            <Link to={"/sesion"}>Cancelar</Link>
         </>
     )};
 
