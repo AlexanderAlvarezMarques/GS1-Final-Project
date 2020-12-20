@@ -65,16 +65,18 @@ const LogIn = () => {
     const iniciarSesion = e => {
       e.preventDefault();
       console.log("he pulsado el boton");
-      // eslint-disable-next-line eqeqeq
-      /*if (userName.trim() == "" || passwd.trim() == "") {
+      
+      if (userName.trim() == "" || passwd.trim() == "") {
         guardarError(true);
         return;
-      }*/
+      }
+      guardarError(false);
+
       auth.signInWithEmailAndPassword(userName, passwd)
       .then((user) => {
         // Signed in
         // ...
-        console.log("Ha entrado juanma")
+        console.log("se ha iniciado sesion")
         console.log(user)
 
         history.push("/sesion");
@@ -85,13 +87,12 @@ const LogIn = () => {
         
       });
 
-    guardarError(false);
-    
     };
   
   //    HTML
   return (
     <Fragment>
+      {error ? <p>Tiene que iniciar sesion con un usuario registrado </p> : null }
       <form onSubmit={iniciarSesion}>
         <h2> Log In</h2>
         <div>
