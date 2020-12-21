@@ -113,42 +113,58 @@ const PayTarjet = ({resumen,idSeguro}) => {
     
     return( 
     <>
-    <form onSubmit={Pagar}>
-            
-            <div class="form-group">
-                <b><label>Numero tarjeta</label></b>
-                <input
-                    type="number"
-                    name="numeroTarjeta"
-                    value={numeroTarjeta}
-                    onChange={actualizarState}
-                ></input>
-            </div>
-            
-            <div class="form-group">
-                <b><label>Numero secreto</label></b>
-                <input
-                    type="number"
-                    name="numeroSecreto"
-                    value={numeroSecreto}
-                    onChange={actualizarState}
-                ></input>
-            </div>
+    <h1>Pagar con tarjeta</h1>
 
-            <div class="form-group">
-                <b><label>Fecha caducidad</label></b>
-                <input
-                    type="number"
-                    name="fechaCaducidad"
-                    value={fechaCaducidad}
-                    onChange={actualizarState}
-                ></input>
-            </div>
+    <div>
+        <label>Elegir tarjeta </label>
+        <input
+            type="radio"
+            name="tarjeta"
+            value="visa"
+            checked={tarjeta === "visa"}
+            onChange={actualizarState}
+        /> 
+        Visa
 
-            <div class="form-group">
-                <button type="submit" class="btn btn-primary submit">Pagar</button>
-            </div>
-        </form>
+        <input
+            type="radio"
+            name="tarjeta"
+            value="mastercard"
+            checked={tarjeta === "mastercard"}
+            onChange={actualizarState}
+        />
+        Mastercard
+    </div>
+
+    {error === true ? <p>Necesitan rellenar todos los campos </p> : null }
+    <form
+        onSubmit={Pagar}
+    >
+        <label>Numero tarjeta</label>
+        <input
+            type="number"
+            name="numeroTarjeta"
+            value={numeroTarjeta}
+            onChange={actualizarState}
+        ></input>
+        
+        <label>Numero secreto</label>
+        <input
+            type="number"
+            name="numeroSecreto"
+            value={numeroSecreto}
+            onChange={actualizarState}
+        ></input>
+
+        <label>Fecha caducidad</label>
+        <input
+            type="number"
+            name="fechaCaducidad"
+            value={fechaCaducidad}
+            onChange={actualizarState}
+        ></input>
+        <button type="submit">Pagar</button>
+    </form>
     </>
 )};
 export default PayTarjet ;

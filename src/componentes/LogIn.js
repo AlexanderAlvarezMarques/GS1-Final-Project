@@ -53,30 +53,36 @@ const LogIn = () => {
   //    HTML
   return (
     <Fragment>
-      
-      <form class="login" onSubmit={iniciarSesion}>
-    
-        {error ? <p>Tiene que iniciar sesion con un usuario registrado </p> : null }
-
-        <div class="form-group login-image">
-          <img src="content/images/loginImage.png" alt="Login image"/>
+      {error ? <p>Tiene que iniciar sesion con un usuario registrado </p> : null }
+      <form onSubmit={iniciarSesion}>
+        <h2> Log In</h2>
+        <div>
+          <label>Nombre de usuario:&nbsp;</label>
+          <input
+            type="text"
+            name="userName"
+            value={userName}
+            onChange={obtenerDatos}
+          />
         </div>
-
-        <div class="form-group">
-          <label for="userName">Email:</label>
-          <input type="text" name="emauserNameil" id="userName" value="{userName}" onChange={obtenerDatos} required/>
+        <br></br>
+        <div>
+          <label>
+            Contraseña:
+          </label>
+          <input
+            type="password"
+            name="passwd"
+            value={passwd}
+            onChange={obtenerDatos}
+          />
         </div>
-
-        <div class="form-group">
-          <label for="passwd">password</label>
-          <input type="password" name="passwd" id="passwd" value={passwd} onChange={obtenerDatos} required/>
-        </div>
-
-        <div class="form-group">
-          <input type="submit" value="LogIn" class="btn btn-primary submit"/>
-        </div>
-    
-		  </form>
+        <br></br>
+        {error ? <a>Debes rellenar todos los campos</a> : null}
+        <button type="submit">Iniciar sesión</button>
+        <br></br>
+        <Link to={"/"}>Volver</Link>
+      </form>
     </Fragment>
   );
 };
