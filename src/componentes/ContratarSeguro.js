@@ -18,8 +18,6 @@ const ContratarSeguro = () => {
     const {path} = useParams()
     console.log('path es ', path);
     
-    //guardar precio en state
-    const [precioSeguro,setPrecioSeguro] = useState()
 
     const {tipo} = data
     const [error, actualizarError] = useState(false);
@@ -32,21 +30,6 @@ const ContratarSeguro = () => {
         })
     }
 
-
-    // useEffect(()=>{
-    //     const docRef = firestore.collection("seguros").doc(id)
-    //     docRef.get().then(function(doc) {
-    //         if (doc.exists) {
-    //             console.log("Precio:", doc.data().Precio);
-    //             setPrecioSeguro(doc.data().Precio)
-    //         } else {
-    //             // doc.data() will be undefined in this case
-    //             console.log("No such document!");
-    //         }
-    //     }).catch(function(error) {
-    //         console.log("Error getting document:", error);
-    //     });
-    // })
 
     return( 
         <>
@@ -73,7 +56,7 @@ const ContratarSeguro = () => {
                 /> 
                 Paypal
             </div>
-            {tipo === 'tarjeta'  ? <PayTarjet idSeguro={id}/> : <Paypal />}
+            {tipo === 'tarjeta'  ? <PayTarjet idSeguro={id}/> : <Paypal  idSeguro={id}/>}
         </>
     )
 };
