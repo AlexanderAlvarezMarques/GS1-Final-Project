@@ -1,5 +1,6 @@
-#firebase data
+# Custom files
 .env
+.eslintcache
 
 # Logs
 logs
