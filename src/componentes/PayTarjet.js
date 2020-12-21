@@ -1,11 +1,14 @@
 import React, { useEffect, useState }  from 'react';
 import { auth, firestore } from '../firebaseConfig';
 
-const PayTarjet = ({cotizacion, idSeguro}) => {
+const PayTarjet = ({resumen,idSeguro}) => {
     
     console.log('id seguro desde PayTarjet: '+idSeguro);
-
     const [precio, setPrecioSeguro] = useState(0);
+    console.log('resumen ',resumen);
+    console.log('cotizacion de resumen ', resumen.cotizacion);
+    console.log('cotizacion de datos ', resumen.datos);
+    
     
 
     useEffect(()=>{
@@ -37,12 +40,14 @@ const PayTarjet = ({cotizacion, idSeguro}) => {
     });
 
 
-    const price = (cotizacion != null ? cotizacion : precio)
+    const price = (resumen.cotizacion != null ? resumen.cotizacion : precio)
     console.log('valor de precio es: ',price);
     
     //state para el pago
     const pagoSeguro = {
+        formaDePago: tipoTarjeta,
         precio: price,
+        datos: resumen.datos,
         fecha: new Date().getTime().toString(),
     }
 

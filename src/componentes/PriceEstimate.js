@@ -252,8 +252,8 @@ const PriceEstimate = () => {
                 <button onClick={actualizarState}>Contratar seguro</button>
                 {prueba===true ? 
                     <div>
-                    <PayTarjet cotizacion={cotizacion}/>
-                    <Paypal/>
+                    <PayTarjet resumen={resumen}/>
+                    <Paypal resumen={resumen}/>
                     </div>
                 : null}
             </> 
