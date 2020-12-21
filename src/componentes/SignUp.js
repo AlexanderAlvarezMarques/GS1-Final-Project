@@ -116,102 +116,114 @@ const SignUp = () => {
     //HTML 
 return( 
     <>
-        <h2>Sign Up Form</h2>
-        { error ? <p>Todos los campos deben estar rellenos</p> : null }
-        <form
-            onSubmit={registrar}
-        >
-            <label>Nombre: </label>
-            <input
-                type="text"
-                name="nombre"
-                onChange={actualizarState}
-            />
-            <label>Apellido: </label>
-            <input
-                type="text"
-                name="apellido"
-                onChange={actualizarState}
-            />
-            <label>DNI: </label>
-            <input
-                type="text"
-                name="dni"
-                onChange={actualizarState}
-            />
-            <label>Correo: </label>
-            <input
-                type="text"
-                name="correo"
-                onChange={actualizarState}
-            />
-            <label>contraseña: </label>
-            <input
-                type="password"
-                name="contraseña"
-                onChange={actualizarState}
-            />
-            <label>Nacimiento: </label>
-            <input
-                type="date"
-                name="nacimiento"
-                onChange={actualizarState}
-            />
+        <form onSubmit={registrar} class="register">
 
-            <label>Telefono: </label>
-            <input
-                type="number"
-                name="telefono"
-                onChange={actualizarState}
-            />
-            <label>Fecha Carnet: </label>
-            <input
-                type="date"
-                name="fechaCarnet"
-                onChange={actualizarState}
-            />
-            <label>Marca: </label>
-            <input
-                type="text"
-                name="marca"
-                onChange={actualizarCoche}
-            />
+            <h1 class="my-4">Formulario de registro</h1>
 
-            <label>Modelo: </label>
-            <input
-                type="text"
-                name="modelo"
-                onChange={actualizarCoche}
-            />
-            <label>Matricula: </label>
-            <input
-                type="text"
-                name="matricula"
-                onChange={actualizarCoche}
-            />
-             <label>Kilometros: </label>
-             <input
-                type="number"
-                name="kilometros"
-                onChange={actualizarCoche}
-            />
-            <label>Combustible: </label>
-             <input
-                type="text"
-                name="combustible"
-                onChange={actualizarCoche}
-            />
-            <label>Tipo: </label>
-             <input
-                type="text"
-                name="tipo"
-                onChange={actualizarCoche}
-            />
-            <button
-                type="submit"
-            >Registrarse</button>
+            { error ? <p>Todos los campos deben estar rellenos</p> : null }
 
-<Link to={"/"}>Volver</Link>
+            <div class="form-group">
+                <b><label>Nombre:</label></b>
+                <input
+                    type="text"
+                    name="nombre"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <b><label>Apellidos:</label></b>
+                <input
+                    type="text"
+                    name="apellido"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <b><label>DNI:</label></b>
+                <input
+                    type="text"
+                    name="dni"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Correo: </label>
+                <input
+                    type="text"
+                    name="correo"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>contraseña: </label>
+                <input
+                    type="text"
+                    name="contraseña"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Nacimiento: </label>
+                <input
+                    type="date"
+                    name="nacimiento"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Telefono: </label>
+                <input
+                    type="date"
+                    name="telefono"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Fecha Carnet: </label>
+                <input
+                    type="date"
+                    name="fechaCarnet"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Marca: </label>
+                <input
+                    type="text"
+                    name="marca"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Submodel: </label>
+                <input
+                    type="text"
+                    name="modelo"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <label>Matricula: </label>
+                <input
+                    type="text"
+                    name="matricula"
+                    onChange={actualizarState}
+                />
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary submit">Registrarse</button>
+            </div>
         </form>
     </>
 );
