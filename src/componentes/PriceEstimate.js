@@ -8,6 +8,8 @@ import Resultado from './Resultado'
 import { useParams } from 'react-router-dom';
 import PayTarjet from './PayTarjet';
 import Paypal from './Paypal';
+import { Link } from "react-router-dom";
+
 
 const PriceEstimate = () => {
 
@@ -70,10 +72,6 @@ const PriceEstimate = () => {
     const [, actualizarError] = useState(false);
 
 
-
-
-    //añadir state de extra
-    const [] = useState(extrasDisponibles);
 
 
 
@@ -225,6 +223,7 @@ const PriceEstimate = () => {
             </div> */}
 
             <button type="submit" >Aceptar</button>
+            <Link to={"/"}> Volver </Link>
         </form>
 
 
