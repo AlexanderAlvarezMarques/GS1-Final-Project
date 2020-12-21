@@ -39,11 +39,11 @@ const PriceEstimate = () => {
     const [resumen, guardarResumen] = useState({
         cotizacion: 0,
         datos: {
-            marca : 'Ford',
-            modelo : 'Focus',
-            year : 1997,
-            antiguedadCarnet : 5,
-            plan : 'basico',
+            marca : '',
+            modelo : '',
+            year : 0,
+            antiguedadCarnet : 0,
+            plan : '',
             extra: []
         }
       });

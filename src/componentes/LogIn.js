@@ -45,8 +45,8 @@ const LogIn = () => {
   let history = useHistory();
   
   const [datos, guardarDatos] = useState({
-    userName: "juanma@gmail.com",
-    passwd: "123456",
+    userName: "",
+    passwd: "",
   });
   const [error, guardarError] = useState(false);
 

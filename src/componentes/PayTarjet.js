@@ -5,18 +5,24 @@ const PayTarjet = ({resumen,idSeguro}) => {
     
     console.log('id seguro desde PayTarjet: '+idSeguro);
     const [precio, setPrecioSeguro] = useState(0);
-    console.log('resumen ',resumen);
-    console.log('cotizacion de resumen ', resumen.cotizacion);
-    console.log('cotizacion de datos ', resumen.datos);
+    const [datosSeguroPagePrincipal, setDatosSeguroPagePrincipal]=useState();
+    // console.log('resumen ',resumen);
+    // console.log('cotizacion de resumen ', resumen.cotizacion);
+    // console.log('cotizacion de datos ', resumen.datos);
     
     
 
     useEffect(()=>{
         const docRef = firestore.collection("seguros").doc(idSeguro)
         docRef.get().then(function(doc) {
+            var docs = []
             if (doc.exists) {
                 console.log("Precio:", doc.data().Precio);
+                console.log('datos ',doc.data());
+                
                 setPrecioSeguro(doc.data().Precio)
+                docs.push({...doc.data(), id:doc.id})
+                setDatosSeguroPagePrincipal(docs)
             } else {
                 // doc.data() will be undefined in this case
                 console.log("No such document!");
@@ -40,14 +46,24 @@ const PayTarjet = ({resumen,idSeguro}) => {
     });
 
 
-    const price = (resumen.cotizacion != null ? resumen.cotizacion : precio)
+    var price=0
+    var datos ={}
+    try {
+        price = (resumen.cotizacion != null ? resumen.cotizacion : precio)
+        datos = resumen.datos
+      } catch {
+        price = precio
+        datos = datosSeguroPagePrincipal
+      }
+
+    //const price = (resumen.cotizacion != null ? resumen.cotizacion : precio)
     console.log('valor de precio es: ',price);
     
     //state para el pago
     const pagoSeguro = {
         formaDePago: tipoTarjeta,
         precio: price,
-        datos: resumen.datos,
+        datos: datos,
         fecha: new Date().getTime().toString(),
     }
 
