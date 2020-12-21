@@ -199,15 +199,24 @@ const PriceEstimate = () => {
                 <input
                     type="radio"
                     name="plan"
-                    value="completo"
-                    checked={plan === "completo"}
+                    value="completo-sin-franquicia"
+                    checked={plan === "completo-sin-franquicia"}
                     onChange={actualizarState}
                 />
-                Completo
+                Completo sin franquicia
+
+                <input
+                    type="radio"
+                    name="plan"
+                    value="completo-con-franquicia"
+                    checked={plan === "completo-con-franquicia"}
+                    onChange={actualizarState}
+                />
+                Completo con franquicia
             </div>
 
 
-            <div>
+            {/* <div>
                 <label>Extras para añadir a tu seguro: </label>
                 {formData.map((test, index) => (
                     <div key={index}>
@@ -220,7 +229,7 @@ const PriceEstimate = () => {
                         />
                     </div>
                 ))}
-            </div>
+            </div> */}
 
             <button type="submit" >Aceptar</button>
         </form>

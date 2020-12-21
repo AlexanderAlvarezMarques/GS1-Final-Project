@@ -77,5 +77,22 @@ export function calcularMarca(marca){
 }
 
 export function obtenerPlan(plan){
-    return (plan === 'basico') ? 1.20 : 1.50 ;
+    let incremento;
+    switch(plan){
+        case 'basico' :
+            incremento = 1.00;
+            break;
+        
+        case 'completo-sin-franquicia' :
+            incremento = 1.15;
+            break;
+
+        case 'completo-con-franquicia' :
+            incremento = 1.35;
+            break;
+        
+        default:
+            break;
+    }
+    return incremento;
 }
