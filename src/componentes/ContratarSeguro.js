@@ -31,30 +31,41 @@ const ContratarSeguro = () => {
 
     return( 
         <>
-            <h1>Contratar seguro</h1>
-            <h2>Forma de pago:</h2>
-
-            <div>
-
-                <input
-                    type="radio"
-                    name="tipo"
-                    value="tarjeta"
-                    checked={tipo === "tarjeta"}
-                    onChange={actualizarState}
-                />
-                Tarjeta
+            <div class="container">
         
-                <input
-                    type="radio"
-                    name="tipo"
-                    value="paypal"
-                    checked={tipo === "paypal"}
-                    onChange={actualizarState}
-                /> 
-                Paypal
+        <div class="claims">
+
+          <h1 class="my-4">Mis reclamaciones</h1>
+
+          <div class="titles">
+            <div class="title-1">Asunto</div>
+            <div class="title-2">Descripción</div>
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 1</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
             </div>
-            {tipo === 'tarjeta'  ? <PayTarjet idSeguro={id}/> : <Paypal  idSeguro={id}/>}
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 2</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+            </div>
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 3</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+            </div>
+          </div>
+
+        </div>
+
+      </div>
         </>
     )
 };
