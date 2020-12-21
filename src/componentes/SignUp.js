@@ -11,14 +11,14 @@ const SignUp = () => {
 
     // estado que tiene el usuario 
     const [user, setUser] = useState({
-        nombre : 'juanma',
-        apellido : 'perez',
-        dni : '12345678E',
-        correo : 'juanma@gmail.com',
-        contraseña : '123456',
-        telefono: '678678678',
-        fechaCarnet : '10/02/2019',
-        nacimiento : '5/02/1997',
+        nombre : '',
+        apellido : '',
+        dni : '',
+        correo : '',
+        contraseña : '',
+        telefono: '',
+        fechaCarnet : '',
+        nacimiento : '',
         vehiculos: [],
         incidencias : [],
         reclamaciones: [],
@@ -27,12 +27,12 @@ const SignUp = () => {
 
     //estado para el vehiculo
     const [car, setCar] = useState({
-        marca: 'Toyota',
-        modelo: 'Yaris',
-        kilometros: 28000,
-        tipo: 'Turismo',
-        combustible: 'Gasolina',
-        matricula: '3844LLL',
+        marca: '',
+        modelo: '',
+        kilometros: 0,
+        tipo: '',
+        combustible: '',
+        matricula: '',
     })
 
     // estado para validaciones
