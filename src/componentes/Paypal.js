@@ -79,28 +79,35 @@ const Paypal = ({cotizacion, idSeguro}) => {
 
     return( 
     <>
-    <h1>Pagar con Paypal</h1>
-    { error ? <p>Debe rellenar los campos! </p> : null}
-    <form
-        onSubmit={pagar}
-    >
-        <label>Correo</label>
-        <input
-            type="text"
-            name="correo"
-            value={correo}
-            onChange={actualizarState}
-        ></input>
+    <form onSubmit={pagar}>
+            
+            { error ? <p>Debe rellenar los campos! </p> : null}
+        
+            <div class="form-group">
+                <b><label>Correo</label></b>
+                <input
+                    type="text"
+                    name="correo"
+                    value={correo}
+                    onChange={actualizarState}
+                ></input>
+            </div>
 
-        <label>Contraseña</label>
-        <input
-            type="text"
-            name="contraseña"
-            value={contraseña}
-            onChange={actualizarState}
-        ></input>
-        <button type="submit">Pagar</button>
-    </form>
+            <div class="form-group">
+                <b><label>Contraseña</label></b>
+                <input
+                    type="text"
+                    name="contraseña"
+                    value={contraseña}
+                    onChange={actualizarState}
+                ></input>
+            </div>
+
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary submit">Pagar</button>
+            </div>
+
+        </form>
     </>
 )};
 export default Paypal ;
