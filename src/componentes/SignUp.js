@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-import { Router, useHistory} from 'react-router-dom';
+import { Link, useHistory} from 'react-router-dom';
 import {auth, firestore} from '../firebaseConfig';
 
 const db = firestore;
@@ -194,6 +194,8 @@ return(
             <button
                 type="submit"
             >Registrarse</button>
+
+<Link to={"/"}>Volver</Link>
         </form>
     </>
 );

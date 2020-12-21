@@ -1,5 +1,6 @@
-import React,{useState} from 'react';
+import React,{Fragment, useState} from 'react';
 import { auth, firestore } from '../firebaseConfig';
+import {Link} from "react-router-dom";
 
 const UpdateProfile = () => {
 
@@ -51,6 +52,7 @@ const UpdateProfile = () => {
 
 
     return( 
+        <Fragment>
         <>
         <h1>Actualizar perfil</h1>
         <form
@@ -92,7 +94,9 @@ const UpdateProfile = () => {
             ></input>
 
             <button type="submit">Actualizar</button>
+            <Link to={"/sesion"}>Cancelar</Link>
         </form>
-        </>    
+        </>
+        </Fragment>    
     )};
 export default UpdateProfile ; 

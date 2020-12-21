@@ -45,6 +45,8 @@ const Buscador = () => {
         <body>
           <h1>BUSCAR</h1>
           <br></br>
+          <Link to={"/"}>Volver</Link>
+          <br></br>
           <h3>Tipo de plan: </h3>
 
           <div>
