@@ -55,14 +55,41 @@ const Claims = () => {
 
   return (
     <Fragment>
-      <h1>Mis reclamaciones</h1>
-      <br></br>
-      <div id="reclamacion">
+      <div class="container">
+        
+        <div class="claims">
+
+          <h1 class="my-4">Mis reclamaciones</h1>
+
+          <div class="titles">
+            <div class="title-1">Asunto</div>
+            <div class="title-2">Descripción</div>
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 1</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+            </div>
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 2</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+            </div>
+          </div>
+
+          <div class="claim">
+            <h3 class="subject">Asunto 3</h3>
+            <div class="description">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+            </div>
+          </div>
+
+        </div>
+
       </div>
-      <br></br>
-      <button onClick={misReclamaciones}> Nueva Reclamacion</button>
-      <br></br>
-      <Link to={"/sesion"}>Volver</Link>
     </Fragment>
   );
 };
