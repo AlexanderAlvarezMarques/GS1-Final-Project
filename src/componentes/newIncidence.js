@@ -3,41 +3,41 @@ import {Link,useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import styled from "@emotion/styled";
 
-const Contenedor = styled.div`
-  display: flex;
-  margin-bottom: 1rem;
-  align-items: center;
-  background-color: #ff5733;
-  width: 100%;
-`;
-const Label = styled.label`
-  flex: 0 0 100px;
-  width: 100%;
-`;
-const Boton = styled.button`
-  background-color: #00838f;
-  font-size: 10px;
-  width: 50%;
-  padding: 1rem;
-  color: #fff;
-  text-transform: uppercase;
-  font-weight: bold;
-  border: none;
-  &:hover {
-    background-color: #26c6da;
-    cursor: pointer;
-  }
-  margin-top: 1rem;
-`;
+// const Contenedor = styled.div`
+//   display: flex;
+//   margin-bottom: 1rem;
+//   align-items: center;
+//   background-color: #ff5733;
+//   width: 100%;
+// `;
+// const Label = styled.label`
+//   flex: 0 0 100px;
+//   width: 100%;
+// `;
+// const Boton = styled.button`
+//   background-color: #00838f;
+//   font-size: 10px;
+//   width: 50%;
+//   padding: 1rem;
+//   color: #fff;
+//   text-transform: uppercase;
+//   font-weight: bold;
+//   border: none;
+//   &:hover {
+//     background-color: #26c6da;
+//     cursor: pointer;
+//   }
+//   margin-top: 1rem;
+// `;
 
-const Error = styled.div`
-  background-color: red;
-  color: white;
-  padding: 0.5rem;
-  width: 47.5%;
-  text-align: center;
-  margin-top: 1rem;
-`;
+// const Error = styled.div`
+//   background-color: red;
+//   color: white;
+//   padding: 0.5rem;
+//   width: 47.5%;
+//   text-align: center;
+//   margin-top: 1rem;
+// `;
 
 const NewIncidence = () => {
   //para rediccionar
@@ -45,9 +45,9 @@ const NewIncidence = () => {
   let history = useHistory();
 
   const [datos, guardarDatos] = useState({
-    issue: "pinchazo",
-    dateIssue: "1-10-2020",
-    incidenceContext: "la rueda a la caca",
+    issue: "",
+    dateIssue: "",
+    incidenceContext: "",
   });
 
   const [error, guardarError] = useState(false);
@@ -104,7 +104,7 @@ const NewIncidence = () => {
     <Fragment>
       <form onSubmit={enviarIncidencia}>
         <h2> Incidencia</h2>
-        <Contenedor>
+        <div>
           <h3>Asunto:&nbsp;</h3>
           <input
             type="text"
@@ -112,9 +112,9 @@ const NewIncidence = () => {
             value={issue}
             onChange={obtenerDatos}
           />
-        </Contenedor>
+        </div>
         <br></br>
-        <Contenedor>
+        <div>
           <h3>Fecha de incidencia:&nbsp;</h3>
           <input
             type="text"
@@ -122,9 +122,9 @@ const NewIncidence = () => {
             value={dateIssue}
             onChange={obtenerDatos}
           />
-        </Contenedor>
+        </div>
         <br></br>
-        <Contenedor>
+        <div>
           <h3>Mensaje:&nbsp;</h3>
           <input
             type="text"
@@ -132,10 +132,10 @@ const NewIncidence = () => {
             value={incidenceContext}
             onChange={obtenerDatos}
           />
-        </Contenedor>
+        </div>
         <br></br>
-        {error ? <Error>Debes rellenar todos los campos</Error> : null}
-        <Boton type="submit">Enviar</Boton>
+        {error ? <label>Debes rellenar todos los campos<br></br></label> : null}
+        <button type="submit">Enviar</button>
         <Link to={"/Incidences"}> Volver</Link>
       </form>
     </Fragment>
