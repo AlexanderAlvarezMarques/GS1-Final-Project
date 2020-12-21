@@ -1,5 +1,4 @@
-import React,{useState,useEffect} from 'react';
-import useForm from 'react-hook-form';
+import React,{useState} from 'react';
 import { auth, firestore } from '../firebaseConfig';
 
 const Extras = () => {
@@ -19,7 +18,7 @@ const Extras = () => {
       ];
 
     const [isChecked, setIsChecked] = useState({});
-    const [formData, setFormData] = useState(data);
+    const [formData] = useState(data);
   
     const handleSingleCheck = e => {
       setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });

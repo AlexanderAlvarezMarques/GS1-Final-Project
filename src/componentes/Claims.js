@@ -1,6 +1,6 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import { Router, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import ReactDOM from "react-dom";
 
@@ -9,14 +9,8 @@ const Claims = () => {
   const misReclamaciones = (e) => {
     history.push("/newClaim");
   };
-  const list = document.querySelector("ul");
 
-  const [claimData, setInci] = useState({
-    claim: [],
-  });
-  const { claim } = claimData;
 
-  let clm = [];
 
   auth.onAuthStateChanged((user) => {
     if (user) {

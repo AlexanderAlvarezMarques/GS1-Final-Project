@@ -1,30 +1,13 @@
 import React, { Fragment, useState, useEffect } from "react";
-import { Router, Link, useHistory, Route } from "react-router-dom";
-import { auth, firestore } from "../firebaseConfig";
-import ContratarSeguro from "./ContratarSeguro";
-import NewIncidence from "./NewIncidence";
+import { Link } from "react-router-dom";
+import { firestore } from "../firebaseConfig";
 
 const PagePrincipal = () => {
 
-  //para redireccionar
-  let history = useHistory();
 
 
   //estados
-  const [error, guardarError] = useState(false);
   const [seguros, setSeguros] = useState([]);
-
-
-
-  //metodo al pulsar el boton para contratar
-  const contratar = (id) => {
-    if(window.confirm("Estas seguro de que quieres contratar este seguro?")){
-      console.log('pulse el boton', id);
-      history.push()
-    }
-    
-  };
-
   
   //constante que coje los seguros de firestore y añade los datos con el id en el estado de seguros
   const seguroDB = async() => {

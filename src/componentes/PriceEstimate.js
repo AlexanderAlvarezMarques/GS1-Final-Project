@@ -5,9 +5,7 @@ import {obtenerPlan} from '../Helper'
 import {porAntiguedad} from '../Helper'
 import Spinner from './Spinner'
 import Resultado from './Resultado'
-import { Link, useParams } from 'react-router-dom';
-import { auth, firestore } from '../firebaseConfig';
-import useForm from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import PayTarjet from './PayTarjet';
 import Paypal from './Paypal';
 
@@ -65,25 +63,20 @@ const PriceEstimate = () => {
     });
 
     
-    const {marca,modelo,year,antiguedadCarnet,plan,extra} = data;
+    const {marca,modelo,year,antiguedadCarnet,plan} = data;
 
 
     // estado para validaciones
-    const [error, actualizarError] = useState(false);
+    const [, actualizarError] = useState(false);
 
 
 
 
     //añadir state de extra
-    const [isChecked, setIsChecked] = useState({});
-    const [formData, setFormData] = useState(extrasDisponibles);
+    const [] = useState(extrasDisponibles);
 
 
 
-    //metodos para los extras de checkbox
-    const handleSingleCheck = e => {
-        setIsChecked({ ...isChecked, [e.target.name]: e.target.checked });
-      };
     
 
       const [prueba,setPrueba] = useState(false);
@@ -247,7 +240,7 @@ const PriceEstimate = () => {
          : null }
 
         
-        { cotizacion != 0 ?
+        { cotizacion !== 0 ?
             <>
                 <button onClick={actualizarState}>Contratar seguro</button>
                 {prueba===true ? 

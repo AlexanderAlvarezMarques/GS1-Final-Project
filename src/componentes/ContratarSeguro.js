@@ -1,8 +1,7 @@
-import React , { useEffect, useState } from 'react';
+import React , { useState } from 'react';
 import PayTarjet from './PayTarjet'
 import Paypal from './Paypal'
 import { useParams } from 'react-router-dom';
-import { auth, firestore } from "../firebaseConfig";
 
 const ContratarSeguro = () => {
 
@@ -20,7 +19,6 @@ const ContratarSeguro = () => {
     
 
     const {tipo} = data
-    const [error, actualizarError] = useState(false);
 
     // actualizar campos del formulario
     const actualizarState = e => {

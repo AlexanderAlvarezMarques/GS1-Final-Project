@@ -1,7 +1,11 @@
 import React, { useEffect, useState }  from 'react';
 import { auth, firestore } from '../firebaseConfig';
+import { useHistory } from "react-router-dom";
+
 
 const PayTarjet = ({resumen,idSeguro}) => {
+
+    let history = useHistory();
     
     console.log('id seguro desde PayTarjet: '+idSeguro);
     const [precio, setPrecioSeguro] = useState(0);
@@ -99,7 +103,8 @@ const PayTarjet = ({resumen,idSeguro}) => {
         if(auth.currentUser.uid != null ){
            
             firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
-            alert("Ha realizado su pago correctamente!")
+            alert("Ha realizado su pago correctamente!");
+            history.push("/sesion");
         }else{
             console.log('no hay usuario ');
         }

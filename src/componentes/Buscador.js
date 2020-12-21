@@ -1,10 +1,8 @@
 import React, { Fragment, useState, useEffect } from "react";
-import ReactDOM from "react-dom";
-import { Router, Link, useHistory } from "react-router-dom";
-import { auth, firestore } from "../firebaseConfig";
+import { Link } from "react-router-dom";
+import { firestore } from "../firebaseConfig";
 
 const Buscador = () => {
-  let history = useHistory();
   const [seguros, setSeguros] = useState([]);
 
   const [seleccionData, setData] = useState({
@@ -102,7 +100,7 @@ const Buscador = () => {
           </div>
 
           {seguros.map((s) => {
-            if (seleccion != "Todos los planes") {
+            if (seleccion !== "Todos los planes") {
               if (s.Tipo === seleccion && parseInt(s.Precio) >= parseInt(precioMin) && parseInt(s.Precio) <= parseInt(precioMax)) {
                 return (
                   <div key={s.id}>

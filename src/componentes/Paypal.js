@@ -1,9 +1,13 @@
 import React, { useState, useEffect }  from 'react';
 import { auth, firestore } from '../firebaseConfig';
+import { useHistory } from "react-router-dom";
+
 
 const Paypal = ({cotizacion, idSeguro}) => {
     
     console.log('id seguro desde Paypal: '+idSeguro);
+
+    let history = useHistory();
 
     const [precio, setPrecioSeguro] = useState(0);
    
@@ -64,7 +68,9 @@ const Paypal = ({cotizacion, idSeguro}) => {
             console.log('user ',auth.currentUser.uid);
             
             firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).collection("pagos").doc("vehiculo").set(pagoSeguro);
-            alert("Ha realizado su pago correctamente!")
+            alert("Ha realizado su pago correctamente!");
+            history.push("/sesion");
+
         }else{
             console.log('no hay usuario ');
         }

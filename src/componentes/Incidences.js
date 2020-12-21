@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
 import { Link } from "react-router-dom";
-import { Router, useHistory } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
 import ReactDOM from "react-dom";
 
@@ -10,15 +10,8 @@ const Incidences = () => {
   const misIncidences = (e) => {
     history.push("/NewIncidence");
   };
-
-
-  const [inciData, setInci] = useState({
-    inci: [],
-  });
   
-  const { inci } = inciData;
 
-  let inc = [];
 
   auth.onAuthStateChanged((user) => {
     if (user) {

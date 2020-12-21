@@ -10,13 +10,6 @@ const SesionPage = () => {
   //estados
   const [seguros, setSeguros] = useState([]);
 
-  //metodo al pulsar el boton para contratar
-  const contratar = (id) => {
-    if (window.confirm("Estas seguro de que quieres contratar este seguro?")) {
-      console.log("pulse el boton", id);
-      history.push();
-    }
-  };
 
   //constante que coje los seguros de firestore y añade los datos con el id en el estado de seguros
   const seguroDB = async () => {
