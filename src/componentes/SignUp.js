@@ -64,7 +64,6 @@ const SignUp = () => {
                 correo.trim() === '' || 
                 contraseña.trim() === '' || 
                 fechaCarnet.trim() === '' || 
-                modelo.trim() === '' || 
                 nacimiento.trim() === '' || 
                 marca.trim() === '' || 
                 modelo.trim() === '' || 
@@ -73,7 +72,6 @@ const SignUp = () => {
                 kilometros === 0 ||
                 combustible.trim() === '' ||
                 telefono.trim() === ''
-
     }
 
     const registrar = e => {
@@ -170,7 +168,7 @@ return(
             <input
                 type="date"
                 name="fechaCarnet"
-                onChange={actualizarCoche}
+                onChange={actualizarState}
             />
             <label>Marca: </label>
             <input
@@ -179,7 +177,7 @@ return(
                 onChange={actualizarCoche}
             />
 
-            <label>Submodel: </label>
+            <label>Modelo: </label>
             <input
                 type="text"
                 name="modelo"
@@ -189,6 +187,24 @@ return(
             <input
                 type="text"
                 name="matricula"
+                onChange={actualizarCoche}
+            />
+             <label>Kilometros: </label>
+             <input
+                type="number"
+                name="kilometros"
+                onChange={actualizarCoche}
+            />
+            <label>Combustible: </label>
+             <input
+                type="text"
+                name="combustible"
+                onChange={actualizarCoche}
+            />
+            <label>Tipo: </label>
+             <input
+                type="text"
+                name="tipo"
                 onChange={actualizarCoche}
             />
             <button
