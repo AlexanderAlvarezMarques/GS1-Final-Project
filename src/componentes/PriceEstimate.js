@@ -255,7 +255,90 @@ const PriceEstimate = () => {
 
 
        
-       
+       <form onSubmit={getPriceEstimate} class="estimate_price">
+			
+			<h1 class="my-4">Estima tu seguro</h1>
+
+			<div class="display_inline">
+				<div class="form-group branch">
+					<label>Marca</label>
+					<select
+						name="marca"
+						value= {marca}
+						onChange={actualizarState}
+					>
+						<option value="">-- Seleccione --</option>
+						<option value="Mercedes">Mercedes</option>
+						<option value="Ford">Ford</option>
+						<option value="Audi">Audi</option>
+						<option value="Toyota">Toyota</option>
+						<option value="Hyundai">Hyundai</option>
+					</select>
+				</div>
+					
+				<div class="form-group model">
+					<label>Modelo</label>
+					<select
+						name="modelo"
+						value= {modelo}
+						onChange={actualizarState}
+					>
+						<option value="">-- Seleccione --</option>
+						<option value="Berlina">Berlina</option>
+						<option value="Focus">Focus</option>
+						<option value="A3">A3</option>
+						<option value="Yaris">Yaris</option>
+						<option value="Tucson">Tucson</option>
+					</select>
+				</div>
+			</div>
+
+            <div class="display_inline">
+                <div class="form-group plate_date">
+                    <label>Año matriculación</label>
+                    <input
+                        type="number"
+                        name="year"
+                        value={year}
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group license_date">
+                    <label>Antiguedad de carnet</label>
+                    <input
+                        type="number"
+                        name="antiguedadCarnet"
+                        value={antiguedadCarnet}
+                        onChange={actualizarState}
+                    />
+                </div>
+			</div>
+			
+            <div class="form-group mt-2">
+                <label>Plan</label>
+                
+                <div class="form-group plan">
+                    <input type="radio" name="plan" value="completo" checked={plan === "basico"} onChange={actualizarState}/>Básico
+                    <input class="ml-2" type="radio" name="plan" value="completo" checked={plan === "completo"} onChange={actualizarState}/>Completo
+                </div>
+			</div>
+			
+			<div class="form-group">
+				<button type="submit" class="btn btn-primary submit">Aceptar</button>
+            </div>
+            
+            <div>
+                { cargando ? <Spinner/> : null }
+                
+                <Resumen datos={datos}/>
+                
+                { !cargando ? <Resultado cotizacion={cotizacion}/> : null }
+            </div>
+		
+            <Link to={'/contratarSeguro'}>Contratar este Seguro</Link>
+        
+        </form>
         </>
     );
 }
