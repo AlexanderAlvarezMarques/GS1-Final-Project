@@ -1,0 +1,17 @@
+html {
+  min-height: 100%;
+}
+
+body {
+  background-image: url("../../content/images/bg-01.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+:root {
+  --teal-blue: #00778fff;
+  --cosmic-latte: #fff4e4ff;
+  --english-violet: #38304aff;
+  --metallic-sunburst: #9b7e46ff;
+  --cafe-au-lait: #a7754dff;
+}

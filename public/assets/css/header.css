@@ -1,0 +1,7 @@
+.navbar {
+  background-color: var(--teal-blue);
+}
+
+.navbar .nav-link {
+  color: var(--cosmic-latte);
+}
