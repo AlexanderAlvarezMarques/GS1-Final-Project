@@ -1,10 +1,11 @@
 import React from 'react';
 import { auth, firestore } from '../firebaseConfig'
-import { Link, } from "react-router-dom";
+import { Link, useHistory, } from "react-router-dom";
 
 
 const DeleteAccount = () => {
 
+    let history=useHistory();
     console.log(auth.currentUser.uid)
 
     const borrar = () => {
@@ -17,11 +18,13 @@ const DeleteAccount = () => {
         user.delete()
             .then(() => {
                 console.log('User deleted!');
-                firestore.collection("usuariosRgistrados").doc(user.uid).delete().then(function () {
+                firestore.collection("usuariosRgistrados").doc(user.uid).delete()
+                history.push("/");
+                /*.then(function () {
                     console.log("Document successfully deleted!");
                 }).catch(function (error) {
                     console.error("Error removing document: ", error);
-                });
+                });*/
             })
             .catch((e) => {
                 console.error('Failed to delete user: ', e);
