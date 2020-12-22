@@ -97,7 +97,7 @@ const Paypal = ({ cotizacion, idSeguro }) => {
                 <div class="form-group">
                     <label>Contraseña</label>
                     <input
-                        type="text"
+                        type="password"
                         name="contraseña"
                         value={contraseña}
                         onChange={actualizarState}

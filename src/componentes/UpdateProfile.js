@@ -1,10 +1,10 @@
 import React, { Fragment, useState } from 'react';
 import { auth, firestore } from '../firebaseConfig';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 const UpdateProfile = () => {
 
-
+    let history= useHistory();
     // estado que tiene el usuario 
     const [data, setDatas] = useState({
         nombre: 'juan manuel ',
@@ -36,8 +36,11 @@ const UpdateProfile = () => {
                 telefono: telefono,
                 correo: correo,
                 contraseña: contraseña
+                
             }).then(() => {
                 console.info('todo actualizado');
+                alert("Ha actualizado su perfil correctamente!");
+                history.push("/sesion")
 
             }).catch((e) => {
                 console.error('Mal', e);
