@@ -62,8 +62,6 @@ const SesionPage = () => {
         <Fragment>
             <div id="welcome"></div>
 
-            
-
             <Link to={"/claims"}>Mis reclamaciones</Link>
             <br></br>
             <Link to={"/Incidences"}>Mis Incidencias</Link>

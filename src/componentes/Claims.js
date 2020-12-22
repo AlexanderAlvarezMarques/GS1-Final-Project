@@ -58,7 +58,14 @@ const Claims = () => {
             <div class="claims">
 
                 <div class="form-group">
+                
                 <h1 class="my-4">Mis reclamaciones</h1><br/>
+
+                <Link to={"/sesion"}>
+                    <span class="btn btn-secondary">
+                        Volver
+                    </span>
+                </Link>
 
                 <button onClick={misReclamaciones} class="btn btn-primary"> Nueva Reclamacion</button>
                 </div>
