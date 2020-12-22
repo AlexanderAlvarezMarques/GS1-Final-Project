@@ -1,6 +1,43 @@
 import React, { Fragment, useState } from "react";
-import {Link,useHistory } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { auth, firestore } from "../firebaseConfig";
+import styled from "@emotion/styled";
+
+const Contenedor = styled.div`
+  display: flex;
+  margin-bottom: 1rem;
+  align-items: center;
+  background-color: #ff5733;
+  width: 100%;
+`;
+const Label = styled.label`
+  flex: 0 0 100px;
+  width: 100%;
+`;
+const Boton = styled.button`
+  background-color: #00838f;
+  font-size: 10px;
+  width: 50%;
+  padding: 1rem;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: none;
+  &:hover {
+    background-color: #26c6da;
+    cursor: pointer;
+  }
+  margin-top: 1rem;
+`;
+
+const Error = styled.div`
+  background-color: red;
+  color: white;
+  padding: 0.5rem;
+  width: 47.5%;
+  text-align: center;
+  margin-top: 1rem;
+`;
 
 const NewIncidence = () => {
     //para rediccionar
@@ -8,9 +45,9 @@ const NewIncidence = () => {
     let history = useHistory();
 
     const [datos, guardarDatos] = useState({
-        issue: "",
-        dateIssue: "",
-        incidenceContext: "",
+        issue: "pinchazo",
+        dateIssue: "1-10-2020",
+        incidenceContext: "la rueda a la caca",
     });
 
     const [error, guardarError] = useState(false);
@@ -91,7 +128,7 @@ const NewIncidence = () => {
                     <div class="form-group">
                         <label>Mensaje:</label>
                         <input
-                            type="date"
+                            type="text"
                             name="incidenceContext"
                             value={incidenceContext}
                             onChange={obtenerDatos}
@@ -99,7 +136,7 @@ const NewIncidence = () => {
                     </div>
 
 
-                    {error ? <label>Debes rellenar todos los campos</label> : null}
+                    {error ? <Error>Debes rellenar todos los campos</Error> : null}
                     <button type="submit" class="btn btn-primary submit">Enviar</button>
                     <Link to={"/Incidences"}><span class="btn btn-danger ml-2">Cancelar</span></Link>
                 </form>

@@ -10,8 +10,6 @@ const Incidences = () => {
   const misIncidences = (e) => {
     history.push("/NewIncidence");
   };
-  
-
 
   auth.onAuthStateChanged((user) => {
     if (user) {
@@ -28,14 +26,14 @@ const Incidences = () => {
             console.log("Document data:", doc.data().incidencias);
             doc.data().incidencias.forEach((incidencia) => {
               html += `
-                <li>
+                
                   <div>
-                    <h2>Incidencia: ${incidencia.issue}</h2>
+                    <h3>Incidencia: ${incidencia.issue}</h3>
                     Asunto: ${incidencia.incidenceContext}
                     <br></br>
                     Fecha: ${incidencia.dateIssue}
                   </div>
-                </li>
+                
             `;
               //list.innerHTML += html;
 
@@ -56,14 +54,21 @@ const Incidences = () => {
 
   return (
     <Fragment>
-      <h1>Mis incidencias</h1>
-      <br></br>
-      <div id="incidencia">
+      <div class="claims">
+        <div class="form-group">
+          <h1 class="my-4">Mis incidencias</h1>
+          <br />
+
+          <div id="incidencia"></div>
+          <br></br>
+          <Link to={"/sesion"}>
+            <span class="btn btn-secondary">Volver</span>
+          </Link>
+          <button onClick={misIncidences} class="btn btn-primary">
+            Nueva Incidencia
+          </button>
+        </div>
       </div>
-      <br></br>
-      <button onClick={misIncidences}> Nueva incidencia</button>
-      <br></br>
-      <Link to={"/sesion"}>Volver</Link>
     </Fragment>
   );
 };

@@ -1,8 +1,3 @@
-
-// const Contenedor = styled.div`
-//   max-width: 600px;
-//   margin: 0 auto;
-// `;
 import { useState, Fragment } from 'react';
 import React from 'react'
 import { auth } from './firebaseConfig';
