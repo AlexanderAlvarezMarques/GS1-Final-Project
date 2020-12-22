@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from 'react';
-import { Link, useHistory} from 'react-router-dom';
-import {auth, firestore} from '../firebaseConfig';
+import { Link, useHistory } from 'react-router-dom';
+import { auth, firestore } from '../firebaseConfig';
 
 const db = firestore;
 
@@ -11,18 +11,18 @@ const SignUp = () => {
 
     // estado que tiene el usuario 
     const [user, setUser] = useState({
-        nombre : '',
-        apellido : '',
-        dni : '',
-        correo : '',
-        contraseña : '',
+        nombre: '',
+        apellido: '',
+        dni: '',
+        correo: '',
+        contraseña: '',
         telefono: '',
-        fechaCarnet : '',
-        nacimiento : '',
+        fechaCarnet: '',
+        nacimiento: '',
         vehiculos: [],
-        incidencias : [],
+        incidencias: [],
         reclamaciones: [],
-        pagos:[]
+        pagos: []
     })
 
     //estado para el vehiculo
@@ -42,36 +42,36 @@ const SignUp = () => {
     const actualizarState = e => {
         setUser({
             ...user,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
     const actualizarCoche = e => {
         setCar({
             ...car,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
     //objeto que contiene todas las variables que necesitamos
-    const {nombre,apellido,dni,correo,fechaCarnet,contraseña,nacimiento,telefono} = user;
-    const {marca,modelo,kilometros,tipo,combustible,matricula} = car;
+    const { nombre, apellido, dni, correo, fechaCarnet, contraseña, nacimiento, telefono } = user;
+    const { marca, modelo, kilometros, tipo, combustible, matricula } = car;
 
 
     const checkEmptyValues = () => {
-        return nombre.trim() === '' || 
-                apellido.trim() === '' || 
-                dni.trim() === '' || 
-                correo.trim() === '' || 
-                contraseña.trim() === '' || 
-                fechaCarnet.trim() === '' || 
-                nacimiento.trim() === '' || 
-                marca.trim() === '' || 
-                modelo.trim() === '' || 
-                matricula.trim() === '' ||
-                tipo.trim() === '' ||
-                kilometros === 0 ||
-                combustible.trim() === '' ||
-                telefono.trim() === ''
+        return nombre.trim() === '' ||
+            apellido.trim() === '' ||
+            dni.trim() === '' ||
+            correo.trim() === '' ||
+            contraseña.trim() === '' ||
+            fechaCarnet.trim() === '' ||
+            nacimiento.trim() === '' ||
+            marca.trim() === '' ||
+            modelo.trim() === '' ||
+            matricula.trim() === '' ||
+            tipo.trim() === '' ||
+            kilometros === 0 ||
+            combustible.trim() === '' ||
+            telefono.trim() === ''
     }
 
     const registrar = e => {
@@ -79,141 +79,181 @@ const SignUp = () => {
         e.preventDefault()
 
         //validar que los campos no esten vacios
-        if (checkEmptyValues()){
+        if (checkEmptyValues()) {
             actualizarError(true);
             return;
         }
         actualizarError(false);
-        
+
         //crear usuario nuevo y añadir a la base de datos
         auth.createUserWithEmailAndPassword(correo, contraseña)
-        .then((u) => {
-            
-            user.vehiculos = [car];
+            .then((u) => {
 
-            console.log('user: ', user);
-            
-            
-            db.collection('usuariosRgistrados').doc(auth.currentUser.uid).set(user)
-                .then(() => {
-                    console.log("Todo correcto")
-                    
-                    history.push("/");
-                }).catch((e) => {
-                console.log("hubo un error: ", e)
+                user.vehiculos = [car];
+
+                console.log('user: ', user);
+
+
+                db.collection('usuariosRgistrados').doc(auth.currentUser.uid).set(user)
+                    .then(() => {
+                        console.log("Todo correcto")
+
+                        history.push("/");
+                    }).catch((e) => {
+                        console.log("hubo un error: ", e)
+                    })
+
             })
-            
-        })
-        .catch((error) => {
-            var errorCode = error.code;
-            console.log(errorCode);
-            var errorMessage = error.message;
-            console.log(errorMessage);
-        });
+            .catch((error) => {
+                var errorCode = error.code;
+                console.log(errorCode);
+                var errorMessage = error.message;
+                console.log(errorMessage);
+            });
     }
 
-    
+
     //HTML 
-return( 
-    <>
-        <h2>Sign Up Form</h2>
-        { error ? <p>Todos los campos deben estar rellenos</p> : null }
-        <form
-            onSubmit={registrar}
-        >
-            <label>Nombre: </label>
-            <input
-                type="text"
-                name="nombre"
-                onChange={actualizarState}
-            />
-            <label>Apellido: </label>
-            <input
-                type="text"
-                name="apellido"
-                onChange={actualizarState}
-            />
-            <label>DNI: </label>
-            <input
-                type="text"
-                name="dni"
-                onChange={actualizarState}
-            />
-            <label>Correo: </label>
-            <input
-                type="text"
-                name="correo"
-                onChange={actualizarState}
-            />
-            <label>contraseña: </label>
-            <input
-                type="password"
-                name="contraseña"
-                onChange={actualizarState}
-            />
-            <label>Nacimiento: </label>
-            <input
-                type="date"
-                name="nacimiento"
-                onChange={actualizarState}
-            />
+    return (
+        <>
+            { error ? <p>Todos los campos deben estar rellenos</p> : null}
+            <form
+                onSubmit={registrar}
+                class="register"
+            >
+                <div class="form-group">
+                    <label>Nombre: </label>
+                    <input
+                        type="text"
+                        name="nombre"
+                        onChange={actualizarState}
+                    />
+                </div>
 
-            <label>Telefono: </label>
-            <input
-                type="number"
-                name="telefono"
-                onChange={actualizarState}
-            />
-            <label>Fecha Carnet: </label>
-            <input
-                type="date"
-                name="fechaCarnet"
-                onChange={actualizarState}
-            />
-            <label>Marca: </label>
-            <input
-                type="text"
-                name="marca"
-                onChange={actualizarCoche}
-            />
+                <div class="form-group">
+                    <label>Apellido: </label>
+                    <input
+                        type="text"
+                        name="apellido"
+                        onChange={actualizarState}
+                    /></div>
 
-            <label>Modelo: </label>
-            <input
-                type="text"
-                name="modelo"
-                onChange={actualizarCoche}
-            />
-            <label>Matricula: </label>
-            <input
-                type="text"
-                name="matricula"
-                onChange={actualizarCoche}
-            />
-             <label>Kilometros: </label>
-             <input
-                type="number"
-                name="kilometros"
-                onChange={actualizarCoche}
-            />
-            <label>Combustible: </label>
-             <input
-                type="text"
-                name="combustible"
-                onChange={actualizarCoche}
-            />
-            <label>Tipo: </label>
-             <input
-                type="text"
-                name="tipo"
-                onChange={actualizarCoche}
-            />
-            <button
-                type="submit"
-            >Registrarse</button>
+                <div class="form-group">
+                    <label>DNI: </label>
+                    <input
+                        type="text"
+                        name="dni"
+                        onChange={actualizarState}
+                    />
+                </div>
 
-<Link to={"/"}>Volver</Link>
-        </form>
-    </>
-);
+                <div class="form-group">
+                    <label>Correo: </label>
+                    <input
+                        type="text"
+                        name="correo"
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>contraseña: </label>
+                    <input
+                        type="password"
+                        name="contraseña"
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Nacimiento: </label>
+                    <input
+                        type="date"
+                        name="nacimiento"
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Telefono: </label>
+                    <input
+                        type="number"
+                        name="telefono"
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Fecha Carnet: </label>
+                    <input
+                        type="date"
+                        name="fechaCarnet"
+                        onChange={actualizarState}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Marca: </label>
+                    <input
+                        type="text"
+                        name="marca"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Modelo: </label>
+                    <input
+                        type="text"
+                        name="modelo"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Matricula: </label>
+                    <input
+                        type="text"
+                        name="matricula"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Kilometros: </label>
+                    <input
+                        type="number"
+                        name="kilometros"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Combustible: </label>
+                    <input
+                        type="text"
+                        name="combustible"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <label>Tipo: </label>
+                    <input
+                        type="text"
+                        name="tipo"
+                        onChange={actualizarCoche}
+                    />
+                </div>
+
+                <div class="form-group">
+                    <button
+                        type="submit"
+                        class="btn btn-primary submit"
+                    >Registrarse</button>
+                </div>
+            </form>
+        </>
+    );
 }
-export default SignUp ;
+export default SignUp;

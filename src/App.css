@@ -109,15 +109,18 @@ body {
 }
 
 /* Contract insuarance */
-
 .payment-type input {
     display: inline;
 }
 
 /* Estimate price */
-
 .estimate_price .plan {
     display: inline;
+}
+
+/* Contract insuarance */
+.contract_insuarance {
+    width: 100%;
 }
 
 @media screen and (min-width: 549px) {
@@ -169,6 +172,12 @@ body {
     .estimate_price .license_date {
         width: 45%;
         margin-left: auto;
+    }
+
+    /* Contract insuarance */
+    .contract_insuarance {
+        width: 50%;
+        margin: 0 auto;
     }
 }
 
