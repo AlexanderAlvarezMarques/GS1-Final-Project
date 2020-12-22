@@ -248,7 +248,6 @@ const PriceEstimate = () => {
                 <div class="my-2">
                 {!cargando ? <> <Resultado cotizacion={cotizacion} /> </> : null}
 
-
                 {cotizacion !== 0 ?
                     <>
                         <button onClick={actualizarState} class="btn btn-primary mb-2">Contratar seguro</button>
