@@ -1,0 +1,274 @@
+html {
+    min-height: 100%;
+}
+
+body {
+    background-image: url("content/images/bg-01.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+:root {
+    --teal-blue: #00778fff;
+    --cosmic-latte: #fff4e4ff;
+    --english-violet: #38304aff;
+    --metallic-sunburst: #9b7e46ff;
+    --cafe-au-lait: #a7754dff;
+}
+
+.navbar {
+    background-color: var(--teal-blue);
+}
+
+.navbar .nav-link {
+    color: var(--cosmic-latte);
+}
+
+.content {
+    width: 100%;
+    background-color: #FFFFFF;
+    margin: 10vh auto;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+}
+
+.submit {
+    width: auto;
+    margin: 0 auto;
+}
+
+/* Index offers */
+.main-offers {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+}
+
+.main-offers .card {
+    margin: 10px;
+    width: 100% !important;
+}
+
+/* Login */
+
+.login {
+    width: 100%;
+}
+
+.login .login-image img {
+    width: 75%;
+    margin: 0 auto;
+}
+
+/* Register */
+
+.login {
+    width: 100%;
+}
+
+/* Complaint */
+
+.complaint {
+    width: 100%;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 25px;
+    border: 1px grey solid;
+}
+
+.complaint textarea {
+    min-height: 120px;
+}
+
+/* Claims */
+.claims {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.claims .titles {
+    display: none;
+}
+
+.claims .claim {
+    margin-bottom: 30px;
+}
+
+.claims .claim .subject {
+    border-bottom: 1px grey dashed;
+}
+
+.claims .claim .description {
+    text-align: justify;
+}
+
+/* Contract insuarance */
+.payment-type input {
+    display: inline;
+}
+
+/* Estimate price */
+.estimate_price .plan {
+    display: inline;
+}
+
+/* Contract insuarance */
+.contract_insuarance {
+    width: 100%;
+}
+
+@media screen and (min-width: 549px) {
+    /* Index offers */
+    .main-offers .card {
+        width: 70% !important;
+    }
+    /* Login */
+    .login {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .login .login-image {
+        margin: 0 auto;
+    }
+    /* Register */
+    .register {
+        width: 80%;
+        margin: 0 auto;
+    }
+    /* Complaint */
+    .complaint {
+        width: 80%;
+        margin: 5px auto;
+    }
+    /* Payment */
+    .payment {
+        width: 340px;
+    }
+    /* Estimate price */
+    .estimate_price {
+        width: 70%;
+        margin: 0 auto;
+    }
+    .estimate_price .display_inline {
+        width: 100%;
+        display: inline-flex;
+    }
+    .estimate_price .branch {
+        width: 45%;
+    }
+    .estimate_price .model {
+        width: 45%;
+        margin-left: auto;
+    }
+    .estimate_price .plate_date {
+        width: 45%;
+    }
+    .estimate_price .license_date {
+        width: 45%;
+        margin-left: auto;
+    }
+
+    /* Contract insuarance */
+    .contract_insuarance {
+        width: 50%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 767px) {
+    /* Index offers */
+    .main-offers .card {
+        width: 45% !important;
+    }
+    /* Login */
+    .login {
+        width: 50%;
+        margin: 0 auto;
+    }
+    /* Register */
+    .register {
+        width: 60%;
+        margin: 0 auto;
+    }
+    .login .login-image {
+        margin: 0 auto;
+    }
+    /* Complaint */
+    .complaint {
+        width: 60%;
+        margin: 5px auto;
+    }
+    /* Claims */
+    .claims {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    .claims .claim {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 991px) {
+    /* Index offers */
+    .main-offers .card {
+        width: 30% !important;
+    }
+    /* Login */
+    .login {
+        width: 30%;
+        margin: 0 auto;
+    }
+    /* Register */
+    .register {
+        width: 60% !important;
+        margin: 0 auto;
+    }
+    .login .login-image {
+        margin: 0 auto;
+    }
+    /* Complaint */
+    .complaint {
+        width: 50%;
+        margin: 5px auto;
+    }
+    /* Claims */
+    .claims {
+        width: 70%;
+        margin: 0 auto;
+    }
+}
+
+@media screen and (min-width: 1024px) {
+    /* Login */
+    .content {
+        width: 75%;
+    }
+    .login {
+        width: 30%;
+        margin: 10px auto;
+        padding: 10px;
+        border-radius: 25px;
+        border: 1px grey solid;
+    }
+    /* Register */
+    .register {
+        width: 50%;
+        margin: 10px auto;
+        padding: 10px;
+        border-radius: 25px;
+        border: 1px grey solid;
+    }
+    /* Complaint */
+    .complaint {
+        width: 50%;
+        margin: 5px auto;
+        padding: 10px;
+        border-radius: 25px;
+        border: 1px grey solid;
+    }
+}
