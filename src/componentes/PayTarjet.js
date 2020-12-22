@@ -166,7 +166,7 @@ const PayTarjet = ({ resumen, idSeguro }) => {
                 <div class="form-group">
                     <b><label>Fecha caducidad</label></b>
                     <input
-                        type="number"
+                        type="date"
                         name="fechaCaducidad"
                         value={fechaCaducidad}
                         onChange={actualizarState}

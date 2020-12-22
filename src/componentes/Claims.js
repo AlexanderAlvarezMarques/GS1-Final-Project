@@ -27,14 +27,12 @@ const Claims = () => {
                         console.log("Document data:", doc.data().reclamaciones);
                         doc.data().reclamaciones.forEach((claim) => {
                             html += `
-                <li>
+                
                   <div>
-                    <h2>Reclamación:</h2>
-                    Asunto: ${claim.asunto}
-                    <br></br>
+                    <h3>Asunto: ${claim.asunto}</h3>
                     Descripción: ${claim.descripcion}
                   </div>
-                </li>
+                
             `;
                             //list.innerHTML += html;
 
@@ -61,6 +59,9 @@ const Claims = () => {
                 
                 <h1 class="my-4">Mis reclamaciones</h1><br/>
 
+                <br></br>
+                <div id = "reclamacion"></div>
+                <br></br>
                 <Link to={"/sesion"}>
                     <span class="btn btn-secondary">
                         Volver
@@ -69,33 +70,6 @@ const Claims = () => {
 
                 <button onClick={misReclamaciones} class="btn btn-primary"> Nueva Reclamacion</button>
                 </div>
-
-                <div class="titles">
-                    <div class="title-1">Asunto</div>
-                    <div class="title-2">Descripción</div>
-                </div>
-
-                <div class="claim">
-                    <h3 class="subject">Asunto 1</h3>
-                    <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
-                    </div>
-                </div>
-
-                <div class="claim">
-                    <h3 class="subject">Asunto 2</h3>
-                    <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
-                    </div>
-                </div>
-
-                <div class="claim">
-                    <h3 class="subject">Asunto 3</h3>
-                    <div class="description">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
-                    </div>
-                </div>
-
             </div>
         </Fragment>
     );

@@ -45,9 +45,9 @@ const NewIncidence = () => {
   let history = useHistory();
 
   const [datos, guardarDatos] = useState({
-    issue: "pinchazo",
-    dateIssue: "1-10-2020",
-    incidenceContext: "la rueda a la caca",
+    issue: "",
+    dateIssue: "",
+    incidenceContext: "",
   });
 
   const [error, guardarError] = useState(false);
@@ -117,7 +117,7 @@ const NewIncidence = () => {
         <Contenedor>
           <h3>Fecha de incidencia:&nbsp;</h3>
           <input
-            type="text"
+            type="date"
             name="dateIssue"
             value={dateIssue}
             onChange={obtenerDatos}
