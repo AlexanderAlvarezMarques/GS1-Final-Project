@@ -48,7 +48,7 @@ const PagePrincipal = () => {
                                 <p class="card-text">{s.Descripcion}</p>
                                 <h5><b>Coberturas:</b></h5>
                                 <p class="card-text">{s.Coberturas}</p>
-                                <h5><b>Précio:</b></h5>
+                                <h5><b>Precio:</b></h5>
                                 <p class="card-text">{s.Precio} - $</p>
                                 <a href={`/contratarSeguro/${s.id}`} class="btn btn-primary">Contratar seguro</a>
                             </div>
