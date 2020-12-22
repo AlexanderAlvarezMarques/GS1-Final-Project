@@ -41,7 +41,7 @@ const PagePrincipal = () => {
                 {seguros.map(s => {
                     return (
                         <div class="card">
-                            <img class="card-img-top" src="content/images/200x200.png" alt="Card image cap" />
+                            {/* <img class="card-img-top" src="content/images/200x200.png" alt="Card image cap" /> */}
                             <div class="card-body">
                                 <h3 class="card-title">Seguro {s.Tipo}</h3>
                                 <h5><b>Decripción:</b></h5>
