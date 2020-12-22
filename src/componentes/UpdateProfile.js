@@ -1,26 +1,26 @@
-import React,{Fragment, useState} from 'react';
+import React, { Fragment, useState } from 'react';
 import { auth, firestore } from '../firebaseConfig';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const UpdateProfile = () => {
 
 
-     // estado que tiene el usuario 
-     const [data, setDatas] = useState({
-        nombre : 'juan manuel ',
-        apellido : 'perez toro',
+    // estado que tiene el usuario 
+    const [data, setDatas] = useState({
+        nombre: 'juan manuel ',
+        apellido: 'perez toro',
         telefono: '647177666',
-        correo : 'juanmita@gmail.com',
-        contraseña : '1234567',
+        correo: 'juanmita@gmail.com',
+        contraseña: '1234567',
     })
 
-    const{nombre,apellido,telefono,contraseña,correo}=data
+    const { nombre, apellido, telefono, contraseña, correo } = data
 
     // actualizar campos del formulario
     const actualizarState = e => {
         setDatas({
             ...data,
-            [e.target.name] : e.target.value
+            [e.target.name]: e.target.value
         })
     }
 
@@ -28,75 +28,89 @@ const UpdateProfile = () => {
     const actualizarPerfil = e => {
         //actualizo los campos que me dan la gana por lo tanto no hay if
         e.preventDefault()
-        
-        if(auth.currentUser.uid != null){
-            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid ).update({
+
+        if (auth.currentUser.uid != null) {
+            firestore.collection('usuariosRgistrados').doc(auth.currentUser.uid).update({
                 nombre: nombre,
-                apellido : apellido,
+                apellido: apellido,
                 telefono: telefono,
                 correo: correo,
                 contraseña: contraseña
             }).then(() => {
-              console.info('todo actualizado');
-              
+                console.info('todo actualizado');
+
             }).catch((e) => {
-              console.error('Mal', e);
-              
+                console.error('Mal', e);
+
             })
-        }else{
+        } else {
             console.log('no hay usuarios');
-            
+
         }
 
     }
 
 
-    return( 
+    return (
         <Fragment>
-        <>
-        <h1>Actualizar perfil</h1>
-        <form
-            onSubmit={actualizarPerfil}
-        >
-            <label>Nombre</label>
-            <input
-                 type="text"
-                 name="nombre"
-                 onChange={actualizarState}
-            ></input>
+            <>
+                <form
+                    onSubmit={actualizarPerfil}
+                    class="register"
+                >
 
-            <label>Apellidos</label>
-            <input
-                 type="text"
-                 name="apellido"
-                 onChange={actualizarState}
-            ></input>
+                    <div class="form-group">
+                        <label>Nombre</label>
+                        <input
+                            type="text"
+                            name="nombre"
+                            onChange={actualizarState}
+                        ></input>
+                    </div>
 
-            <label>Telefono</label>
-            <input
-                 type="text"
-                 name="telefono"
-                 onChange={actualizarState}
-            ></input>
+                    <div class="form-group">
+                        <label>Apellidos</label>
+                        <input
+                            type="text"
+                            name="apellido"
+                            onChange={actualizarState}
+                        ></input>
+                    </div>
 
-            <label>Correo electronico</label>
-            <input
-                 type="text"
-                 name="correo"
-                 onChange={actualizarState}
-            ></input>
+                    <div class="form-group">
+                        <label>Telefono</label>
+                        <input
+                            type="text"
+                            name="telefono"
+                            onChange={actualizarState}
+                        ></input>
+                    </div>
 
-            <label>Contraseña</label>
-            <input
-                 type="text"
-                 name="contraseña"
-                 onChange={actualizarState}
-            ></input>
+                    <div class="form-group">
+                        <label>Correo electronico</label>
+                        <input
+                            type="text"
+                            name="correo"
+                            onChange={actualizarState}
+                        ></input>
+                    </div>
 
-            <button type="submit">Actualizar</button>
-            <Link to={"/sesion"}>Cancelar</Link>
-        </form>
-        </>
-        </Fragment>    
-    )};
-export default UpdateProfile ; 
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input
+                            type="text"
+                            name="contraseña"
+                            onChange={actualizarState}
+                        ></input>
+                    </div>
+
+                    <div class="">
+                        <button type="submit" class="btn btn-primary">Actualizar</button>
+                        <Link to={"/sesion"}><span class="btn btn-danger ml-2">Cancelar</span></Link>
+                    </div>
+                </form>
+            </>
+        </Fragment>
+    )
+};
+export default UpdateProfile; 
