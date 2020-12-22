@@ -5,28 +5,28 @@ import { auth, firestore } from "../firebaseConfig";
 import ReactDOM from "react-dom";
 
 const Claims = () => {
-  let history = useHistory();
-  const misReclamaciones = (e) => {
-    history.push("/newClaim");
-  };
+    let history = useHistory();
+    const misReclamaciones = (e) => {
+        history.push("/newClaim");
+    };
 
 
 
-  auth.onAuthStateChanged((user) => {
-    if (user) {
-      //var uid = user.uid;
-      var userUID = auth.currentUser.uid;
+    auth.onAuthStateChanged((user) => {
+        if (user) {
+            //var uid = user.uid;
+            var userUID = auth.currentUser.uid;
 
-      var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
+            var docRef = firestore.collection("usuariosRgistrados").doc(userUID);
 
-      docRef
-        .get()
-        .then(function (doc) {
-          if (doc.exists) {
-            let html = "";
-            console.log("Document data:", doc.data().reclamaciones); 
-            doc.data().reclamaciones.forEach((claim) => {
-              html += `
+            docRef
+                .get()
+                .then(function (doc) {
+                    if (doc.exists) {
+                        let html = "";
+                        console.log("Document data:", doc.data().reclamaciones);
+                        doc.data().reclamaciones.forEach((claim) => {
+                            html += `
                 <li>
                   <div>
                     <h2>Reclamación:</h2>
@@ -36,34 +36,61 @@ const Claims = () => {
                   </div>
                 </li>
             `;
-              //list.innerHTML += html;
+                            //list.innerHTML += html;
 
-              ReactDOM.render(
-                <div dangerouslySetInnerHTML={{ __html: html }} />,
-                document.getElementById("reclamacion")
-              );
-            });
-          } else {
-            console.log("No such document!");
-          }
-        })
-        .catch(function (error) {
-          console.log("Error getting document:", error);
-        });
-    }
-  });
+                            ReactDOM.render(
+                                <div dangerouslySetInnerHTML={{ __html: html }} />,
+                                document.getElementById("reclamacion")
+                            );
+                        });
+                    } else {
+                        console.log("No such document!");
+                    }
+                })
+                .catch(function (error) {
+                    console.log("Error getting document:", error);
+                });
+        }
+    });
 
-  return (
-    <Fragment>
-      <h1>Mis reclamaciones</h1>
-      <br></br>
-      <div id="reclamacion">
-      </div>
-      <br></br>
-      <button onClick={misReclamaciones}> Nueva Reclamacion</button>
-      <br></br>
-      <Link to={"/sesion"}>Volver</Link>
-    </Fragment>
-  );
+    return (
+        <Fragment>
+            <div class="claims">
+
+                <div class="form-group">
+                <h1 class="my-4">Mis reclamaciones</h1><br/>
+
+                <button onClick={misReclamaciones} class="btn btn-primary"> Nueva Reclamacion</button>
+                </div>
+
+                <div class="titles">
+                    <div class="title-1">Asunto</div>
+                    <div class="title-2">Descripción</div>
+                </div>
+
+                <div class="claim">
+                    <h3 class="subject">Asunto 1</h3>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+                    </div>
+                </div>
+
+                <div class="claim">
+                    <h3 class="subject">Asunto 2</h3>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+                    </div>
+                </div>
+
+                <div class="claim">
+                    <h3 class="subject">Asunto 3</h3>
+                    <div class="description">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc dapibus, justo vel euismod scelerisque, ex velit finibus enim, quis pretium felis quam vel lectus. Maecenas non facilisis urna, id posuere turpis.
+                    </div>
+                </div>
+
+            </div>
+        </Fragment>
+    );
 };
 export default Claims;  
