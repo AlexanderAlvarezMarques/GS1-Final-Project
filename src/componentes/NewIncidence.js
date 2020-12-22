@@ -40,106 +40,109 @@ const Error = styled.div`
 `;
 
 const NewIncidence = () => {
-  //para rediccionar
-  //Se ha cambiado
-  let history = useHistory();
+    //para rediccionar
+    //Se ha cambiado
+    let history = useHistory();
 
-  const [datos, guardarDatos] = useState({
-    issue: "pinchazo",
-    dateIssue: "1-10-2020",
-    incidenceContext: "la rueda a la caca",
-  });
-
-  const [error, guardarError] = useState(false);
-  const { issue, dateIssue, incidenceContext } = datos;
-
-  const obtenerDatos = (e) => {
-    guardarDatos({
-      ...datos,
-      [e.target.name]: e.target.value,
+    const [datos, guardarDatos] = useState({
+        issue: "pinchazo",
+        dateIssue: "1-10-2020",
+        incidenceContext: "la rueda a la caca",
     });
-  };
 
-  console.log(auth.currentUser.uid);
+    const [error, guardarError] = useState(false);
+    const { issue, dateIssue, incidenceContext } = datos;
 
-  const enviarIncidencia = (e) => {
-    e.preventDefault();
-
-    if (
-      issue.trim() === "" ||
-      dateIssue.trim() === "" ||
-      incidenceContext.trim() === ""
-    ) {
-      guardarError(true);
-      return;
-    }
-
-    //Codigo BD
-    if (auth.currentUser.uid != null) {
-      console.log("entra en el if " + auth.currentUser.uid);
-      var userUID = auth.currentUser.uid;
-      firestore
-        .collection("usuariosRgistrados")
-        .doc(userUID)
-        .update({
-          //apellido: 'pepito'
-          //incidencias: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
-          incidencias: [datos],
-        })
-        .then(() => {
-          console.info("todo actualizado");
-        })
-        .catch((e) => {
-          console.error("Mal", e);
+    const obtenerDatos = (e) => {
+        guardarDatos({
+            ...datos,
+            [e.target.name]: e.target.value,
         });
-    } else {
-      console.log("No hay nadie" + auth.currentUser.uid);
-    }
-    guardarError(false);
-    history.push("/Incidences");
-  };
+    };
 
-  //    HTML
-  return (
-    <Fragment>
-      <form onSubmit={enviarIncidencia}>
-        <h2> Incidencia</h2>
-        <Contenedor>
-          <h3>Asunto:&nbsp;</h3>
-          <input
-            type="text"
-            name="issue"
-            value={issue}
-            onChange={obtenerDatos}
-          />
-        </Contenedor>
-        <br></br>
-        <Contenedor>
-          <h3>Fecha de incidencia:&nbsp;</h3>
-          <input
-            type="text"
-            name="dateIssue"
-            value={dateIssue}
-            onChange={obtenerDatos}
-          />
-        </Contenedor>
-        <br></br>
-        <Contenedor>
-          <h3>Mensaje:&nbsp;</h3>
-          <input
-            type="text"
-            name="incidenceContext"
-            value={incidenceContext}
-            onChange={obtenerDatos}
-          />
-        </Contenedor>
-        <br></br>
-        {error ? <Error>Debes rellenar todos los campos</Error> : null}
-        <Boton type="submit">Enviar</Boton>
-        <Link to={"/Incidences"}> Volver</Link>
-      </form>
-    </Fragment>
-  );
+    console.log(auth.currentUser.uid);
+
+    const enviarIncidencia = (e) => {
+        e.preventDefault();
+
+        if (
+            issue.trim() === "" ||
+            dateIssue.trim() === "" ||
+            incidenceContext.trim() === ""
+        ) {
+            guardarError(true);
+            return;
+        }
+
+        //Codigo BD
+        if (auth.currentUser.uid != null) {
+            console.log("entra en el if " + auth.currentUser.uid);
+            var userUID = auth.currentUser.uid;
+            firestore
+                .collection("usuariosRgistrados")
+                .doc(userUID)
+                .update({
+                    //apellido: 'pepito'
+                    //incidencias: firebase.firestore.FieldValue.arrayUnion("greater_virginia")
+                    incidencias: [datos],
+                })
+                .then(() => {
+                    console.info("todo actualizado");
+                })
+                .catch((e) => {
+                    console.error("Mal", e);
+                });
+        } else {
+            console.log("No hay nadie" + auth.currentUser.uid);
+        }
+        guardarError(false);
+        history.push("/Incidences");
+    };
+
+    //    HTML
+    return (
+        <Fragment>
+            <div class="claims py-2">
+                <form onSubmit={enviarIncidencia}>
+                    <h2> Incidencia</h2>
+                    <div class="form-group">
+                        <label>Asunto:&nbsp;</label>
+                        <input
+                            type="text"
+                            name="issue"
+                            value={issue}
+                            onChange={obtenerDatos}
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Fecha de incidencia:&nbsp;</label>
+                        <input
+                            type="text"
+                            name="dateIssue"
+                            value={dateIssue}
+                            onChange={obtenerDatos}
+                        />
+                    </div>
+
+                    <div class="form-group">
+                        <label>Mensaje:</label>
+                        <input
+                            type="text"
+                            name="incidenceContext"
+                            value={incidenceContext}
+                            onChange={obtenerDatos}
+                        />
+                    </div>
+
+
+                    {error ? <Error>Debes rellenar todos los campos</Error> : null}
+                    <button type="submit" class="btn btn-primary submit">Enviar</button>
+                    <Link to={"/Incidences"}><span class="btn btn-danger ml-2">Cancelar</span></Link>
+                </form>
+            </div>
+        </Fragment>
+    );
 };
 
 export default NewIncidence;
