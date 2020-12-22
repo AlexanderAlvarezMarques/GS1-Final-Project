@@ -70,7 +70,7 @@ const SesionPage = () => {
             <br></br>
             <Link to={"/actualizarPerfil"}>Actualizar perfil</Link>
             <br></br>
-            <button onClick={cerrarSesion}>Cerrar sesión</button>
+            <button onClick={cerrarSesion} class="btn btn-info">Cerrar sesión</button>
             <br></br>
 
             <div class="main-offers">
