@@ -86,7 +86,6 @@ body {
 }
 
 /* Claims */
-
 .claims {
     width: 100%;
     display: flex;
@@ -243,7 +242,7 @@ body {
     }
     .login {
         width: 30%;
-        margin: 5px auto;
+        margin: 10px auto;
         padding: 10px;
         border-radius: 25px;
         border: 1px grey solid;
