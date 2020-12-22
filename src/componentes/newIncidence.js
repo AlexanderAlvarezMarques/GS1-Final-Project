@@ -19,6 +19,8 @@ const NewIncidence = () => {
     const { issue, dateIssue, incidenceContext } = datos;
 
     const obtenerDatos = (e) => {
+      console.log('añadiendo datos state');
+      
         guardarDatos({
             ...datos,
             [e.target.name]: e.target.value,
